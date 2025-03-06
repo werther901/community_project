@@ -3,27 +3,44 @@ const jwt = require("jsonwebtoken");
 // 비밀번호 암호화 라이브러리
 const bcrypt = require("bcrypt");
 // 날짜 데이터 변환 라이브러리
-const moment = require('moment');
+const moment = require("moment");
 // env
 require("dotenv").config();
 // 데이터베이스 모델
-const { User } = require("../models/index");
-
+const { User, Category } = require("../models/index");
 
 // 메인 페이지
-const main = (req, res) => {
-  res.render('main');
-}
+const main = async (req, res) => {
+  let categoryname = await Category.findAll({}).catch((err) =>
+    console.log(err)
+  );
+  let cate = []; //카테고리 이름
+  categoryname.map((item) => {
+    cate.push(item.dataValues.name);
+  });
+  console.log("category", cate);
+  res.render("main", { category: cate });
+};
 
 // 회원가입 페이지
 const signup = (req, res) => {
-  res.render('signup');
-}
+  res.render("signup");
+};
 
 // 로그인 페이지
 const login = (req, res) => {
-  res.render('login');
-}
+  res.render("login");
+};
+
+// 글 쓰기 페이지
+const write = (req, res) => {
+  res.render("write");
+};
+
+// 글 쓰기 페이지
+const detailmain = (req, res) => {
+  res.render("detailmain");
+};
 
 // id 중복검사
 const idCheck = async (req, res) => {
@@ -41,19 +58,20 @@ const idCheck = async (req, res) => {
   //     res.status(500).json({ error: "아이디(이메일) 찾기 실패", message: error.message })
   //   }
   // }
-  if(checkId) {
+  if (checkId) {
     res.send(false); // 중복 아이디
   } else {
     res.send(true); // 사용 가능
   }
-}
+};
 
 // 회원가입 처리
 const signupProcess = async (req, res) => {
-  const { userId, password, name, address, phoneNumber, gender, birth } = req.body;
+  const { userId, password, name, address, phoneNumber, gender, birth } =
+    req.body;
 
   console.log(req.body);
-  const date = moment(birth, 'YYYY-MM-DD').format('YYYY-MM-DD');
+  const date = moment(birth, "YYYY-MM-DD").format("YYYY-MM-DD");
   console.log(date);
   console.log(typeof date);
 
@@ -64,7 +82,15 @@ const signupProcess = async (req, res) => {
   console.log("hashedPw : ", hashedPw);
 
   try {
-    const user = await User.create({ userId, password: hashedPw, name, address, phoneNumber, gender, birth: date });
+    const user = await User.create({
+      userId,
+      password: hashedPw,
+      name,
+      address,
+      phoneNumber,
+      gender,
+      birth: date,
+    });
     console.log("user : ", user);
 
     if (!user) {
@@ -73,9 +99,11 @@ const signupProcess = async (req, res) => {
     // 회원가입 성공
     return res.status(200).json({ result: true, message: "회원가입 성공" });
   } catch (e) {
-    return res.status(400).json({ result: false, message: "회원가입 실패2", error: e });
+    return res
+      .status(400)
+      .json({ result: false, message: "회원가입 실패2", error: e });
   }
-}
+};
 
 // 로그인 처리
 const loginProcess = async (req, res) => {
@@ -89,13 +117,18 @@ const loginProcess = async (req, res) => {
     try {
       // 비밀번호 비교
       const match = await bcrypt.compare(pw, user.dataValues.password);
-  
+
       if (!match) {
         // 비밀번호가 틀렸습니다.
-        return res.status(401).json({ result: false, message: "비밀번호가 틀렸습니다." });
+        return res
+          .status(401)
+          .json({ result: false, message: "비밀번호가 틀렸습니다." });
       }
       // 토큰 발급
-      const token = jwt.sign({ id: user.dataValues.id }, process.env.SECRET_KEY);
+      const token = jwt.sign(
+        { id: user.dataValues.id },
+        process.env.SECRET_KEY
+      );
       // 쿠키 설정
       res.cookie("token", token);
       // 토큰 응답
@@ -104,11 +137,30 @@ const loginProcess = async (req, res) => {
       return res.status(401).json({ result: false, message: "로그인 실패" });
     }
   } else {
-    res.status(404).json({ result: false, message: "회원정보가 없습니다."})
+    res.status(404).json({ result: false, message: "회원정보가 없습니다." });
   }
-}
+};
 
-
-
-
-module.exports = { main, signup, login, idCheck, signupProcess, loginProcess };
+// 카테고리 요청
+const getCategory = async (req, res) => {
+  let categoryname = await Category.findAll({}).catch((err) =>
+    console.log(err)
+  );
+  let cate = []; //카테고리 이름
+  categoryname.map((item) => {
+    cate.push(item.dataValues);
+  });
+  console.log("category", cate);
+  res.send({ category: cate });
+};
+module.exports = {
+  main,
+  signup,
+  login,
+  idCheck,
+  signupProcess,
+  loginProcess,
+  write,
+  getCategory,
+  detailmain,
+};
