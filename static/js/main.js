@@ -11,7 +11,7 @@ window.onload = function () {
       console.log("Res", res.data.category);
       let category = res.data.category;
       category.map((item) => {
-        container_category.innerHTML += `<div onclick="category_${item.category_id}">${item.name}</div>`;
+        container_category.innerHTML += `<div onclick="categoryMove(${item.category_id})">${item.name}</div>`;
       });
     })
     .catch((e) => {
@@ -56,4 +56,9 @@ function freepostview() {
 //뉴스 게시판 더보기 클릭
 function newspostview() {
   console.log("newspostview click");
+}
+
+// 카테고리 상세 페이지 이동
+function categoryMove(categoryid) {
+  window.location.href = `/detilmain?category_id=${categoryid}`;
 }

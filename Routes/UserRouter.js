@@ -10,6 +10,8 @@ router.get("/signup", userController.signup);
 router.get("/login", userController.login);
 // 글 작성 페이지 이동
 router.get("/write", userController.write);
+// 카테고리 상세 페이지 이동
+router.get("/detilmain", userController.detailmain);
 
 // 이메일 중복 검사
 router.get("/idCheck", userController.idCheck);

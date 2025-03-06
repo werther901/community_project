@@ -37,6 +37,11 @@ const write = (req, res) => {
   res.render("write");
 };
 
+// 글 쓰기 페이지
+const detailmain = (req, res) => {
+  res.render("detailmain");
+};
+
 // id 중복검사
 const idCheck = async (req, res) => {
   const userId = req.query.userId;
@@ -157,4 +162,5 @@ module.exports = {
   loginProcess,
   write,
   getCategory,
+  detailmain,
 };
