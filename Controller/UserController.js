@@ -11,6 +11,7 @@ const { User, Category } = require("../models/index");
 
 // 메인 페이지
 const main = async (req, res) => {
+
   let categoryname = await Category.findAll({}).catch((err) => console.log(err));
   let cate = []; //카테고리 이름
   categoryname.map((item) => {
@@ -18,6 +19,7 @@ const main = async (req, res) => {
   });
   // console.log("category", cate);
   res.render("main", { category: cate });
+
 };
 
 // 회원가입 페이지

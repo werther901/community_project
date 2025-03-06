@@ -118,3 +118,14 @@ input[type="text"]:focus {
 .container_mid input:focus {
   border-color: #03c75a;
 }
+
+.preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.image_style {
+  width: 100%;
+  height: 100%;
+}
