@@ -9,31 +9,48 @@
       rel="stylesheet"
       href="https://uicdn.toast.com/editor/latest/toastui-editor.css"
     />
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
   </head>
   <body>
     <div class="container">
-      <form>
+      <form name="write_form">
         <div class="container_top">
           <div class="title">글쓰기</div>
-          <button type="button" class="form_submit">등록</button>
+          <button type="button" class="form_submit" onclick="form_submit()">
+            등록
+          </button>
         </div>
         <div class="container_content">
           <div class="container_content_top">
-            <div class="files_input"><input type="file" /></div>
+            <div class="files_input">대표 이미지 선정</div>
+            <div class="category_select">카테고리 선정</div>
+          </div>
+          <div class="container_content_top">
+            <div class="files_input">
+              <input
+                type="file"
+                name="userfile"
+                accept="image/*"
+                onchange="readURL(this)"
+              />
+            </div>
             <div class="category_select">
-              <select name="category" class="category">
-                <option value="red">빨강</option>
-                <option value="green">초록</option>
-                <option value="blue">파랑</option>
-                <option value="magenta">보라</option>
-                <option value="cyan">하늘</option>
-              </select>
+              <select name="category" class="category"></select>
             </div>
           </div>
-          <div class="container_contente_mid">이미지 미리보기</div>
+          <div class="container_contente_mid" id="preview_image">
+            이미지 미리보기
+          </div>
 
-          <div><input type="text" placeholder="제목을 입려해 주세요" /></div>
+          <div>
+            <input
+              type="text"
+              placeholder="제목을 입려해 주세요"
+              name="input_title"
+            />
+          </div>
         </div>
         <div class="container_mid">
           <div id="editor"></div>
