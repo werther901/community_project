@@ -58,7 +58,4 @@ function newspostview() {
   console.log("newspostview click");
 }
 
-// 카테고리 상세 페이지 이동
-function categoryMove(categoryid) {
-  window.location.href = `/detilmain?category_id=${categoryid}`;
-}
+
