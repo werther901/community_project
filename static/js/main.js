@@ -32,3 +32,6 @@ const logoutFunc = () => {
   // 페이지 새로고침
   window.location.reload();
 };
+
+
+// 250306 임시 사용자 검증
