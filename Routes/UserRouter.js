@@ -20,4 +20,7 @@ router.post("/signup", userController.signupProcess);
 // 로그인 처리
 router.post("/login", userController.loginProcess);
 
+// 카테고리 요청
+router.post("/category", userController.getCategory);
+
 module.exports = router;

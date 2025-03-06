@@ -7,11 +7,19 @@ const moment = require("moment");
 // env
 require("dotenv").config();
 // 데이터베이스 모델
-const { User } = require("../models/index");
+const { User, Category } = require("../models/index");
 
 // 메인 페이지
-const main = (req, res) => {
-  res.render("main");
+const main = async (req, res) => {
+  let categoryname = await Category.findAll({}).catch((err) =>
+    console.log(err)
+  );
+  let cate = []; //카테고리 이름
+  categoryname.map((item) => {
+    cate.push(item.dataValues.name);
+  });
+  console.log("category", cate);
+  res.render("main", { category: cate });
 };
 
 // 회원가입 페이지
@@ -128,6 +136,18 @@ const loginProcess = async (req, res) => {
   }
 };
 
+// 카테고리 요청
+const getCategory = async (req, res) => {
+  let categoryname = await Category.findAll({}).catch((err) =>
+    console.log(err)
+  );
+  let cate = []; //카테고리 이름
+  categoryname.map((item) => {
+    cate.push(item.dataValues);
+  });
+  console.log("category", cate);
+  res.send({ category: cate });
+};
 module.exports = {
   main,
   signup,
@@ -136,4 +156,5 @@ module.exports = {
   signupProcess,
   loginProcess,
   write,
+  getCategory,
 };

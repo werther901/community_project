@@ -1,3 +1,23 @@
+//변수 선언 - dom
+const container_category = document.querySelector(".container_category");
+
+window.onload = function () {
+  //카테고리 표시
+  axios({
+    method: "post",
+    url: "/category",
+  })
+    .then((res) => {
+      console.log("Res", res.data.category);
+      let category = res.data.category;
+      category.map((item) => {
+        container_category.innerHTML += `<div onclick="category_${item.category_id}">${item.name}</div>`;
+      });
+    })
+    .catch((e) => {
+      console.log("error", e);
+    });
+};
 //로그인 클릭 버튼
 function login() {
   console.log("login click");
