@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>(임시) 메인 페이지</h1>
+    <a href="/signup">회원가입</a>
+    <br />
+    <br />
+    <a href="/login">로그인</a>
+    <br />
+    <br />
+    <button class="logout" onclick="logoutFunc()">로그아웃</button>
+    <div class="content01"></div>
+  </body>
+
+  <script>
+    const content01 = document.querySelector('.content01');
+
+    const logoutFunc = () => {
+      // 쿠키 삭제
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      // 페이지 새로고침
+      window.location.reload();
+    };
+  </script>
+</html>

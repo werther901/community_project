@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
+  <link rel="stylesheet" href="/css/signup.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <form>
+      <div class="form-group">
+        <div class="input-box">
+          <span>이메일 </span>
+          <input id="email" type="email" name="id" placeholder="이메일 주소" required>
+        </div>
+        <div class="duplicateCheck">중복확인</div>
+        <div class="input-box">
+          <span>비밀번호 </span>
+          <input id="password" type="password" name="pass" placeholder="비밀번호" required>
+        </div>
+        <div class="input-box">
+          <span>비밀번호 확인 </span>
+          <input id="passCheck" type="password" name="passCheck" placeholder="비밀번호 확인" required>
+        </div>
+      </div>
+      <div>
+        <div class="content01"></div>
+        <div class="content02"></div>
+        <div class="content03"></div>
+      </div>
+      <div class="form-group">
+        <div class="input-box">
+          <span>이름 </span>
+          <input id="name" type="text" name="name" placeholder="이름" value maxlength="10" required>
+        </div>
+        <div class="input-box">
+          <span>생년월일 </span>
+          <input type="text" id="birth" placeholder="생년월일 8자리">
+          <!-- <div class="birth-group">
+            <select name="yy" id="year"></select>
+            <select name="mm" id="month"></select>
+            <select name="dd" id="day"></select>
+          </div> -->
+        </div>
+        <div class="input-box">
+          <span>주소</span>
+          <div class="address-group">
+            <input id="address" type="text" placeholder="임시">
+          </div>
+        </div>
+        <div class="input-box">
+          <span>성별</span>
+          <div class="gender-group">
+            <label for="gender_m">남자</label>
+            <input type="radio" id="gender_m" name="gender" value="male">
+            <div style="width: 40px;"></div>
+            <label for="gender_f">여자</label>
+            <input type="radio" id="gender_f" name="gender" value="female">
+          </div>
+        </div>
+        <div class="input-box">
+          <span>전화번호 </span>
+          <input id="phone" type="tel" name="phone" placeholder="휴대전화번호" value maxlength="16" required>
+        </div>
+      </div>
+      <div>
+        <div class="content04"></div>
+        <div class="content05"></div>
+        <div class="content06"></div>
+        <div class="content07"></div>
+        <div class="content08"></div>
+      </div>
+      <div>
+        <button type="button" class="saveData" disabled>회원가입</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+<script src="/js/signup.js"></script>
+</html>

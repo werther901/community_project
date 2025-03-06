@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="container_header">
+        <div class="main_logo_img">
+          <img
+            class="imgstyle"
+            src="/images/main_logo.png"
+            alt="main_logo"
+          />
+        </div>
+        <div class="sidemenu">
+          <div>
+            <a href="/login">로그인</a>
+          </div>
+          <div>
+            <a href="/signup">회원가입</a>
+          </div>
+          <div>
+            <button class="logout" onclick="logoutFunc()">로그아웃</button>
+          </div>
+        </div>
+      </div>
+      <div class="container_category">
+        <div>전체</div>
+        <div>자유게시판</div>
+        <div>맛집</div>
+        <div>뉴스</div>
+        <div>게임</div>
+        <div>운동</div>
+      </div>
+      <div class="container_main">
+        <div class="main_cards">
+          <div class="card">
+            <div class="card_content">
+              <div class="card_title">
+                서울에서 꼭 가봐야 할 숨은 맛집 추천!
+              </div>
+              <div class="card_name">나무아비</div>
+              <div class="card_comment">
+                서울에는 유명한 맛집도 많지만, 잘 알려지지 않은 숨은 맛집들도
+                많아요! 최근에 다녀온 곳 중에 강남의 작은 이자카야와 홍대의
+                수제버거 가게가 정말 인상적이었어요. 분위기도 좋고, 음식
+                퀄리티도 최고였답니다. 여러분이 아는 서울의 숨은 맛집이 있다면
+                댓글로 추천해주세요!
+              </div>
+            </div>
+            <div class="card_img">
+              <div class="card_img_style">
+                <img
+                  class="imgstyle"
+                  src="/images/main_logo.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card_content">
+              <div class="card_title">
+                서울에서 꼭 가봐야 할 숨은 맛집 추천!
+              </div>
+              <div class="card_name">나무아비</div>
+              <div class="card_comment">
+                서울에는 유명한 맛집도 많지만, 잘 알려지지 않은 숨은 맛집들도
+                많아요! 최근에 다녀온 곳 중에 강남의 작은 이자카야와 홍대의
+                수제버거 가게가 정말 인상적이었어요. 분위기도 좋고, 음식
+                퀄리티도 최고였답니다. 여러분이 아는 서울의 숨은 맛집이 있다면
+                댓글로 추천해주세요!
+              </div>
+            </div>
+            <div class="card_img">
+              <div class="card_img_style">
+                <img
+                  class="imgstyle"
+                  src="/images/main_logo.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container_submain">
+        <div class="submain_section_1">
+          <div class="submain_table">
+            <div class="submain_title">
+              <div>전체 게시판</div>
+              <div onclick="allpostview()">더보기</div>
+            </div>
+            <div class="submain_content">
+              <div class="submain_content_row">김밥천국 위생논란</div>
+            </div>
+          </div>
+        </div>
+        <div class="submain_section_2">
+          <div class="submain_table">
+            <div class="submain_title">
+              <div>자유 게시판</div>
+              <div onclick="freepostview()">더보기</div>
+            </div>
+            <div class="submain_content">
+              <div class="submain_content_row">김밥천국 위생논란</div>
+            </div>
+          </div>
+        </div>
+        <div class="submain_section_3">
+          <div class="submain_table">
+            <div class="submain_title">
+              <div>뉴스 게시판</div>
+              <div onclick="newspostview()">더보기</div>
+            </div>
+            <div class="submain_content">
+              <div class="submain_content_row">김밥천국 위생논란</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container_footer">
+        <div>이용약관</div>
+        <div>커뮤니티 운영정책</div>
+        <div>개인정보처리방침</div>
+        <div>게시글 중단 요청 서비스</div>
+      </div>
+    </div>
+    
+
+  </body>
+  <script src="/js/main.js"></script>
+</html>

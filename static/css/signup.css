@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f6f7;
+}
+
+.container {
+  width: 400px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.form-group {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background: white;
+}
+
+.input-box {
+  margin-bottom: 10px;
+}
+
+.input-box span {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.duplicateCheck {
+  width: 100%;
+  text-align: center;
+  background-color: #03C75A;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0 10px 0;
+}
+
+.duplicateCheck:hover {
+  background-color: #03c75bd3;
+}
+
+.content01, .content02, .content03, .content04, .content05, .content06, .content07, .content08 {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.saveData {
+  width: 100%;
+  padding: 10px;
+  background-color: #03C75A;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.saveData:hover {
+  background-color: #03c75bd3;
+}
+
+.saveData:disabled {
+  background-color: #ccc;
+  cursor: default;
+}
+
+/* 수정된 부분 */
+.gender-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.gender-group input {
+  margin-right: 10px; /* 라디오 버튼과 텍스트 사이 간격 조정 */
+}
+
+.gender-group input[type="radio"] {
+  width: 30px;
+}
+
+.gender-group label {
+  font-weight: normal;
+}
+
+.birth-group {
+  display: flex;
+  gap: 5px;
+}

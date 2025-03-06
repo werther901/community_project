@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f6f7; /* 네이버 배경색 */
+}
+
+.login-container {
+  width: 360px;
+  padding: 40px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.input-box {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.content01, .content02 {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #03c75a; /* 네이버 초록색 */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-btn:hover {
+  background-color: #029c4f;
+}
+
+.login-btn:disabled {
+  background-color: #b6b6b6;
+  cursor: default;
+}
+
+/* 아이디 찾기, 비밀번호 찾기, 회원가입을 한 줄에 정렬 */
+.links {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.links a {
+  color: #666;
+  text-decoration: none;
+  margin: 0 10px; /* 좌우 간격 */
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
