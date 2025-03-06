@@ -1,16 +1,31 @@
 //로그인 클릭 버튼
 function login() {
   console.log("login click");
+  window.location.href = "/login";
 }
 
 //회원가입 클릭 버튼
 function signup() {
   console.log("signup click");
+  window.location.href = "/signup";
 }
 
 //전체 게시판 더보기 클릭
 function allpostview() {
   console.log("allpostview click");
+  //window.location.href = "/postview";
+  axios({
+    method: "get",
+    url: "/postviewmove",
+    data: { category: "all" },
+  })
+    .then((res) => {
+      console.log("res", res);
+      window.location.href = "/postview";
+    })
+    .catch((e) => {
+      console.log("error : ", e);
+    });
 }
 
 //자유 게시판 더보기 클릭
@@ -22,13 +37,3 @@ function freepostview() {
 function newspostview() {
   console.log("newspostview click");
 }
-
-// 250305 임시 로그아웃 기능
-const content01 = document.querySelector(".content01");
-
-const logoutFunc = () => {
-  // 쿠키 삭제
-  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  // 페이지 새로고침
-  window.location.reload();
-};
