@@ -58,4 +58,13 @@ function newspostview() {
   console.log("newspostview click");
 }
 
+// 250306 임시 로그아웃 기능
+const content01 = document.querySelector(".content01");
+const logoutFunc = () => {
+  // 쿠키 삭제
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  // 페이지 새로고침
+  window.location.reload();
+};
 
+// 250306 임시 사용자 검증
