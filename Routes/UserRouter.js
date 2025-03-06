@@ -1,24 +1,28 @@
 const express = require("express");
 const router = express.Router();
-const userController = require('../Controller/UserController');
+const userController = require("../Controller/UserController");
 
 // 메인페이지 이동
-router.get('/', userController.main);
+router.get("/", userController.main);
 // 회원가입 페이지 이동
-router.get('/signup', userController.signup);
+router.get("/signup", userController.signup);
 // 로그인 페이지 이동
-router.get('/login', userController.login);
-
-
+router.get("/login", userController.login);
+// 글 작성 페이지 이동
+router.get("/write", userController.write);
+// 카테고리 상세 페이지 이동
+router.get("/detilmain", userController.detailmain);
 
 // 이메일 중복 검사
-router.get('/idCheck', userController.idCheck);
+router.get("/idCheck", userController.idCheck);
 
 // 회원가입 처리
-router.post('/signup', userController.signupProcess);
+router.post("/signup", userController.signupProcess);
 
 // 로그인 처리
-router.post('/login', userController.loginProcess);
+router.post("/login", userController.loginProcess);
 
+// 카테고리 요청
+router.post("/category", userController.getCategory);
 
 module.exports = router;
