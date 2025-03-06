@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="container_category">
-        <div>전체</div>
+        <div onclick="categoryMove('all')">전체</div>
       </div>
       <div class="container_main">
         <div class="main_cards">
@@ -103,12 +103,7 @@
           </div>
         </div>
       </div>
-      <div class="container_footer">
-        <div>이용약관</div>
-        <div>커뮤니티 운영정책</div>
-        <div>개인정보처리방침</div>
-        <div>게시글 중단 요청 서비스</div>
-      </div>
+      <%- include("./footer") %>
     </div>
   </body>
   <script src="/js/main.js"></script>

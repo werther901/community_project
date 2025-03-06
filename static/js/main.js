@@ -60,7 +60,11 @@ function newspostview() {
 
 // 카테고리 상세 페이지 이동
 function categoryMove(categoryid) {
-  window.location.href = `/detilmain?category_id=${categoryid}`;
+  if (categoryid === "all") {
+    window.location.href = `/detilmain?category_id=all`;
+  } else {
+    window.location.href = `/detilmain?category_id=${categoryid}`;
+  }
 }
 
 // 250306 임시 로그아웃 기능
