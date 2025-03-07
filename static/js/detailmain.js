@@ -36,3 +36,9 @@ function createPost() {
   console.log("createPost click");
   window.location.href = "/write";
 }
+
+//각 포스트 클릭
+function findpost() {
+  console.log("findpost click");
+  window.location.href = "/post";
+}

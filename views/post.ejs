@@ -3,9 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- css -->
+    <link rel="stylesheet" href="/css/post.css" />
     <title>Document</title>
   </head>
   <body>
-    <h1>글 페이지</h1>
+    <div class="container_wrap">
+      <div class="container_main">
+        <!-- top -->
+        <div class="main_top">
+          <div class="main_top_btn">
+            <div class="postModify_btn">
+              <button>수정</button>
+              <button>삭제</button>
+            </div>
+            <div class="postMove_btn">
+              <button>이전글</button>
+              <button>다음글</button>
+              <button>목록</button>
+            </div>
+          </div>
+        </div>
+        <!-- mid -->
+        <div class="main_content">
+          <div class="content_top">
+            <div class="content_category">전체 게시판</div>
+            <div class="content_title">
+              서울에서 꼭 가봐야 할 숨은 맛집 추천!
+            </div>
+            <div class="content_detils">
+              <div class="content_userid">나무아비</div>
+              <div class="content_detils_right">
+                <div class="copyurl">url복사</div>
+                <div class="moreview">더보기</div>
+              </div>
+            </div>
+          </div>
+          <div class="content_comment">
+            서울에는 유명한 맛집도 많지만, 잘 알려지지 않은 숨은 맛집들도
+            많아요! 최근에 다녀온 곳 중에 강남의 작은 이자카야와 홍대의 수제버거
+            가게가 정말 인상적이었어요. 분위기도 좋고, 음식 퀄리티도
+            최고였답니다. 여러분이 아는 서울의 숨은 맛집이 있다면 댓글로
+            추천해주세요!
+          </div>
+          <div class="content_top_bottom">
+            <div class="like_btn">좋아요</div>
+            <div class="share_post">공유</div>
+            <div class="notify_post">신고</div>
+          </div>
+        </div>
+        <!-- bottom -->
+        <div class="main_bottom">
+          <button class="wrtieMove_btn">글쓰기</button>
+          <button class="postlist_btn" onclick="postlist()">목록</button>
+          <button class="top_btn">TOP</button>
+        </div>
+      </div>
+    </div>
   </body>
+  <script src="/js/post.js"></script>
 </html>
