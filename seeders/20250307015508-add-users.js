@@ -10,7 +10,7 @@ module.exports = {
         name: "홍길동",
         address: "서울 어딘가",
         phoneNumber: "010-1234-5678",
-        gender: "male",
+        gender: "M",
         birth: "1999-01-01",
       },
       {
@@ -19,7 +19,7 @@ module.exports = {
         name: "김영희",
         address: "인천 어딘가",
         phoneNumber: "010-2222-3333",
-        gender: "female",
+        gender: "F",
         birth: "1996-07-10",
       },
     ]);

@@ -22,10 +22,16 @@ router.post("/signup", userController.signupProcess);
 // 로그인 처리
 router.post("/login", userController.loginProcess);
 
+// naver 로그인
+router.get("/naver_login", userController.naverLogin);
+
 // 로그인 검증
 router.post("/verify", userController.verifyProcess);
 
 // 카테고리 요청
 router.post("/category", userController.getCategory);
+
+// naver 로그인 처리
+router.post("/naver_login", userController.naverLoginProcess);
 
 module.exports = router;

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="view_info"></div>
+  </body>
+
+  <script>
+    const view_info = document.querySelector(".view_info");
+
+    var naver_id_login = new naver_id_login("Ck5wKX1f6oVy4LIJ8Etp", "http://localhost:3000/naver_login");
+    // 접근 토큰 값 출력
+    // alert(naver_id_login.oauthParams.access_token);
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+      // view_info.innerHTML += `${naver_id_login.getProfileData('email')}`;
+      view_info.innerHTML = `${naver_id_login.getProfileData("email")},<br>
+      ${naver_id_login.getProfileData("name")},<br>
+      ${naver_id_login.getProfileData("gender")},<br>
+      ${naver_id_login.getProfileData("birthday")}`;
+
+      const email = naver_id_login.getProfileData("email");
+      const name = naver_id_login.getProfileData("name");
+      const gender = naver_id_login.getProfileData("gender");
+      // const birthyear = naver_id_login.getProfileData("birthyear"); // 1999
+      // console.log(birthyear);
+      const birthday = naver_id_login.getProfileData("birthday"); // 09-10
+      // const mobile = naver_id_login.getProfileData("mobile");
+
+      // const birth = `${birthyear}-${birthday}`;
+
+      let data = {
+        email: email,
+        name: name,
+        gender: gender,
+        birthday: birthday,
+      };
+
+      axios({
+        method: "post",
+        url: "/naver_login",
+        data: data,
+      })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.result) {
+            alert('로그인 성공');
+            window.location.href = 'http://localhost:3000';
+          } else {
+            alert('회원가입을 진행해주세요. 네이버에서 제공한 정보 외 작성 필요')
+            window.opener.location.href = 'http://localhost:3000/signup';
+            window.close();
+          }
+        })
+        .catch((e) => {
+          console.log("오류 : ", e);
+        });
+    }
+
+  </script>
+</html>

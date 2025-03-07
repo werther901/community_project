@@ -28,14 +28,18 @@ module.exports = (sequelize, DataTypes) => {
       },
       phoneNumber: {
         type: DataTypes.STRING(45),
-        allowNull: false,
+        allowNull: true,
       },
       gender: {
         type: DataTypes.STRING(10),
-        allowNull: false,
+        allowNull: true,
       },
       birth: {
         type: DataTypes.DATEONLY,
+        allowNull: true,
+      },
+      signup_method: {
+        type: DataTypes.STRING(20),
         allowNull: false,
       },
     },
