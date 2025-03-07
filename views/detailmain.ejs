@@ -3,10 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- css -->
+    <link rel="stylesheet" href="css/detailmain.css" />
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
   </head>
   <body>
-    <h1>상세페이지</h1>
-    <h1>상세페이지</h1>
+    <div class="container_wrap">
+      <h1 class="category_name"></h1>
+      <div class="container_main">
+        <table>
+          <tr>
+            <th class="th_img">이미지</th>
+            <th class="th_title">제목</th>
+            <th class="th_user">작성자</th>
+            <th class="th_like">좋아요</th>
+          </tr>
+          <tr onclick="findpost()">
+            <td class="td_img">
+              <div class="table_img">
+                <img
+                  class="imgstyle"
+                  src="/images/main_logo.png"
+                  alt="table_img"
+                />
+              </div>
+            </td>
+            <td class="td_title">김밥천국 위생 논란</td>
+            <td class="td_user">김홍상이랑</td>
+            <td class="td_like">4</td>
+          </tr>
+        </table>
+        <div class="container_modify">
+          <button class="postbtn" onclick="createPost()">생성</button>
+        </div>
+      </div>
+      <%- include("./footer") %>
+    </div>
   </body>
+  <script src="/js/detailmain.js"></script>
 </html>

@@ -33,37 +33,27 @@ function signup() {
 //전체 게시판 더보기 클릭
 function allpostview() {
   console.log("allpostview click");
-  //window.location.href = "/postview";
-  axios({
-    method: "get",
-    url: "/postviewmove",
-    data: { category: "all" },
-  })
-    .then((res) => {
-      console.log("res", res);
-      window.location.href = "/postview";
-    })
-    .catch((e) => {
-      console.log("error : ", e);
-    });
+  window.location.href = "/detailmain?category_id=all";
 }
 
 //자유 게시판 더보기 클릭
 function freepostview() {
   console.log("freepostview click");
+  window.location.href = "/detailmain?category_id=1";
 }
 
 //뉴스 게시판 더보기 클릭
 function newspostview() {
   console.log("newspostview click");
+  window.location.href = "/detailmain?category_id=3";
 }
 
 // 카테고리 상세 페이지 이동
 function categoryMove(categoryid) {
   if (categoryid === "all") {
-    window.location.href = `/detilmain?category_id=all`;
+    window.location.href = `/detailmain?category_id=all`;
   } else {
-    window.location.href = `/detilmain?category_id=${categoryid}`;
+    window.location.href = `/detailmain?category_id=${categoryid}`;
   }
 }
 
@@ -75,7 +65,6 @@ const logoutFunc = () => {
   // 페이지 새로고침
   window.location.reload();
 };
-
 
 // 250306 사용자 검증
 (async function () {
@@ -93,7 +82,8 @@ const logoutFunc = () => {
 
     if (!tokenCookie) {
       // 토큰이 없으면 로그인 링크 표시
-      data = '<a href="/login" style="margin-right: 10px">로그인</a><a href="/signup">회원가입</a>';
+      data =
+        '<a href="/login" style="margin-right: 10px">로그인</a><a href="/signup">회원가입</a>';
       info.innerHTML = data;
       return;
     }
@@ -119,7 +109,6 @@ const logoutFunc = () => {
     info.innerHTML = data;
   } catch (error) {
     console.error("Authentication error:", error);
-    info.innerHTML =
-      '<span>인증 오류가 발생했습니다</span>';
+    info.innerHTML = "<span>인증 오류가 발생했습니다</span>";
   }
 })();
