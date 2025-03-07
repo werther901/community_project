@@ -76,3 +76,20 @@ const login = () => {
     });
 };
 login_btn.addEventListener("click", login);
+
+// 네이버 로그인
+var naver_id_login = new naver_id_login("Ck5wKX1f6oVy4LIJ8Etp", "http://localhost:3000/naver_login");
+var state = naver_id_login.getUniqState();
+naver_id_login.setButton("white", 2, 40);
+naver_id_login.setDomain("http://localhost:3000/login");
+naver_id_login.setState(state);
+naver_id_login.setPopup();
+naver_id_login.init_naver_id_login();
+
+// 가상버튼 누르면 네이버 로그인 버튼누르기
+const naverLoginCostom = document.getElementById('naverLoginCostom');
+
+naverLoginCostom.addEventListener('click', function() {
+  const naver_login = document.querySelector('#naver_id_login a');
+  naver_login.click();
+})
