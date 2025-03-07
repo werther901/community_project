@@ -25,6 +25,7 @@ app.set("views", "./views");
 app.use("/", require("./Routes/UserRouter"));
 app.use("/write", require("./Routes/WriteRouter"));
 app.use("/detailmain", require("./Routes/DetailmainRouter"));
+app.use("/post", require("./Routes/PostRouter"));
 
 app.listen(port, () => {
   console.log(`http://localhost:3000 / Example app listening on port ${port}`);

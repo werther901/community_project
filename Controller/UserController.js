@@ -7,7 +7,7 @@ const moment = require("moment");
 // env
 require("dotenv").config();
 // 데이터베이스 모델
-const { User, Category, Write } = require("../models/index");
+const { User, Category } = require("../models/index");
 
 // 메인 페이지
 const main = async (req, res) => {
@@ -22,16 +22,6 @@ const signup = (req, res) => {
 // 로그인 페이지
 const login = (req, res) => {
   res.render("login");
-};
-
-// 글 쓰기 페이지
-const write = (req, res) => {
-  res.render("write");
-};
-
-// 글 쓰기 페이지
-const detailmain = (req, res) => {
-  res.render("detailmain");
 };
 
 // id 중복검사
@@ -181,30 +171,8 @@ const getCategory = async (req, res) => {
   res.send({ category: cate });
 };
 
-// 카테고리 요청 - one
-const getCategoryOne = async (req, res) => {
-  console.log("res", req.body.num);
-  let num = req.body.num;
-  let categoryname = await Category.findOne({
-    where: { category_id: Number(num) },
-  }).catch((err) => console.log(err));
-
-  //console.log("category", categoryname.dataValues.name);
-  res.send({ name: categoryname.dataValues.name });
-};
-
-//글 등록하기
-const getPost = async (req, res) => {
-  let info = {
-    title: req.body.title,
-    userId: req.body.password,
-    category: req.body.category,
-    like_cnt: 0,
-    photo_address: "imgsrc",
-  };
-
-  //const user = await User.create(info).catch((err) => console.log(err));
-  //res.status(200).send(user);
+const detailmain = async (req, res) => {
+  res.render("detailmain");
 };
 
 module.exports = {
@@ -215,8 +183,6 @@ module.exports = {
   signupProcess,
   loginProcess,
   verifyProcess,
-  write,
   getCategory,
   detailmain,
-  getCategoryOne,
 };

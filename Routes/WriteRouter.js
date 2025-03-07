@@ -2,9 +2,11 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
-const userController = require("../Controller/UserController");
+const writeController = require("../Controller/WriteContoller");
 
-router.post("/categroy", userController.getCategory);
+router.get("/", writeController.write);
+
+router.post("/categroy", writeController.getCategory);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
