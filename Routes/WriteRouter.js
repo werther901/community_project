@@ -2,9 +2,11 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
-const userController = require("../Controller/UserController");
+const writeController = require("../Controller/WriteContoller");
 
-router.post("/categroy", userController.getCategory);
+router.get("/", writeController.write);
+
+router.post("/categroy", writeController.getCategory);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -19,5 +21,8 @@ const storage = multer.diskStorage({
   },
 });
 let upload = multer({ storage: storage });
+
+//등록 버튼 클릭
+//router.post("/createPost",userController)
 
 module.exports = router;

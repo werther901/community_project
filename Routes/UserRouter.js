@@ -8,10 +8,9 @@ router.get("/", userController.main);
 router.get("/signup", userController.signup);
 // 로그인 페이지 이동
 router.get("/login", userController.login);
-// 글 작성 페이지 이동
-router.get("/write", userController.write);
-// 카테고리 상세 페이지 이동
-router.get("/detilmain", userController.detailmain);
+
+//카테고리 선택 페이지 이동
+router.get("/detailmain", userController.detailmain);
 
 // 이메일 중복 검사
 router.get("/idCheck", userController.idCheck);
@@ -25,7 +24,7 @@ router.post("/login", userController.loginProcess);
 // 로그인 검증
 router.post("/verify", userController.verifyProcess);
 
-// 카테고리 요청
+//카테고리 선택
 router.post("/category", userController.getCategory);
 
 module.exports = router;

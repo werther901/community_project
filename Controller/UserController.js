@@ -11,15 +11,7 @@ const { User, Category } = require("../models/index");
 
 // 메인 페이지
 const main = async (req, res) => {
-
-  let categoryname = await Category.findAll({}).catch((err) => console.log(err));
-  let cate = []; //카테고리 이름
-  categoryname.map((item) => {
-    cate.push(item.dataValues.name);
-  });
-  // console.log("category", cate);
-  res.render("main", { category: cate });
-
+  res.render("main");
 };
 
 // 회원가입 페이지
@@ -30,16 +22,6 @@ const signup = (req, res) => {
 // 로그인 페이지
 const login = (req, res) => {
   res.render("login");
-};
-
-// 글 쓰기 페이지
-const write = (req, res) => {
-  res.render("write");
-};
-
-// 글 쓰기 페이지
-const detailmain = (req, res) => {
-  res.render("detailmain");
 };
 
 // id 중복검사
@@ -67,7 +49,8 @@ const idCheck = async (req, res) => {
 
 // 회원가입 처리
 const signupProcess = async (req, res) => {
-  const { userId, password, name, address, phoneNumber, gender, birth } = req.body;
+  const { userId, password, name, address, phoneNumber, gender, birth } =
+    req.body;
 
   console.log(req.body);
   const date = moment(birth, "YYYY-MM-DD").format("YYYY-MM-DD");
@@ -98,7 +81,9 @@ const signupProcess = async (req, res) => {
     // 회원가입 성공
     return res.status(200).json({ result: true, message: "회원가입 성공" });
   } catch (e) {
-    return res.status(400).json({ result: false, message: "회원가입 실패2", error: e });
+    return res
+      .status(400)
+      .json({ result: false, message: "회원가입 실패2", error: e });
   }
 };
 
@@ -117,10 +102,15 @@ const loginProcess = async (req, res) => {
 
       if (!match) {
         // 비밀번호가 틀렸습니다.
-        return res.status(401).json({ result: false, message: "비밀번호가 틀렸습니다." });
+        return res
+          .status(401)
+          .json({ result: false, message: "비밀번호가 틀렸습니다." });
       }
       // 토큰 발급
-      const token = jwt.sign({ id: user.dataValues.id }, process.env.SECRET_KEY);
+      const token = jwt.sign(
+        { id: user.dataValues.id },
+        process.env.SECRET_KEY
+      );
       // 쿠키 설정
       res.cookie("token", token);
       // 토큰 응답
@@ -149,30 +139,40 @@ const verifyProcess = async (req, res) => {
       // 데이터베이스 유저 조회
       const user = await User.findOne({ where: { id } });
       console.log(user);
-      
+
       if (!user.dataValues.id) {
         // 로그인 실패
-        return res.status(403).json({ result: false, message: "유저 정보 조회 실패" });
+        return res
+          .status(403)
+          .json({ result: false, message: "유저 정보 조회 실패" });
       }
       // 성공
       res.json({ result: true, name: user.name });
     } catch (e) {
-      return res.status(403).json({ result: false, message: "토큰이 만료되었습니다." });
+      return res
+        .status(403)
+        .json({ result: false, message: "토큰이 만료되었습니다." });
     }
   } else {
     return res.status(403).json({ result: false, message: "토큰이 없습니다." });
   }
 };
 
-// 카테고리 요청
+// 카테고리 요청 - all
 const getCategory = async (req, res) => {
-  let categoryname = await Category.findAll({}).catch((err) => console.log(err));
+  let categoryname = await Category.findAll({}).catch((err) =>
+    console.log(err)
+  );
   let cate = []; //카테고리 이름
   categoryname.map((item) => {
     cate.push(item.dataValues);
   });
   // console.log("category", cate);
   res.send({ category: cate });
+};
+
+const detailmain = async (req, res) => {
+  res.render("detailmain");
 };
 
 module.exports = {
@@ -183,7 +183,6 @@ module.exports = {
   signupProcess,
   loginProcess,
   verifyProcess,
-  write,
   getCategory,
   detailmain,
 };

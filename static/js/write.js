@@ -67,4 +67,16 @@ function form_submit() {
   //   editor.getMarkdown(),
   //   input_img.files[0]
   // );
+
+  axios({
+    method: "post",
+    url: "/write/createPost",
+    data: formData,
+  })
+    .then((res) => {
+      console.log("Res", res);
+    })
+    .catch((e) => {
+      console.log("error : ", e);
+    });
 }

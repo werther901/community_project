@@ -1,0 +1,161 @@
+/* 전체 레이아웃 */
+.container_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+/* 메인 컨테이너 */
+.container_main {
+  width: 90%;
+  max-width: 1000px;
+  background: white;
+  padding: 20px;
+}
+
+/* 상단 버튼 영역 */
+.main_top {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #03c75a;
+}
+
+.main_top_btn {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.postModify_btn button,
+.postMove_btn button {
+  background-color: #03c75a;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin: 0 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 10px;
+  transition: all 0.3s ease;
+}
+
+.postMove_btn > button {
+  background-color: #ddd;
+  color: #333;
+}
+/* 게시글 내용 */
+.main_content {
+  padding: 20px 0;
+  line-height: 1.6;
+  font-size: 16px;
+  color: #333;
+}
+
+/* 게시글 상단 정보 */
+
+.content_top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.content_category {
+  font-size: 12px;
+  color: #777;
+}
+
+.content_title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.content_detils {
+  display: flex;
+  justify-content: space-between;
+}
+.content_userid,
+.copyurl,
+.moreview {
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+}
+.content_detils_right {
+  display: flex;
+  gap: 10px;
+}
+/* 게시글 하단 기능 버튼 */
+.content_comment {
+  font-size: 20px;
+  color: #666;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+.content_top_bottom {
+  display: flex;
+  gap: 10px;
+  justify-content: right;
+  margin-top: 10px;
+}
+.like_btn,
+.share_post,
+.notify_post {
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+}
+
+.like_btn {
+  color: red;
+}
+
+/* 하단 버튼 */
+.main_bottom {
+  display: flex;
+  justify-content: right;
+  padding-top: 15px;
+  border-top: 2px solid #ddd;
+  gap: 10px;
+}
+
+.main_bottom button {
+  background-color: #03c75a;
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .container_main {
+    width: 95%;
+  }
+
+  .main_top,
+  .main_bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .main_top_btn {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .postModify_btn button,
+  .postMove_btn button {
+    width: 100%;
+  }
+}
