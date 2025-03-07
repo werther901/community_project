@@ -22,6 +22,9 @@ router.post("/signup", userController.signupProcess);
 // 로그인 처리
 router.post("/login", userController.loginProcess);
 
+// 로그인 검증
+router.post("/verify", userController.verifyProcess);
+
 // 카테고리 요청
 router.post("/category", userController.getCategory);
 

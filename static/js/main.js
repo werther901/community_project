@@ -76,4 +76,50 @@ const logoutFunc = () => {
   window.location.reload();
 };
 
-// 250306 임시 사용자 검증
+
+// 250306 사용자 검증
+(async function () {
+  const info = document.querySelector(".welcome");
+
+  try {
+    // 쿠키에서 토큰 추출하기
+    // 브라우저에는 쿠키가 하나의 문자열로 관리되고 ';'를 기준으로 여러개 저장되기 때문에 token만 뽑으려고 split(";")하는 것
+    const cookies = document.cookie.split("; ");
+    const tokenCookie = cookies.find((item) =>
+      item.trim().startsWith("token=")
+    );
+
+    let data = "";
+
+    if (!tokenCookie) {
+      // 토큰이 없으면 로그인 링크 표시
+      data = '<a href="/login" style="margin-right: 10px">로그인</a><a href="/signup">회원가입</a>';
+      info.innerHTML = data;
+      return;
+    }
+
+    // 토큰 값만 추출 (token= 부분 제거)
+    const token = tokenCookie.trim().substring(6);
+
+    // 토큰 검증 요청
+    const res = await axios.post(
+      "/verify",
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    if (res.data.result) {
+      data = `
+        <span><strong>${res.data.name}</strong>님 환영합니다.</span>
+        <button onClick='logoutFunc()'>로그아웃</button>`;
+    }
+
+    info.innerHTML = data;
+  } catch (error) {
+    console.error("Authentication error:", error);
+    info.innerHTML =
+      '<span>인증 오류가 발생했습니다</span>';
+  }
+})();

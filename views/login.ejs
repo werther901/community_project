@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>로그인</title>
     <link rel="stylesheet" href="/css/login.css" />
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
 
@@ -20,11 +21,13 @@
       <div class="content01"></div>
       <div class="content02"></div>
       <button class="login-btn" type="button" disabled>로그인</button>
+      <div id="naver_id_login"></div>
+      <div id="naverLoginCostom">네이버 로그인</div>
 
       <div class="links">
         <a href="/findId">아이디 찾기</a>
         <a href="/findPw">비밀번호 찾기</a>
-        <a href="/join">회원가입</a>
+        <a href="/signup">회원가입</a>
       </div>
 
     </div>
