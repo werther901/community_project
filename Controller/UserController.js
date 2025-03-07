@@ -24,11 +24,10 @@ const login = (req, res) => {
   res.render("login");
 };
 
-
 // naver
 const naverLogin = (req, res) => {
   res.render("naver_login");
-}
+};
 
 // 글 쓰기 페이지
 const write = (req, res) => {
@@ -174,7 +173,6 @@ const verifyProcess = async (req, res) => {
   }
 };
 
-
 // 네이버 로그인 요청
 const naverLoginProcess = async (req, res) => {
   // 만약에 email이 db에 있으면 중복
@@ -187,16 +185,20 @@ const naverLoginProcess = async (req, res) => {
   console.log(req.body);
   const user = await User.findOne({ where: { userId: email } });
   // db에 데이터 추가하는 코드 필요
-  console.log('user : ', user);
+  console.log("user : ", user);
 
   if (user) {
     // user가 있으면 로그인 성공 alert띄우고, 메인페이지로
-    res.status(200).json({ result: true, message: '로그인 성공' });
+    res.status(200).json({ result: true, message: "로그인 성공" });
   } else {
     // user가 없으면 alert띄우고 회원가입 페이지로
-    res.status(200).json({ result: false, message: "회원가입 페이지로 이동", userInfo: req.body });
+    res.status(200).json({
+      result: false,
+      message: "회원가입 페이지로 이동",
+      userInfo: req.body,
+    });
   }
-}
+};
 
 // 카테고리 요청 - all
 const getCategory = async (req, res) => {
@@ -209,10 +211,6 @@ const getCategory = async (req, res) => {
   });
   // console.log("category", cate);
   res.send({ category: cate });
-};
-
-const detailmain = async (req, res) => {
-  res.render("detailmain");
 };
 
 module.exports = {
