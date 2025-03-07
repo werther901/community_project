@@ -93,7 +93,7 @@ const logoutFunc = () => {
 
     if (!tokenCookie) {
       // 토큰이 없으면 로그인 링크 표시
-      data = '<a href="/login">로그인</a>';
+      data = '<a href="/login" style="margin-right: 10px">로그인</a><a href="/signup">회원가입</a>';
       info.innerHTML = data;
       return;
     }
@@ -123,4 +123,3 @@ const logoutFunc = () => {
       '<span>인증 오류가 발생했습니다</span>';
   }
 })();
-

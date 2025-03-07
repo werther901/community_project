@@ -65,6 +65,37 @@ body {
   cursor: default;
 }
 
+#naver_id_login {
+  display: none;
+}
+
+#naverLoginCostom {
+  position: relative;
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(3, 199, 90);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#naverLoginCostom::before {
+  position: absolute;
+  content: "";
+  width: 30px;
+	height: 30px;
+	margin-left: 10px;
+	background: url('/images/btnG_naver_login_icon.png') no-repeat center;
+	background-size: 30px;
+  top: 7px;
+  left: 0;
+}
+
+
 /* 아이디 찾기, 비밀번호 찾기, 회원가입을 한 줄에 정렬 */
 .links {
   margin-top: 15px;
