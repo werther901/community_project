@@ -33,13 +33,13 @@ function signup() {
 //전체 게시판 더보기 클릭
 function allpostview() {
   console.log("allpostview click");
-  window.location.href = "/detilmain?category_id=all";
+  window.location.href = "/detailmain?category_id=all";
 }
 
 //자유 게시판 더보기 클릭
 function freepostview() {
   console.log("freepostview click");
-  window.location.href = "/detilmain?category_id=1";
+  window.location.href = "/detailmain?category_id=1";
 }
 
 //뉴스 게시판 더보기 클릭
