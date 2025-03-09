@@ -5,10 +5,9 @@ const header_menu = document.querySelector(".header_menu");
 //버튼 클릭 확인용
 let menu_chk = true;
 
-
 //table 생성성
-function createTable(){
-  header_menu.innerHTML =`
+function createTable() {
+  header_menu.innerHTML = `
             <div class="header_menu_container">
                 <div class="header_menu_header"></div>
                 <div class="header_menu_row">
@@ -60,11 +59,7 @@ function createTable(){
             `;
 }
 
-
-
-
 window.onload = function () {
-  
   //카테고리 표시
   axios({
     method: "post",
@@ -73,38 +68,33 @@ window.onload = function () {
     .then((res) => {
       console.log("Res", res.data.category);
       let category = res.data.category;
-      
+
       //header_menu
-      window.menubar = function() {
+      window.menubar = function () {
         if (menu_chk === true) {
-            header_menu.style.display = "block";
-            // header_menu 내용 생성
-            createTable();
-            const header_menu_header = document.querySelector(".header_menu_header");
-            // 카테고리 넣기
-            category.map((item) => {
-
-                header_menu_header.innerHTML += `
+          header_menu.style.display = "block";
+          // header_menu 내용 생성
+          createTable();
+          const header_menu_header = document.querySelector(
+            ".header_menu_header"
+          );
+          // 카테고리 넣기
+          category.map((item) => {
+            header_menu_header.innerHTML += `
                 <div class="header_menu_header_item" onclick="categoryMove(${item.category_id})">${item.name}</div>`;
-            });
+          });
 
-            menu_chk = false;
+          menu_chk = false;
         } else {
-            header_menu.style.display = "none";
-            menu_chk = true;
+          header_menu.style.display = "none";
+          menu_chk = true;
         }
-
-       
-    };
-    
-
+      };
     })
     .catch((e) => {
       console.log("error", e);
     });
 };
-
-
 
 //로그인 클릭 버튼
 function login() {
@@ -190,7 +180,7 @@ const logoutFunc = () => {
 
     if (res.data.result) {
       data = `
-        <span><strong>${res.data.name}</strong>님 환영합니다.</span>
+        <div><strong>${res.data.name}</strong>님 환영합니다.</div>
         <button onClick='logoutFunc()'>로그아웃</button>`;
     }
 

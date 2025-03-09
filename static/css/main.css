@@ -9,7 +9,6 @@ body {
 
 body {
   width: 100%;
-  height: 1000px;
 }
 .container {
   width: 100%;
@@ -17,12 +16,80 @@ body {
 }
 .container_header {
   display: flex;
+  position: fixed;
+  top: 0px;
+  left: 0px;
   justify-content: space-between;
   width: 100%;
   height: 70px;
-  background-color: #02723A;
+  background-color: #02723a;
   /*background-color: white;*/
 }
+.today_menu {
+  margin-top: 80px;
+  padding: 0px 40px;
+}
+.today_content {
+  display: flex;
+  gap: 10px;
+}
+.today_main,
+.today_sub {
+  display: flex;
+  height: 300px;
+}
+.today_main {
+  width: 50%;
+}
+.today_sub {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.today_main_title {
+  padding-top: 20px;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+.today_main_comment {
+  padding: 0px 0px 0px 10px;
+  flex-direction: column;
+}
+.today_main_content {
+  padding-top: 10px;
+  font-size: 14px;
+}
+.today_main_img {
+  width: 50%;
+}
+.today_main_img > img {
+  border-radius: 10px;
+}
+
+.today_sub_1,
+.today_sub_2,
+.today_sub_3 {
+  width: 100%;
+  height: 32%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+  align-items: center;
+  border-left: 1px solid #ccc;
+}
+.today_sub_title {
+  padding-left: 30px;
+}
+.today_sub_img {
+  width: 90px;
+  height: 90px;
+}
+.today_sub_img > img {
+  border-radius: 10px;
+}
+
 .container_category {
   display: flex;
   justify-content: center;
@@ -32,12 +99,18 @@ body {
   gap: 30px;
   /* background-color: aqua; */
 }
+.today_more {
+  display: flex;
+  justify-content: right;
+}
 
 .container_main {
   display: flex;
   justify-content: center;
   width: 100%;
   height: 40%;
+  margin-top: 20px;
+  padding: 0px 40px;
   /* background-color: bisque; */
 }
 
@@ -48,16 +121,8 @@ body {
   justify-content: center;
   gap: 20px;
   /* background-color: blue; */
-}
-.container_footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 7%;
-  background-color: #f6f6f6;
-  gap: 20px;
-  font-size: 12px;
+  margin-top: 30px;
+  padding: 0px 40px;
 }
 
 /*header*/
@@ -65,13 +130,12 @@ body {
   width: 100%;
   height: 100%;
 }
-.main_logo{
+.main_logo {
   display: flex;
   padding-left: 40px;
-
 }
 .main_logo > h1 {
-  color: white;  
+  color: white;
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
@@ -84,38 +148,47 @@ body {
   padding-right: 40px;
   gap: 10px;
 }
-.sidemenu_menu{
+.sidemenu_menu {
   width: 30px;
   height: 30px;
 }
 .login,
-.signup{
+.signup {
   font-size: 14px;
   color: white;
-  text-decoration: none; 
+  text-decoration: none;
 }
-.login{
+.login {
   padding-right: 10px;
 }
 /* main */
 .card {
   display: flex;
   width: 100%;
-  height: 150px;
-  margin-top: 10px;
-  border-bottom: 1px solid gray;
+  height: 200px;
+  margin-top: 30px;
+  border-bottom: 1px solid #ccc;
 }
 .card_content {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 70%;
   padding: 10px;
+  gap: 10px;
+}
+.card_title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.card_name {
+  font-size: 12px;
 }
 .card_img {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20%;
+  width: 30%;
 }
 .card_img_style {
   width: 120px;
@@ -126,12 +199,11 @@ body {
 .submain_section_1,
 .submain_section_2,
 .submain_section_3 {
-  width: 31%;
-  height: 100%;
-
+  width: 33%;
+  height: 250px;
 }
 
-.submain_title{
+.submain_title {
   display: flex;
   justify-content: space-between;
   color: #03c75a;
@@ -147,15 +219,20 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   z-index: 10;
+  position: fixed;
 }
 
 .header_menu_container {
+  position: fixed;
+  top: 70px;
+  left: 0%;
   width: 100%;
-  max-width: 900px;
   display: flex;
+  justify-content: center;
+  margin: 0px auto;
   flex-direction: column;
   padding: 10px 0px;
-  justify-content: center;
+  background-color: white;
 }
 
 .header_menu_header {
@@ -171,6 +248,7 @@ body {
   padding: 10px;
   text-align: center;
   border-right: 1px solid #ccc;
+  justify-content: center;
 }
 
 .header_menu_row {
@@ -186,7 +264,6 @@ body {
   text-align: center;
   border-right: 1px solid #ccc;
   transition: all 0.3s ease-in-out;
-  
 }
 
 .header_menu_item:hover {
@@ -199,7 +276,7 @@ body {
   border-right: none; /* 마지막 열 border 제거 */
 }
 
-.header_menu_footer{
+.header_menu_footer {
   display: flex;
   width: 100%;
   height: 50px;
@@ -207,14 +284,28 @@ body {
   align-items: center;
   font-size: 14px;
   border-top: 1px solid #ccc;
-  
+  padding: 20px;
 }
-.my_page{
+.my_page {
   font-weight: bold;
 }
-.header_menu_footer_links{
+.header_menu_footer_links {
   display: flex;
   gap: 15px;
   color: gray;
-  
+}
+.welcome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.welcome > div {
+  color: white;
+  font-size: 14px;
+}
+.welcome > button {
+  padding: 5px;
+  border: none;
+  font-size: 12px;
+  border-radius: 10px;
 }
