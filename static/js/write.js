@@ -72,9 +72,14 @@ function form_submit() {
     method: "post",
     url: "/write/createPost",
     data: formData,
+    headers: {
+      "Content-Type": "multipart/form-data", // 파일을 포함한 데이터 전송을 위한 헤더
+    },
   })
     .then((res) => {
       console.log("Res", res);
+      alert("등록하였습니다.");
+      window.location.href = "/";
     })
     .catch((e) => {
       console.log("error : ", e);
