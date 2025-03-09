@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/main.css" />
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
@@ -11,16 +15,19 @@
   <body>
     <div class="container">
       <div class="container_header">
-        <div class="main_logo_img">
-          <img class="imgstyle" src="/images/main_logo.png" alt="main_logo" />
+        <div class="main_logo">
+         <h1>Gather</h1>
         </div>
         <div class="sidemenu">
+          <div class="sidemenu_menu" onclick="menubar()"><img class="imgstyle" src="/images/menu.png" alt="menu"></div>
           <div class="welcome"></div>
         </div>
       </div>
-      <div class="container_category">
-        <div onclick="categoryMove('all')">전체</div>
+      <!-- menu click content -->
+      <div class="header_menu">
+        
       </div>
+      <div class="container_category"></div>
       <div class="container_main">
         <div class="main_cards">
           <div class="card">
@@ -65,6 +72,7 @@
           </div>
         </div>
       </div>
+      <!-- 3열 게시판 -->
       <div class="container_submain">
         <div class="submain_section_1">
           <div class="submain_table">

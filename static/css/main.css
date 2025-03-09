@@ -19,10 +19,9 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 8%;
-  border-bottom: 1px solid #03c75a;
-  background-color: white;
-  /* background-color: red; */
+  height: 70px;
+  background-color: #02723A;
+  /*background-color: white;*/
 }
 .container_category {
   display: flex;
@@ -33,6 +32,7 @@ body {
   gap: 30px;
   /* background-color: aqua; */
 }
+
 .container_main {
   display: flex;
   justify-content: center;
@@ -43,7 +43,6 @@ body {
 
 .container_submain {
   display: flex;
-
   width: 100%;
   height: 40%;
   justify-content: center;
@@ -66,21 +65,38 @@ body {
   width: 100%;
   height: 100%;
 }
-.main_logo_img {
+.main_logo{
   display: flex;
-  margin: auto 0px;
-  padding-left: 15px;
-  width: 100px;
-  height: 50px;
+  padding-left: 40px;
+
+}
+.main_logo > h1 {
+  color: white;  
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
 .sidemenu {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 40px;
   gap: 10px;
-  padding-right: 15px;
 }
-
+.sidemenu_menu{
+  width: 30px;
+  height: 30px;
+}
+.login,
+.signup{
+  font-size: 14px;
+  color: white;
+  text-decoration: none; 
+}
+.login{
+  padding-right: 10px;
+}
 /* main */
 .card {
   display: flex;
@@ -112,11 +128,93 @@ body {
 .submain_section_3 {
   width: 31%;
   height: 100%;
+
 }
 
-.submain_title {
+.submain_title{
   display: flex;
   justify-content: space-between;
   color: #03c75a;
   border-bottom: 1px solid #03c75a;
+}
+
+/* 게시판 테이블 */
+.header_menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.header_menu_container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  justify-content: center;
+}
+
+.header_menu_header {
+  display: flex;
+  justify-content: center;
+  background: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.header_menu_header_item {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border-right: 1px solid #ccc;
+}
+
+.header_menu_row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.header_menu_item {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  border-right: 1px solid #ccc;
+  transition: all 0.3s ease-in-out;
+  
+}
+
+.header_menu_item:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+.header_menu_item:last-child,
+.header_menu_header_item:last-child {
+  border-right: none; /* 마지막 열 border 제거 */
+}
+
+.header_menu_footer{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+  
+}
+.my_page{
+  font-weight: bold;
+}
+.header_menu_footer_links{
+  display: flex;
+  gap: 15px;
+  color: gray;
+  
 }

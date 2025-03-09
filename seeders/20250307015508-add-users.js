@@ -12,6 +12,7 @@ module.exports = {
         phoneNumber: "010-1234-5678",
         gender: "M",
         birth: "1999-01-01",
+        signup_method : "main"
       },
       {
         userId: "test2@email.com",
@@ -21,6 +22,7 @@ module.exports = {
         phoneNumber: "010-2222-3333",
         gender: "F",
         birth: "1996-07-10",
+        signup_method : "main"
       },
     ]);
   },
