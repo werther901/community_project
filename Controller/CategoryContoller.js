@@ -33,6 +33,7 @@ const getCategoryOne = async (req, res) => {
 //전체 포스트 요청 - all
 const allPost = async (req, res) => {
   let allpost = await Write.findAll({}).catch((err) => console.log(err));
+  console.log("allpost", allpost);
   res.send({ allpost });
 };
 

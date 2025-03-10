@@ -22,6 +22,7 @@ const getCategory = async (req, res) => {
   // console.log("category", cate);
   res.send({ category: cate });
 };
+
 //글 등록하기
 const getPost = async (req, res) => {
   const imgsrc = req.file ? req.file.path : null;
@@ -29,7 +30,7 @@ const getPost = async (req, res) => {
   //const { id } = jwt.verify(token, process.env.SECRET_KEY);
   //console.log(id);
   const userid = await User.findOne();
-  //console.log("userid", userid.dataValues.id);
+  console.log("userid", userid.dataValues.id);
 
   let info = {
     userId: userid.dataValues.id,
@@ -41,6 +42,7 @@ const getPost = async (req, res) => {
   };
 
   const user = await Write.create(info).catch((err) => console.log(err));
+  res.send({ user });
 };
 
 module.exports = { getCategory, getPost, write };

@@ -51,7 +51,7 @@ if (urlParams.get("category_id") === "all") {
                 />
               </div>
             </div>
-            <div class="td_title">김밥천국 위생 논란</div>
+            <div class="td_title">${item.title}</div>
             <div class="td_user">${item.userId}</div>
             <div class="td_like">${item.likes_cnt}</div>
           </div>

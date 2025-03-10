@@ -48,7 +48,7 @@ h1 {
 
 .table_content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -90,7 +90,7 @@ h1 {
   margin: 0px auto;
 }
 /* 테이블 행 호버 효과 */
-.table_content:hover {
+.td_row:hover {
   background-color: rgba(3, 199, 90, 0.1);
   transition: background-color 0.3s ease;
 }
