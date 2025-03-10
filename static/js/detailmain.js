@@ -17,7 +17,6 @@ if (urlParams.get("category_id") === "all") {
   })
     .then((res) => {
       console.log("res", res);
-      console.log("res data", res.data.allpost);
 
       let allpost_lst = res.data.allpost;
 
@@ -105,12 +104,12 @@ if (urlParams.get("category_id") === "all") {
 
 //생성 버튼 클릭
 function createPost() {
-  console.log("createPost click");
+  //console.log("createPost click");
   window.location.href = "/write";
 }
 
 //각 포스트 클릭
-function findpost() {
-  console.log("findpost click");
-  window.location.href = "/post";
+function findpost(element) {
+  //console.log("findpost click");
+  window.location.href = `/post?comment_id=${element}`;
 }

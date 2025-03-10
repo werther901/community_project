@@ -34,6 +34,14 @@ db.Like = require("./like.js")(sequelize, Sequelize.DataTypes);
 // 관계 설정
 db.Write.belongsTo(db.User, { foreignKey: "userId", targetKey: "id" });
 db.User.hasMany(db.Write, { foreignKey: "userId", sourceKey: "id" });
+db.Write.belongsTo(db.Category, {
+  foreignKey: "category",
+  targetKey: "category_id",
+});
+db.Category.hasMany(db.Write, {
+  foreignKey: "category",
+  sourceKey: "category_id",
+});
 
 // 이건 app.js에 작성하는게 좋음
 sequelize

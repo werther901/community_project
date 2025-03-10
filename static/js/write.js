@@ -33,7 +33,7 @@ let username = "";
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    console.log("Res.data", res.data);
+    //console.log("Res.data", res.data);
     if (res.data.result) {
       username = res.data.id;
     }
@@ -48,7 +48,7 @@ axios({
   url: "/write/categroy",
 })
   .then((res) => {
-    console.log("Res", res.data.category);
+    //console.log("Res", res.data.category);
     let cate = res.data.category; //카테고리 배열
     cate.map((item) => {
       category.innerHTML += `<option value="${item.category_id}">${item.name}</option>`;
@@ -116,3 +116,7 @@ function form_submit() {
       console.log("error : ", e);
     });
 }
+
+/*
+만약 쿼리스트링에 값이 있는 경우에만 해당 폼에 값을 미리 넣음
+*/

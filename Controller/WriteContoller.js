@@ -40,4 +40,10 @@ const getPost = async (req, res) => {
   res.send({ user });
 };
 
-module.exports = { getCategory, getPost, write };
+//수정 버튼
+const postmodify = async (req, res) => {
+  console.log("req", req.body);
+  res.send({ data: req.body });
+};
+
+module.exports = { getCategory, getPost, write, postmodify };

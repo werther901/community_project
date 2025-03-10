@@ -37,15 +37,14 @@ const allPost = async (req, res) => {
   -> userId는 User Table에 있는 id값을 기준으로 name 가져오기*/
 
   let allpost = await Write.findAll({
-    //userId: await User.findOne({where : {id : } }),
     include: [
       {
         model: User, // User 모델과 조인
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    raw: true, // 🔥 JOIN된 데이터를 평탄화 (User가 배열로 나오지 않음)
-    nest: true, // 🔥 JSON 구조 유지
+    // raw: true, // JOIN된 데이터를 평탄화 (User가 배열로 나오지 않음)
+    // nest: true, // JSON 구조 유지
   }).catch((err) => console.log(err));
   console.log("allpost", allpost);
   res.send({ allpost });

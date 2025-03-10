@@ -135,6 +135,16 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
+.main_img {
+  display: flex;
+  margin: 0px auto;
+  width: 50%;
+  padding: 20px 0px;
+}
+.imgstyle {
+  width: 100%;
+  height: 100%;
+}
 
 /* 반응형 */
 @media (max-width: 768px) {
