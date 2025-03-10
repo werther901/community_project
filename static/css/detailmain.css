@@ -17,16 +17,26 @@ h1 {
 }
 
 /* 테이블 스타일 */
-table {
+.table {
   width: 100%;
   border-collapse: collapse;
   background: #f9f9f9;
   border-radius: 5px;
   overflow: hidden;
 }
+.td_row {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
 /* 테이블 헤더 스타일 */
-th {
+.talbe_column {
+  display: flex;
+}
+.talbe_column > div {
   background-color: #03c75a;
   color: white;
   padding: 10px;
@@ -35,7 +45,14 @@ th {
 }
 
 /* 테이블 데이터 스타일 */
-td {
+
+.table_content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.table_content > div {
   padding: 10px;
   text-align: center;
   font-size: 14px;
@@ -72,9 +89,8 @@ td {
   height: 100px;
   margin: 0px auto;
 }
-
 /* 테이블 행 호버 효과 */
-tr:hover {
+.table_content:hover {
   background-color: rgba(3, 199, 90, 0.1);
   transition: background-color 0.3s ease;
 }
@@ -108,4 +124,8 @@ tr:hover {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.table_img > img {
+  border-radius: 10px;
 }
