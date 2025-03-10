@@ -9,8 +9,11 @@ router.get("/signup", userController.signup);
 // 로그인 페이지 이동
 router.get("/login", userController.login);
 
-//카테고리 선택 페이지 이동
+// 카테고리 선택 페이지 이동
 router.get("/detailmain", userController.detailmain);
+
+// 마이페이지 이동
+router.get("/mypage", userController.mypage);
 
 // 이메일 중복 검사
 router.get("/idCheck", userController.idCheck);

@@ -1,4 +1,4 @@
-// 로드 시 쿠키 읽기
+// 로드 시 쿠키 읽기('아이디 저장')
 window.addEventListener("DOMContentLoaded", function () {
   const idCookie = getCookie("id");
 
@@ -23,11 +23,12 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// 아이디, 비밀번호 입력값이 일단 들어가면 로그인 버튼 'disabled' 해제
+
 const id = document.getElementById("id");
 const password = document.getElementById("password");
 const login_btn = document.querySelector(".login-btn");
 
+// 아이디, 비밀번호 입력값이 일단 들어가면 로그인 버튼 'disabled' 해제
 const openLogin = () => {
   if (id.value != "" && password.value != "") {
     login_btn.disabled = false;
@@ -56,7 +57,7 @@ const login = () => {
     .post("/login", { id: id.value, pw: password.value })
     .then((res) => {
       if (res.data.result) {
-        // 아이디 저장 체크 시 쿠키에 아이디 저장
+        // '아이디 저장' 체크 시 쿠키에 아이디 저장
         if (saveId.checked) {
           const expirationDate = new Date();
           expirationDate.setDate(expirationDate.getDate() + 7);
@@ -76,6 +77,15 @@ const login = () => {
     });
 };
 login_btn.addEventListener("click", login);
+
+// Enter시 로그인
+const EnterKeyDown = (e) => {
+  if (e.keyCode === 13 && id.value.trim() !== "" && password.value.trim() !== "") {
+    login();
+  }
+}
+id.addEventListener('keydown', EnterKeyDown);
+password.addEventListener('keydown', EnterKeyDown);
 
 // 네이버 로그인
 var naver_id_login = new naver_id_login("Ck5wKX1f6oVy4LIJ8Etp", "http://localhost:3000/naver_login");
