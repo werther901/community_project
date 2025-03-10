@@ -135,7 +135,7 @@ function categoryMove(categoryid) {
   }
 }
 
-// 250306 임시 로그아웃 기능
+// 로그아웃
 const content01 = document.querySelector(".content01");
 const logoutFunc = () => {
   // 쿠키 삭제
@@ -161,7 +161,10 @@ const logoutFunc = () => {
     if (!tokenCookie) {
       // 토큰이 없으면 로그인 링크 표시
       data =
-        '<a href="/login" class="login">로그인</a><a href="/signup" class="signup">회원가입</a>';
+
+        `<a href="/login" style="margin-right: 10px">로그인</a>
+        <a href="/signup" style="margin-right: 10px">회원가입</a>`;
+
       info.innerHTML = data;
       return;
     }
@@ -180,7 +183,10 @@ const logoutFunc = () => {
 
     if (res.data.result) {
       data = `
-        <div><strong>${res.data.name}</strong>님 환영합니다.</div>
+
+        <span><strong>${res.data.name}</strong>님 환영합니다.</span>
+        <a href="/mypage" style="margin: 0 10px">마이페이지</a>
+
         <button onClick='logoutFunc()'>로그아웃</button>`;
     }
 

@@ -29,6 +29,11 @@ const naverLogin = (req, res) => {
   res.render("naver_login");
 };
 
+// 마이페이지
+const mypage = (req, res) => {
+  res.render("mypage");
+}
+
 // 글 쓰기 페이지
 const write = (req, res) => {
   res.render("write");
@@ -64,8 +69,7 @@ const idCheck = async (req, res) => {
 
 // 회원가입 처리
 const signupProcess = async (req, res) => {
-  const { userId, password, name, address, phoneNumber, gender, birth } =
-    req.body;
+  const { userId, password, name, address, phoneNumber, gender, birth } = req.body;
 
   console.log(req.body);
   const date = moment(birth, "YYYY-MM-DD").format("YYYY-MM-DD");
@@ -96,9 +100,7 @@ const signupProcess = async (req, res) => {
     // 회원가입 성공
     return res.status(200).json({ result: true, message: "회원가입 성공" });
   } catch (e) {
-    return res
-      .status(400)
-      .json({ result: false, message: "회원가입 실패2", error: e });
+    return res.status(400).json({ result: false, message: "회원가입 실패2", error: e });
   }
 };
 
@@ -117,17 +119,12 @@ const loginProcess = async (req, res) => {
 
       if (!match) {
         // 비밀번호가 틀렸습니다.
-        return res
-          .status(401)
-          .json({ result: false, message: "비밀번호가 틀렸습니다." });
+        return res.status(401).json({ result: false, message: "비밀번호가 틀렸습니다." });
       }
       // 토큰 발급
-      const token = jwt.sign(
-        { id: user.dataValues.id },
-        process.env.SECRET_KEY
-      );
+      const token = jwt.sign({ id: user.dataValues.id }, process.env.SECRET_KEY, { expiresIn: "1h" });
       // 쿠키 설정
-      res.cookie("token", token);
+      res.cookie("token", token, { maxAge: 3600000 });
       // 토큰 응답
       res.json({ result: true, token });
     } catch (e) {
@@ -157,16 +154,12 @@ const verifyProcess = async (req, res) => {
 
       if (!user.dataValues.id) {
         // 로그인 실패
-        return res
-          .status(403)
-          .json({ result: false, message: "유저 정보 조회 실패" });
+        return res.status(403).json({ result: false, message: "유저 정보 조회 실패" });
       }
       // 성공
       res.json({ result: true, name: user.name });
     } catch (e) {
-      return res
-        .status(403)
-        .json({ result: false, message: "토큰이 만료되었습니다." });
+      return res.status(403).json({ result: false, message: "토큰이 만료되었습니다." });
     }
   } else {
     return res.status(403).json({ result: false, message: "토큰이 없습니다." });
@@ -175,36 +168,39 @@ const verifyProcess = async (req, res) => {
 
 // 네이버 로그인 요청
 const naverLoginProcess = async (req, res) => {
-  // 만약에 email이 db에 있으면 중복
-  // db에는 컬럼 어디서 로그인했는지 컬럼 추가
-  // user가 없으면 받은 데이터 db에 추가(추가하려면 db null도 들어가도 상관없도록 수정 필요)
-  // user가 있으면 '로그인 성공했습니다' 후 메인페이지로 이동
-
   // 로그인 요청 데이터
-  const { email, name, gender, birthday } = req.body;
-  console.log(req.body);
+  const { email, name, gender, signup_method } = req.body;
   const user = await User.findOne({ where: { userId: email } });
-  // db에 데이터 추가하는 코드 필요
-  console.log("user : ", user);
 
-  if (user) {
-    // user가 있으면 로그인 성공 alert띄우고, 메인페이지로
-    res.status(200).json({ result: true, message: "로그인 성공" });
-  } else {
-    // user가 없으면 alert띄우고 회원가입 페이지로
-    res.status(200).json({
-      result: false,
-      message: "회원가입 페이지로 이동",
-      userInfo: req.body,
-    });
+  try {
+    if (!user) {
+      // user가 없으면 db에 회원정보 저장 후 토큰 발급
+      const addUser = await User.create({
+        userId: email,
+        name: name,
+        gender: gender,
+        signup_method: signup_method,
+      });
+  
+      const token = jwt.sign({ id: addUser.dataValues.id }, process.env.SECRET_KEY, { expiresIn: "1h" });
+      // 쿠키 설정
+      res.cookie("token", token);
+      // 토큰 응답
+      res.json({ result: true, token });
+    }
+    const token = jwt.sign({ id: user.dataValues.id }, process.env.SECRET_KEY, { expiresIn: "1h" });
+    // 쿠키 설정
+    res.cookie("token", token);
+    // 토큰 응답
+    res.json({ result: true, token });
+  } catch (error) {
+    return res.status(403).json({ result: false, message: "네이버 로그인 실패" });
   }
 };
 
 // 카테고리 요청 - all
 const getCategory = async (req, res) => {
-  let categoryname = await Category.findAll({}).catch((err) =>
-    console.log(err)
-  );
+  let categoryname = await Category.findAll({}).catch((err) => console.log(err));
   let cate = []; //카테고리 이름
   categoryname.map((item) => {
     cate.push(item.dataValues);
@@ -218,6 +214,7 @@ module.exports = {
   signup,
   login,
   naverLogin,
+  mypage,
   idCheck,
   signupProcess,
   loginProcess,

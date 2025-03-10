@@ -22,11 +22,11 @@ module.exports = {
         allowNull: true,
       }),
       // signup_method 컬럼 추가
-      queryInterface.addColumn('user', 'signup_method', {
-        type: Sequelize.STRING(20),
-        allowNull: false,
-        defaultValue: 'local', // 기본값은 일반 회원가입
-      }),
+      // queryInterface.addColumn('user', 'signup_method', {
+      //   type: Sequelize.STRING(20),
+      //   allowNull: false,
+      //   defaultValue: 'local', // 기본값은 일반 회원가입
+      // }),
     ]);
   },
 
