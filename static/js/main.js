@@ -48,7 +48,7 @@ function createTable() {
               
                 <!-- 마이페이지 & 고객센터 -->
                 <div class="header_menu_footer">
-                    <div class="my_page">마이페이지</div>
+                    <div class="my_page" onclick="mypage()">마이페이지</div>
                     <div class="header_menu_footer_links">
                         <div>고객센터</div>
                         <div>Gather 이용안내</div>
@@ -135,6 +135,10 @@ function categoryMove(categoryid) {
   }
 }
 
+function mypage() {
+  window.location.href = "/mypage";
+}
+
 // 로그아웃
 const content01 = document.querySelector(".content01");
 const logoutFunc = () => {
@@ -160,10 +164,8 @@ const logoutFunc = () => {
 
     if (!tokenCookie) {
       // 토큰이 없으면 로그인 링크 표시
-      data =
-
-        `<a href="/login" style="margin-right: 10px">로그인</a>
-        <a href="/signup" style="margin-right: 10px">회원가입</a>`;
+      data = `<a href="/login" class="login">로그인</a>
+        <a href="/signup" class="signup" >회원가입</a>`;
 
       info.innerHTML = data;
       return;
@@ -183,10 +185,7 @@ const logoutFunc = () => {
 
     if (res.data.result) {
       data = `
-
-        <span><strong>${res.data.name}</strong>님 환영합니다.</span>
-        <a href="/mypage" style="margin: 0 10px">마이페이지</a>
-
+        <div><strong>${res.data.name}</strong>님 환영합니다.</div>
         <button onClick='logoutFunc()'>로그아웃</button>`;
     }
 

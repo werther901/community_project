@@ -288,6 +288,7 @@ body {
 }
 .my_page {
   font-weight: bold;
+  cursor: pointer;
 }
 .header_menu_footer_links {
   display: flex;
@@ -308,4 +309,8 @@ body {
   border: none;
   font-size: 12px;
   border-radius: 10px;
+}
+
+.moreview {
+  cursor: pointer;
 }
