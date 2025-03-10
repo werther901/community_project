@@ -28,7 +28,16 @@ const ViewPost = async (req, res) => {
   res.send({ write });
 };
 
+const deleteData = async (req, res) => {
+  let id = req.params.id;
+  console.log("id", id);
+  await Write.destroy({ where: { comment_id: id } }).catch((err) =>
+    console.log(err)
+  );
+  res.status(200).send("User is deleted");
+};
 module.exports = {
   postMove,
   ViewPost,
+  deleteData,
 };

@@ -249,6 +249,7 @@ body {
   text-align: center;
   border-right: 1px solid #ccc;
   justify-content: center;
+  cursor: pointer;
 }
 
 .header_menu_row {
