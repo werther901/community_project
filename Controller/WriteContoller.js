@@ -27,13 +27,8 @@ const getCategory = async (req, res) => {
 const getPost = async (req, res) => {
   const imgsrc = req.file ? req.file.path : null;
 
-  //const { id } = jwt.verify(token, process.env.SECRET_KEY);
-  //console.log(id);
-  const userid = await User.findOne();
-  console.log("userid", userid.dataValues.id);
-
   let info = {
-    userId: userid.dataValues.id,
+    userId: req.body.userId,
     title: req.body.title,
     category: req.body.category,
     likes_cnt: 0,
@@ -45,4 +40,12 @@ const getPost = async (req, res) => {
   res.send({ user });
 };
 
-module.exports = { getCategory, getPost, write };
+//수정 버튼
+const postmodify = async (req, res) => {
+  console.log("req", req.body.posturl);
+  const posturl = req.body.posturl;
+  const user = await Write.findOne({ where: { comment_id: posturl } });
+  res.send({ user });
+};
+
+module.exports = { getCategory, getPost, write, postmodify };

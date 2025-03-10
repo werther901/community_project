@@ -17,27 +17,9 @@ if (urlParams.get("category_id") === "all") {
   })
     .then((res) => {
       console.log("res", res);
-      console.log("res data", res.data.allpost);
 
       let allpost_lst = res.data.allpost;
-      // allpost_lst.map((item) => {
-      //   table_content.innerHTML += `
-      //   <tr onclick="findpost(${item.comment_id})">
-      //   <td class="td_img">
-      //     <div class="table_img">
-      //       <img
-      //         class="imgstyle"
-      //         src="${item.photo_address}"
-      //         alt="table_img"
-      //       />
-      //     </div>
-      //   </td>
-      //   <td class="td_title">김밥천국 위생 논란</td>
-      //   <td class="td_user">${item.userId}</td>
-      //   <td class="td_like">${item.likes_cnt}</td>
-      // </tr>
-      //   `;
-      // });
+
       table_content.innerHTML = allpost_lst
         .map((item) => {
           return `
@@ -52,7 +34,7 @@ if (urlParams.get("category_id") === "all") {
               </div>
             </div>
             <div class="td_title">${item.title}</div>
-            <div class="td_user">${item.userId}</div>
+            <div class="td_user">${item.User.name}</div>
             <div class="td_like">${item.likes_cnt}</div>
           </div>
         `;
@@ -72,12 +54,48 @@ if (urlParams.get("category_id") === "all") {
   })
     .then((res) => {
       console.log("Res", res);
+      let id = res.data.cate_id;
       let name = res.data.name; //카테고리 이름
       if (name.includes("게시판")) {
         category_name.innerHTML = `<div>${res.data.name}</div>`;
       } else {
         category_name.innerHTML = `<div>${res.data.name} 게시판</div>`;
       }
+
+      //table 추가
+      axios({
+        method: "post",
+        url: "/detailmain/allPost",
+      }).then((res) => {
+        //console.log("res", res);
+        let postlist = res.data.allpost;
+
+        const category_post = postlist.filter((element) => {
+          //console.log("element", element.category, "id", id);
+          return Number(element.category) === Number(id);
+        });
+        console.log("category_post", category_post);
+        table_content.innerHTML = category_post
+          .map((item) => {
+            return `
+            <div class="td_row" onclick="findpost(${item.comment_id})">
+            <div class="td_img">
+              <div class="table_img">
+                <img
+                  class="imgstyle"
+                  src="${item.photo_address}"
+                  alt="table_img"
+                />
+              </div>
+            </div>
+            <div class="td_title">${item.title}</div>
+            <div class="td_user">${item.User.name}</div>
+            <div class="td_like">${item.likes_cnt}</div>
+          </div>
+        `;
+          })
+          .join("");
+      });
     })
     .catch((e) => {
       console.log("error : ", e);
@@ -86,12 +104,12 @@ if (urlParams.get("category_id") === "all") {
 
 //생성 버튼 클릭
 function createPost() {
-  console.log("createPost click");
+  //console.log("createPost click");
   window.location.href = "/write";
 }
 
 //각 포스트 클릭
-function findpost() {
-  console.log("findpost click");
-  window.location.href = "/post";
+function findpost(element) {
+  //console.log("findpost click");
+  window.location.href = `/post?comment_id=${element}`;
 }

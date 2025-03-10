@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define(
+  const Write = sequelize.define(
     "Write",
     {
       comment_id: {
@@ -51,4 +51,13 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     }
   );
+  Write.associate = (models) => {
+    Write.belongsTo(models.User, { foreignKey: "userId", targetKey: "id" });
+    Write.belongsTo(models.Category, {
+      foreignKey: "category",
+      targetKey: "category_id",
+    });
+  };
+
+  return Write;
 };
