@@ -1,6 +1,6 @@
 //변수선언 - dom
 const category_name = document.querySelector(".category_name");
-
+const table_content = document.querySelector(".table_content");
 //h1 change title
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
@@ -9,9 +9,62 @@ const urlParams = url.searchParams;
 //main에서 전체 게시판 클릭 시
 if (urlParams.get("category_id") === "all") {
   category_name.innerHTML = "<div>전체 게시판</div>";
+
+  //전체 내용 띄우기
+  axios({
+    method: "post",
+    url: "/detailmain/allPost",
+  })
+    .then((res) => {
+      console.log("res", res);
+      console.log("res data", res.data.allpost);
+
+      let allpost_lst = res.data.allpost;
+      // allpost_lst.map((item) => {
+      //   table_content.innerHTML += `
+      //   <tr onclick="findpost(${item.comment_id})">
+      //   <td class="td_img">
+      //     <div class="table_img">
+      //       <img
+      //         class="imgstyle"
+      //         src="${item.photo_address}"
+      //         alt="table_img"
+      //       />
+      //     </div>
+      //   </td>
+      //   <td class="td_title">김밥천국 위생 논란</td>
+      //   <td class="td_user">${item.userId}</td>
+      //   <td class="td_like">${item.likes_cnt}</td>
+      // </tr>
+      //   `;
+      // });
+      table_content.innerHTML = allpost_lst
+        .map((item) => {
+          return `
+            <div class="td_row" onclick="findpost(${item.comment_id})">
+            <div class="td_img">
+              <div class="table_img">
+                <img
+                  class="imgstyle"
+                  src="${item.photo_address}"
+                  alt="table_img"
+                />
+              </div>
+            </div>
+            <div class="td_title">${item.title}</div>
+            <div class="td_user">${item.userId}</div>
+            <div class="td_like">${item.likes_cnt}</div>
+          </div>
+        `;
+        })
+        .join("");
+    })
+    .catch((e) => {
+      console.log("error", e);
+    });
 } else {
   console.log(Number(urlParams.get("category_id")));
-  //main에서 전체 게시판 외 다른 게시판 클릭 시
+  //main에서 전체 게시판 외 다른 게시판 클릭 시 - 카테고리 요청
   axios({
     method: "post",
     url: "/detailmain/categoryselcet",

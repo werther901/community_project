@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt"); // 비밀번호 암호화 라이브러리
 
 require("dotenv").config(); // env
 
-const { Category, Write } = require("../models/index"); // 데이터베이스 모델
+const { User, Category, Write } = require("../models/index"); // 데이터베이스 모델
 
 //write 페이지 이동
 const write = async (req, res) => {
@@ -22,18 +22,27 @@ const getCategory = async (req, res) => {
   // console.log("category", cate);
   res.send({ category: cate });
 };
+
 //글 등록하기
 const getPost = async (req, res) => {
+  const imgsrc = req.file ? req.file.path : null;
+
+  //const { id } = jwt.verify(token, process.env.SECRET_KEY);
+  //console.log(id);
+  const userid = await User.findOne();
+  console.log("userid", userid.dataValues.id);
+
   let info = {
+    userId: userid.dataValues.id,
     title: req.body.title,
-    userId: req.body.password,
     category: req.body.category,
-    like_cnt: 0,
-    photo_address: "imgsrc",
+    likes_cnt: 0,
+    photo_address: imgsrc,
+    comment: req.body.comment,
   };
 
-  //const user = await User.create(info).catch((err) => console.log(err));
-  //res.status(200).send(user);
+  const user = await Write.create(info).catch((err) => console.log(err));
+  res.send({ user });
 };
 
 module.exports = { getCategory, getPost, write };

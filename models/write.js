@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       comment_id: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,  // 1부터 자동 증가
-        primaryKey: true,     // 기본 키 설정
+        autoIncrement: true, // 1부터 자동 증가
+        primaryKey: true, // 기본 키 설정
       },
       title: {
         type: DataTypes.STRING(255),
@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'user',
-          key: 'id'
+          model: "user",
+          key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
@@ -27,8 +27,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'category',
-          key: 'category_id'
+          model: "category",
+          key: "category_id",
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
@@ -38,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       photo_address: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+      },
+      comment: {
         type: DataTypes.STRING(255),
         allowNull: false,
       },

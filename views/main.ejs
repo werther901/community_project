@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/main.css" />
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
@@ -11,16 +18,61 @@
   <body>
     <div class="container">
       <div class="container_header">
-        <div class="main_logo_img">
-          <img class="imgstyle" src="/images/main_logo.png" alt="main_logo" />
+        <div class="main_logo">
+          <h1>Gather</h1>
         </div>
         <div class="sidemenu">
+          <div class="sidemenu_menu" onclick="menubar()">
+            <img class="imgstyle" src="/images/menu.png" alt="menu" />
+          </div>
           <div class="welcome"></div>
         </div>
       </div>
-      <div class="container_category">
-        <div onclick="categoryMove('all')">전체</div>
+      <!-- menu click content -->
+      <div class="header_menu"></div>
+
+      <!-- today topic -->
+      <div class="today_menu">
+        <h2>오늘의 글</h2>
+
+        <div class="today_content">
+          <div class="today_main">
+            <div class="today_main_img">
+              <img class="imgstyle" src="/images/bird.jpg" alt="bird" />
+            </div>
+            <div class="today_main_comment">
+              <div class="today_more">더보기</div>
+              <div class="today_main_title">올빼미 찾음</div>
+              <div class="today_main_content">
+                여기 동네 뒷산인데 왜 여기에 있지?
+              </div>
+            </div>
+          </div>
+          <div class="today_sub">
+            <div class="today_sub_1">
+              <div class="today_sub_title">올챙이 배는 개구리 배</div>
+              <div class="today_sub_img">
+                <img class="imgstyle" src="/images/battle.jpeg" alt="battle" />
+              </div>
+            </div>
+            <div class="today_sub_2">
+              <div class="today_sub_title">올챙이 배는 개구리 배</div>
+              <div class="today_sub_img">
+                <img class="imgstyle" src="/images/battle.jpeg" alt="battle" />
+              </div>
+            </div>
+
+            <div class="today_sub_3">
+              <div class="today_sub_title">올챙이 배는 개구리 배</div>
+              <div class="today_sub_img">
+                <img class="imgstyle" src="/images/battle.jpeg" alt="battle" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- main -->
       <div class="container_main">
         <div class="main_cards">
           <div class="card">
@@ -65,6 +117,8 @@
           </div>
         </div>
       </div>
+
+      <!-- 3열 게시판 -->
       <div class="container_submain">
         <div class="submain_section_1">
           <div class="submain_table">

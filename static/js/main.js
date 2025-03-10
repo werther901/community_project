@@ -1,5 +1,63 @@
 //변수 선언 - dom
 const container_category = document.querySelector(".container_category");
+const header_menu = document.querySelector(".header_menu");
+
+//버튼 클릭 확인용
+let menu_chk = true;
+
+//table 생성성
+function createTable() {
+  header_menu.innerHTML = `
+            <div class="header_menu_container">
+                <div class="header_menu_header"></div>
+                <div class="header_menu_row">
+                    <div class="header_menu_item"  onclick="categoryMove('all')">전체게시판</div>
+                    <div class="header_menu_item">서울</div>
+                    <div class="header_menu_item">정치</div>
+                    <div class="header_menu_item">보드게임</div>
+                    <div class="header_menu_item">헬스</div>
+                </div>
+                <div class="header_menu_row">
+                    <div class="header_menu_item">자유게시판</div>
+                    <div class="header_menu_item">경기도</div>
+                    <div class="header_menu_item">경제</div>
+                    <div class="header_menu_item">스팀</div>
+                    <div class="header_menu_item">수영</div>
+                </div>
+                <div class="header_menu_row">
+                    <div class="header_menu_item"></div>
+                    <div class="header_menu_item">경상도</div>
+                    <div class="header_menu_item">사회</div>
+                    <div class="header_menu_item">오리진</div>
+                    <div class="header_menu_item">필라테스</div>
+                </div>
+                <div class="header_menu_row">
+                    <div class="header_menu_item"></div>
+                    <div class="header_menu_item">충청도</div>
+                    <div class="header_menu_item">과학</div>
+                    <div class="header_menu_item">닌텐도</div>
+                    <div class="header_menu_item">골프</div>
+                </div>
+                <div class="header_menu_row">
+                    <div class="header_menu_item"></div>
+                    <div class="header_menu_item">전라도</div>
+                    <div class="header_menu_item">국제</div>
+                    <div class="header_menu_item">기타</div>
+                    <div class="header_menu_item">사격</div>
+                </div>
+              
+                <!-- 마이페이지 & 고객센터 -->
+                <div class="header_menu_footer">
+                    <div class="my_page">마이페이지</div>
+                    <div class="header_menu_footer_links">
+                        <div>고객센터</div>
+                        <div>Gather 이용안내</div>
+                    </div>
+                </div>
+            </div>
+            
+            `;
+}
 
 window.onload = function () {
   //카테고리 표시
@@ -10,14 +68,34 @@ window.onload = function () {
     .then((res) => {
       console.log("Res", res.data.category);
       let category = res.data.category;
-      category.map((item) => {
-        container_category.innerHTML += `<div onclick="categoryMove(${item.category_id})">${item.name}</div>`;
-      });
+
+      //header_menu
+      window.menubar = function () {
+        if (menu_chk === true) {
+          header_menu.style.display = "block";
+          // header_menu 내용 생성
+          createTable();
+          const header_menu_header = document.querySelector(
+            ".header_menu_header"
+          );
+          // 카테고리 넣기
+          category.map((item) => {
+            header_menu_header.innerHTML += `
+                <div class="header_menu_header_item" onclick="categoryMove(${item.category_id})">${item.name}</div>`;
+          });
+
+          menu_chk = false;
+        } else {
+          header_menu.style.display = "none";
+          menu_chk = true;
+        }
+      };
     })
     .catch((e) => {
       console.log("error", e);
     });
 };
+
 //로그인 클릭 버튼
 function login() {
   console.log("login click");
@@ -83,8 +161,10 @@ const logoutFunc = () => {
     if (!tokenCookie) {
       // 토큰이 없으면 로그인 링크 표시
       data =
+
         `<a href="/login" style="margin-right: 10px">로그인</a>
         <a href="/signup" style="margin-right: 10px">회원가입</a>`;
+
       info.innerHTML = data;
       return;
     }
@@ -103,8 +183,10 @@ const logoutFunc = () => {
 
     if (res.data.result) {
       data = `
+
         <span><strong>${res.data.name}</strong>님 환영합니다.</span>
         <a href="/mypage" style="margin: 0 10px">마이페이지</a>
+
         <button onClick='logoutFunc()'>로그아웃</button>`;
     }
 
