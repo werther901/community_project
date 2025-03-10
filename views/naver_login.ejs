@@ -4,15 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="view_info"></div>
   </body>
 
-  <script>
+  <!-- <script>
     const view_info = document.querySelector(".view_info");
 
     var naver_id_login = new naver_id_login("Ck5wKX1f6oVy4LIJ8Etp", "http://localhost:3000/naver_login");
@@ -21,14 +23,9 @@
     // 네이버 사용자 프로필 조회
     naver_id_login.get_naver_userprofile("naverSignInCallback()");
 
+    
     // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
     function naverSignInCallback() {
-      // view_info.innerHTML += `${naver_id_login.getProfileData('email')}`;
-      // view_info.innerHTML = `${naver_id_login.getProfileData("email")},<br>
-      // ${naver_id_login.getProfileData("name")},<br>
-      // ${naver_id_login.getProfileData("gender")},<br>
-      // ${naver_id_login.getProfileData("birthday")}`;
-
       const email = naver_id_login.getProfileData("email");
       const name = naver_id_login.getProfileData("name");
       const gender = naver_id_login.getProfileData("gender");
@@ -68,6 +65,57 @@
           console.log("오류 : ", e);
         });
     }
+  </script> -->
+  <!-- <script>
+    /* (3) 네아로 설정 정보 및 초기화 */
+    window.name = "opener";
+    var naverLogin = new naver.LoginWithNaverId({
+      clientId: "Ck5wKX1f6oVy4LIJ8Etp",
+      callbackUrl: "http://localhost:3000/naver_login",
+      isPopup: true,
+      loginButton: { color: "green", type: 3, height: 60 },
+    });
 
-  </script>
+    /* (4) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */
+    naverLogin.init();
+
+    /* (4-1) 임의의 링크를 설정해줄 필요가 있는 경우 */
+    $("#gnbLogin").attr("href", naverLogin.generateAuthorizeUrl());
+
+    /* (5) 현재 로그인 상태를 확인 */
+    window.addEventListener("load", function () {
+      naverLogin.getLoginStatus(function (status) {
+        if (status) {
+          /* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+          setLoginStatus();
+        }
+      });
+    });
+
+    /* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+    function setLoginStatus() {
+      let profileImage = naverLogin.user.getProfileImage();
+      let email = naverLogin.user.getEmail();
+      let birthYear = naverLogin.user.getBirthyear();
+      let birthDay = naverLogin.user.getBirthday();
+      let mobile = naverLogin.user.getMobile();
+      let name = naverLogin.user.getName();
+      let gender = naverLogin.user.getGender();
+      console.log(profileImage, email, birthYear, birthDay, mobile, name, gender);
+      // var imageViewer = "";
+      // if (profileImage) {
+      //   imageViewer += '<br><br><img src="' + profileImage + '" height=50 /> <p>';
+      // }
+      // $("#naverIdLogin_loginButton").html(imageViewer + nickName + "님 반갑습니다.</p>");
+      // $("#gnbLogin").html("Logout");
+      // $("#gnbLogin").attr("href", "#");
+      // /* (7) 로그아웃 버튼을 설정하고 동작을 정의합니다. */
+      // $("#gnbLogin").click(function (e) {
+      //   e.preventDefault();
+      //   naverLogin.logout();
+      //   location.replace("/oauth/sample/javascript_sample.html");
+      // });
+    }
+
+  </script> -->
 </html>

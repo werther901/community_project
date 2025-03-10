@@ -49,6 +49,12 @@ input {
   -webkit-text-size-adjust: none;
 }
 
+/* 자동완성 하늘색 배경 없애기 */
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
 body {
   /* display: flex; */
   /* justify-content: center; */
@@ -57,7 +63,8 @@ body {
   margin: 0;
 }
 
-.saveId_label::before {
+.saveId_label::before,
+.icon_delete {
   background-image: url(../images/login.png);
   background-size: 336px 330px;
   background-repeat: no-repeat;
@@ -143,11 +150,56 @@ header {
   font-weight: 400;
   line-height: 22px;
   letter-spacing: -.2px;
-  transition: all .3scubic-bezier(.4,0,.2,1);
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
   color: rgba(0, 0, 0, .38);
   pointer-events: none;
   box-sizing: border-box;
   z-index: 5;
+}
+
+/* .text_label span {
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  transition: 0.3s;
+} */
+
+.input_id:focus-within,
+.input_pw:focus-within {
+  border: 2px solid #09aa5c;
+  outline: none;
+}
+
+#id:focus + .text_label,
+#id:valid + .text_label { 
+  transform: translateY(-51%);
+  font-size: 12px;
+  color: #a9aeb4;
+}
+
+#password:focus + .text_label,
+#password:valid + .text_label { 
+  transform: translateY(-51%);
+  font-size: 12px;
+  color: #a9aeb4;
+}
+
+.btn_delete {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 3px;
+  width: 40px;
+  height: 40px;
+  z-index: 7;
+}
+
+.icon_delete {
+  display: inline-block;
+  background-position: -292px 0;
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 22px;
 }
 
 .saveId_wrap {
@@ -208,9 +260,13 @@ header {
   color: #fff;
 }
 
-#naver_id_login {
+/* #naver_id_login {
   display: none;
-}
+} */
+
+/* #naverIdLogin {
+  display: none;
+} */
 
 #naverLoginCostom {
   position: relative;
@@ -235,8 +291,8 @@ header {
 	margin-left: 10px;
 	background: url('/images/btnG_naver_login_icon.png') no-repeat center;
 	background-size: 30px;
-  top: 7px;
-  left: 0;
+  top: 9px;
+  left: 2px;
 }
 
 
