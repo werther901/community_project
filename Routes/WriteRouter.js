@@ -26,6 +26,6 @@ let upload = multer({ storage: storage });
 router.post("/createPost", upload.single("imgsrc"), writeController.getPost);
 
 //수정 버튼 클릭
-router.post("/postmodify", writeController.postmodify);
+router.post("/modify", writeController.postmodify);
 
 module.exports = router;

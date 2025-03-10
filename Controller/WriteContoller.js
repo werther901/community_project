@@ -42,8 +42,10 @@ const getPost = async (req, res) => {
 
 //수정 버튼
 const postmodify = async (req, res) => {
-  console.log("req", req.body);
-  res.send({ data: req.body });
+  console.log("req", req.body.posturl);
+  const posturl = req.body.posturl;
+  const user = await Write.findOne({ where: { comment_id: posturl } });
+  res.send({ user });
 };
 
 module.exports = { getCategory, getPost, write, postmodify };

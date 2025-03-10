@@ -7,6 +7,44 @@ const preview_image = document.getElementById("preview_image");
 
 let username = "";
 
+//url
+const url = new URL(window.location.href);
+const urlParams = url.searchParams;
+//console.log("urlSearch", urlParams.get("comment_id")); //10
+
+// toast ui editor
+const editor = new window.toastui.Editor({
+  el: document.querySelector("#editor"),
+  previewStyle: "vertical",
+  height: "400px",
+  initialValue: "",
+});
+
+if (urlParams.get("comment_id")) {
+  //값이 존재하는 경우
+  axios({
+    method: "post",
+    url: "/write/modify",
+    data: { posturl: urlParams.get("comment_id") },
+  })
+    .then((res) => {
+      console.log("res", res.data.user);
+      let comment_data = res.data.user;
+      input_title.value = comment_data.title;
+
+      // toast ui editor
+      const editor = new window.toastui.Editor({
+        el: document.querySelector("#editor"),
+        previewStyle: "vertical",
+        height: "400px",
+        initialValue: comment_data.comment,
+      });
+    })
+    .catch((e) => {
+      console.log("error : ", e);
+    });
+}
+
 // 사용자 검증
 (async function () {
   try {
@@ -57,13 +95,6 @@ axios({
   .catch((e) => {
     console.log("error : ", e);
   });
-
-// toast ui editor
-const editor = new window.toastui.Editor({
-  el: document.querySelector("#editor"),
-  previewStyle: "vertical",
-  height: "400px",
-});
 
 //이미지 선택 버튼
 const readURL = (input) => {
@@ -116,7 +147,3 @@ function form_submit() {
       console.log("error : ", e);
     });
 }
-
-/*
-만약 쿼리스트링에 값이 있는 경우에만 해당 폼에 값을 미리 넣음
-*/
