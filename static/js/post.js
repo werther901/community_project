@@ -38,10 +38,11 @@ axios({
           <div class="content_comment">${postdata.comment}</div>
           <div class="content_top_bottom">
             <div class="bottom_like">
-              <div class="like_btn" onclick="likes()">좋아요</div>
+              <div class="like_btn" onclick="likes()">좋아요</div> 
               <div class="like_img">
                 <img class="imgstyle heart_img" alt="heart_img" />
               </div>
+              <div class="like_number"></div>
             </div>
             <div class="share_post">공유</div>
             <div class="notify_post">신고</div>
@@ -51,6 +52,29 @@ axios({
   .catch((e) => {
     console.log("error : ", e);
   });
+
+//좋아요 숫자
+function like_num() {
+  const like_number = document.querySelector(".like_number");
+  /*
+  axios를 통해 현재 포스트의 comment_id를 보내
+  전체 like 테이블에서 해당 comment_id만 찾아 res보냄
+  받은 res를 통해 길이를 찾아 해당 div에 넣어줌 
+  */
+  axios({
+    method: "post",
+    url: "/post/row",
+    data: { comment_id: current_category_num },
+  }).then((res) => {
+    console.log("res", res);
+    let data_lst = res.data;
+    if (data_lst.length === 0) {
+      like_number.innerHTML = `<div>0</div>`;
+    } else {
+      like_number.innerHTML = `<div>${data_lst.length}</div>`;
+    }
+  });
+}
 
 // 사용자 검증
 (async function () {
@@ -81,8 +105,11 @@ axios({
     if (res.data.result) {
       userid = res.data.id; //현재 접속한 user의 id(user table의 id)
       console.log("현재 접속한 유저의 id(PK)", userid);
+
+      //페이지 로드 시 DOM 변수 선언
       const heart_img = document.querySelector(".heart_img");
-      //axios - 요청 like 테이블에 값이 있는지 확인
+
+      //axios - 요청 like 테이블에 값이 있는지 확인 - 초기 heart_img src 세팅
       axios({
         method: "post",
         url: "/post/checkuser",
@@ -95,9 +122,13 @@ axios({
         if (res.data.user === null) {
           //만약 data > user > null인 경우 -> 데이터가 없어 빈 하트인 경우
           heart_img.src = "/images/heart.png";
+          //좋아요 숫자 표시
+          like_num();
         } else {
           //좋아요 버튼을 이미 누른 상태
           heart_img.src = "/images/fullheart.png";
+          //좋아요 숫자 표시
+          like_num();
         }
       });
     }
@@ -264,6 +295,7 @@ function likes() {
       }).then((res) => {
         console.log("res", res);
         heart_img.src = "/images/fullheart.png";
+        like_num();
       });
     } else {
       //좋아요 버튼을 이미 누른 상태
@@ -274,6 +306,7 @@ function likes() {
       }).then((res) => {
         console.log("res", res);
         heart_img.src = "/images/heart.png";
+        like_num();
       });
     }
   });

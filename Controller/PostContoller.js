@@ -80,6 +80,15 @@ const findUser = async (req, res) => {
   res.send({ user });
 };
 
+//해당 comment id에 따른 길이 찾기
+const Row = async (req, res) => {
+  const comment_id = req.body.comment_id;
+  let data_lst = await Like.findAll({
+    where: { comment_id: comment_id },
+  }).catch((err) => console.log(err));
+  res.send(data_lst);
+};
+
 module.exports = {
   postMove,
   ViewPost,
@@ -88,4 +97,5 @@ module.exports = {
   addUser,
   deleteUser,
   findUser,
+  Row,
 };
