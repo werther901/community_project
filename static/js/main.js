@@ -59,6 +59,19 @@ function createTable() {
             `;
 }
 
+//최신 글 axios 요청
+axios({
+  method: "post",
+  url: "/recentpost",
+})
+  .then((res) => {
+    console.log("Res", res);
+  })
+  .catch((e) => {
+    console.log("error : ", e);
+  });
+
+//window 실행 시
 window.onload = function () {
   //카테고리 표시
   axios({

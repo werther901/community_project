@@ -59,11 +59,34 @@ function writePage() {
 // 수정 버튼 클릭
 function post_modify() {
   window.location.href = `/write?comment_id=${postdata.comment_id}`;
-  // axios({
-  //   method: "post",
-  //   url: "/write/postmodify",
-  //   data: postdata,
-  // }).then((res) => {
-  //   window.location.href = "/write";
-  // });
+}
+
+//삭제 버튼 클릭
+function post_delete() {
+  let id = postdata.comment_id;
+  Swal.fire({
+    title: "정말로 삭제 하시겠습니까?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "삭제하기",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "삭제되었습니다",
+        icon: "success",
+      }).then((results) => {
+        if (results.isConfirmed) {
+          axios({
+            method: "delete",
+            url: `/post/delete/${id}`,
+          }).then((res) => {
+            window.location.href = "/";
+            //window.location.href = `/detailmain?category=${postdata.category}`;
+          });
+        }
+      });
+    }
+  });
 }

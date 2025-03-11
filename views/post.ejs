@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- css -->
     <link rel="stylesheet" href="/css/post.css" />
     <title>Document</title>
@@ -17,7 +19,7 @@
           <div class="main_top_btn">
             <div class="postModify_btn">
               <button onclick="post_modify()">수정</button>
-              <button>삭제</button>
+              <button onclick="post_delete()">삭제</button>
             </div>
             <div class="postMove_btn">
               <button>이전글</button>
