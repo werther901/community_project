@@ -6,6 +6,9 @@ const urlParams = url.searchParams;
 // 변수 선언
 const main_content = document.querySelector(".main_content");
 let postdata = {};
+const current_category = urlParams.get("category");
+const current_category_num = Number(urlParams.get("comment_id"));
+
 // 페이지 로드 시 axios 요청
 axios({
   method: "post",
@@ -47,7 +50,8 @@ axios({
 //목록으로 이동
 function postlist() {
   console.log("postlist click");
-  window.location.href = "/detailmain?category_id=all";
+  const category_num = urlParams.get("category");
+  window.location.href = `/detailmain?category_id=${category_num}`;
 }
 
 //글쓰기 페이지 이동
@@ -89,4 +93,75 @@ function post_delete() {
       });
     }
   });
+}
+
+//이전글 버튼 클릭
+function postMove_pre() {
+  axios({
+    method: "post",
+    url: "/post/movePost",
+    data: { now_category: current_category },
+  })
+    .then((res) => {
+      console.log("res", res.data);
+      const category_data_lst = res.data;
+      let category_id_lst = []; //comment_id 비교 리스트
+
+      //comment_id만 배열에 넣기
+      category_data_lst.map((item) => {
+        category_id_lst.push(Number(item.comment_id));
+      });
+
+      //console.log("cate", category_id_lst);
+
+      if (category_id_lst.indexOf(current_category_num) === 0) {
+        alert("이전 글이 없습니다.");
+      } else {
+        let pre_id =
+          category_id_lst[category_id_lst.indexOf(current_category_num) - 1];
+
+        //페이지 이동
+        window.location.href = `/post?comment_id=${pre_id}&category=${current_category}`;
+      }
+    })
+    .catch((e) => {
+      console.log("error : ", e);
+    });
+}
+
+//다음 글 이동 클릭 함수
+function postMove_next() {
+  axios({
+    method: "post",
+    url: "/post/movePost",
+    data: { now_category: current_category },
+  })
+    .then((res) => {
+      console.log("res", res.data);
+      const category_data_lst = res.data;
+      let category_id_lst = []; //comment_id 비교 리스트
+
+      //comment_id만 배열에 넣기
+      category_data_lst.map((item) => {
+        category_id_lst.push(Number(item.comment_id));
+      });
+
+      //console.log("cate", category_id_lst);
+
+      if (
+        category_id_lst.indexOf(current_category_num) ===
+        category_id_lst.length - 1
+      ) {
+        alert("다음 글이 없습니다.");
+      } else {
+        let next_id =
+          category_id_lst[category_id_lst.indexOf(current_category_num) + 1];
+
+        //페이지 이동
+        window.location.href = `/post?comment_id=${next_id}&category=${current_category}`;
+      }
+    })
+    .catch((e) => {
+      console.log("error : ", e);
+    });
 }

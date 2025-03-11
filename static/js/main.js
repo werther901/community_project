@@ -247,3 +247,8 @@ function main_moreview(id) {
 function sub_moreview(id) {
   window.location.href = `/post?comment_id=${id}&category=0`;
 }
+
+//logo 클릭
+function main_reload() {
+  window.location.reload();
+}

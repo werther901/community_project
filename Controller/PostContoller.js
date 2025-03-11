@@ -36,8 +36,19 @@ const deleteData = async (req, res) => {
   );
   res.status(200).send("User is deleted");
 };
+
+const movePost = async (req, res) => {
+  //console.log("req", req.body.now_category);
+
+  let data_lst = await Write.findAll({
+    where: { category: req.body.now_category },
+  }).catch((err) => console.log(err));
+  res.send(data_lst);
+};
+
 module.exports = {
   postMove,
   ViewPost,
   deleteData,
+  movePost,
 };
