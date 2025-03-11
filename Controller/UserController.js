@@ -69,7 +69,7 @@ const idCheck = async (req, res) => {
 
 // 회원가입 처리
 const signupProcess = async (req, res) => {
-  const { userId, password, name, address, phoneNumber, gender, birth } =
+  const { userId, password, name, address, phoneNumber, gender, birth, signup_method } =
     req.body;
 
   console.log(req.body);
@@ -80,8 +80,8 @@ const signupProcess = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   // 비밀번호 암호화
   const hashedPw = await bcrypt.hash(password, salt);
-  console.log("password : ", password);
-  console.log("hashedPw : ", hashedPw);
+  // console.log("password : ", password);
+  // console.log("hashedPw : ", hashedPw);
 
   try {
     const user = await User.create({
@@ -92,6 +92,7 @@ const signupProcess = async (req, res) => {
       phoneNumber,
       gender,
       birth: date,
+      signup_method: signup_method
     });
     console.log("user : ", user);
 
@@ -182,7 +183,7 @@ const verifyProcess = async (req, res) => {
 // 네이버 로그인 요청
 const naverLoginProcess = async (req, res) => {
   // 로그인 요청 데이터
-  const { email, name, gender, signup_method } = req.body;
+  const { email, name, gender, birthday, phoneNumber, signup_method } = req.body;
   const user = await User.findOne({ where: { userId: email } });
 
   try {
@@ -192,6 +193,8 @@ const naverLoginProcess = async (req, res) => {
         userId: email,
         name: name,
         gender: gender,
+        birth: birthday,
+        phoneNumber: phoneNumber,
         signup_method: signup_method,
       });
 
@@ -203,7 +206,7 @@ const naverLoginProcess = async (req, res) => {
       // 쿠키 설정
       res.cookie("token", token);
       // 토큰 응답
-      res.json({ result: true, token });
+      return res.json({ result: true, token });
     }
     const token = jwt.sign({ id: user.dataValues.id }, process.env.SECRET_KEY, {
       expiresIn: "1h",
@@ -211,7 +214,7 @@ const naverLoginProcess = async (req, res) => {
     // 쿠키 설정
     res.cookie("token", token);
     // 토큰 응답
-    res.json({ result: true, token });
+    return res.json({ result: true, token });
   } catch (error) {
     return res
       .status(403)

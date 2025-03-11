@@ -66,56 +66,68 @@
         });
     }
   </script> -->
-  <!-- <script>
+
+  <script>
     /* (3) 네아로 설정 정보 및 초기화 */
     window.name = "opener";
     var naverLogin = new naver.LoginWithNaverId({
       clientId: "Ck5wKX1f6oVy4LIJ8Etp",
       callbackUrl: "http://localhost:3000/naver_login",
       isPopup: true,
-      loginButton: { color: "green", type: 3, height: 60 },
+      callbackHandle: true,
     });
 
     /* (4) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */
     naverLogin.init();
 
     /* (4-1) 임의의 링크를 설정해줄 필요가 있는 경우 */
-    $("#gnbLogin").attr("href", naverLogin.generateAuthorizeUrl());
+    // $("#gnbLogin").attr("href", naverLogin.generateAuthorizeUrl());
 
     /* (5) 현재 로그인 상태를 확인 */
     window.addEventListener("load", function () {
       naverLogin.getLoginStatus(function (status) {
         if (status) {
-          /* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
-          setLoginStatus();
+          // let profileImage = naverLogin.user.getProfileImage();
+          let email = naverLogin.user.getEmail();
+          let name = naverLogin.user.getName();
+          let gender = naverLogin.user.getGender();
+          let birthYear = naverLogin.user.getBirthyear();
+          let birthDay = naverLogin.user.getBirthday();
+          let mobile = naverLogin.user.getMobile();
+
+          const birth = `${birthYear}-${birthDay}`;
+
+          let data = {
+            email: email,
+            name: name,
+            gender: gender,
+            birthday: birth,
+            phoneNumber: mobile,
+            signup_method: "naver",
+          };
+
+          axios({
+            method: "post",
+            url: "/naver_login",
+            data: data,
+          })
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.result) {
+                alert("네이버 로그인 성공");
+                window.opener.location.href = "http://localhost:3000";
+                window.close();
+              } else {
+                alert("네이버 로그인 실패");
+                window.opener.location.href = "http://localhost:3000/login";
+                window.close();
+              }
+            })
+            .catch((e) => {
+              console.log("오류 : ", e);
+            });
         }
       });
     });
-
-    /* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
-    function setLoginStatus() {
-      let profileImage = naverLogin.user.getProfileImage();
-      let email = naverLogin.user.getEmail();
-      let birthYear = naverLogin.user.getBirthyear();
-      let birthDay = naverLogin.user.getBirthday();
-      let mobile = naverLogin.user.getMobile();
-      let name = naverLogin.user.getName();
-      let gender = naverLogin.user.getGender();
-      console.log(profileImage, email, birthYear, birthDay, mobile, name, gender);
-      // var imageViewer = "";
-      // if (profileImage) {
-      //   imageViewer += '<br><br><img src="' + profileImage + '" height=50 /> <p>';
-      // }
-      // $("#naverIdLogin_loginButton").html(imageViewer + nickName + "님 반갑습니다.</p>");
-      // $("#gnbLogin").html("Logout");
-      // $("#gnbLogin").attr("href", "#");
-      // /* (7) 로그아웃 버튼을 설정하고 동작을 정의합니다. */
-      // $("#gnbLogin").click(function (e) {
-      //   e.preventDefault();
-      //   naverLogin.logout();
-      //   location.replace("/oauth/sample/javascript_sample.html");
-      // });
-    }
-
-  </script> -->
+  </script>
 </html>
