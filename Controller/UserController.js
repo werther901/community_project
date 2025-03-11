@@ -7,7 +7,7 @@ const moment = require("moment");
 // env
 require("dotenv").config();
 // 데이터베이스 모델
-const { User, Category } = require("../models/index");
+const { Write, User, Category } = require("../models/index");
 
 // 메인 페이지
 const main = async (req, res) => {
@@ -244,6 +244,18 @@ const getCategory = async (req, res) => {
   res.send({ category: cate });
 };
 
+//최신 글 요청
+const recentPost = async (req, res) => {
+  /* findall를 통해 전체 데이터를 가지고 온 후 id를 
+  기준으로 내림차순 후 4개만 전송하기 */
+  let recentdata = await Write.findAll({
+    order: [["comment_id", "desc"]],
+    limit: 4,
+  }).catch((err) => console.log(err));
+  //console.log("recent", recentdata);
+  res.send({ recentdata });
+};
+
 module.exports = {
   main,
   signup,
@@ -257,4 +269,5 @@ module.exports = {
   verifyProcess,
   getCategory,
   detailmain,
+  recentPost,
 };

@@ -37,5 +37,5 @@ router.post("/category", userController.getCategory);
 router.post("/naver_login", userController.naverLoginProcess);
 
 //최신 글 불러오기
-
+router.post("/recentpost", userController.recentPost);
 module.exports = router;
