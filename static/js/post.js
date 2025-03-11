@@ -59,13 +59,6 @@ function writePage() {
 // 수정 버튼 클릭
 function post_modify() {
   window.location.href = `/write?comment_id=${postdata.comment_id}`;
-  // axios({
-  //   method: "post",
-  //   url: "/write/postmodify",
-  //   data: postdata,
-  // }).then((res) => {
-  //   window.location.href = "/write";
-  // });
 }
 
 //삭제 버튼 클릭
@@ -95,6 +88,5 @@ function post_delete() {
         }
       });
     }
-    //axios요청하여 삭제하기
   });
 }

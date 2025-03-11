@@ -25,7 +25,9 @@ let upload = multer({ storage: storage });
 //등록 버튼 클릭
 router.post("/createPost", upload.single("imgsrc"), writeController.getPost);
 
-//수정 버튼 클릭
+//수정 버튼 클릭 - 기존 데이터 불러옴
 router.post("/modify", writeController.postmodify);
+//수정 버튼 클릭 - 쿼리 스트링 있는 경우
+router.put("/updateData", writeController.updateData);
 
 module.exports = router;

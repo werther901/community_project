@@ -48,4 +48,13 @@ const postmodify = async (req, res) => {
   res.send({ user });
 };
 
-module.exports = { getCategory, getPost, write, postmodify };
+const updateData = async (req, res) => {
+  console.log("req", req.body);
+
+  let id = Number(req.body.comment_id);
+  const user = await Write.update(req.body, {
+    where: { comment_id: id },
+  }).catch((err) => console.log(err));
+  res.status(200).send(user);
+};
+module.exports = { getCategory, getPost, write, postmodify, updateData };

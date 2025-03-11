@@ -114,8 +114,8 @@ const readURL = (input) => {
 
 //등록 버튼 클릭
 function form_submit() {
-  console.log("fom_submit click");
-  console.log("imgsrc", input_img.files[0]);
+  //console.log("fom_submit click");
+  //console.log("imgsrc", input_img.files[0]);
 
   /*
   1.파일 이미지 경로, select option값, 제목, 내용을 data에 담기
@@ -130,20 +130,45 @@ function form_submit() {
   formData.append("comment", editor.getMarkdown());
   formData.append("imgsrc", input_img.files[0]);
 
-  axios({
-    method: "post",
-    url: "/write/createPost",
-    data: formData,
-    headers: {
-      "Content-Type": "multipart/form-data", // 파일을 포함한 데이터 전송을 위한 헤더
-    },
-  })
-    .then((res) => {
-      console.log("Res", res);
-      alert("등록하였습니다.");
-      window.location.href = "/";
+  if (!urlParams.get("comment_id")) {
+    //쿼리 스트링이 없는 경우
+    axios({
+      method: "post",
+      url: "/write/createPost",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data", // 파일을 포함한 데이터 전송을 위한 헤더
+      },
     })
-    .catch((e) => {
-      console.log("error : ", e);
-    });
+      .then((res) => {
+        console.log("Res", res);
+        alert("등록하였습니다.");
+        window.location.href = "/";
+      })
+      .catch((e) => {
+        console.log("error : ", e);
+      });
+  } else {
+    let data_lst = {
+      userId: username,
+      category: category.value,
+      title: input_title.value,
+      comment: editor.getMarkdown(),
+      photo_address: input_img.files[0],
+      comment_id: urlParams.get("comment_id"),
+    };
+
+    axios({
+      method: "put",
+      url: "/write/updateData",
+      data: data_lst,
+    })
+      .then((res) => {
+        console.log("put data", res);
+        window.location.href = "/";
+      })
+      .catch((e) => {
+        console.log("error : ", e);
+      });
+  }
 }

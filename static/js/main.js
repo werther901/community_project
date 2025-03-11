@@ -59,6 +59,8 @@ function createTable() {
             `;
 }
 
+//최신 글 axios 요청
+
 window.onload = function () {
   //카테고리 표시
   axios({
