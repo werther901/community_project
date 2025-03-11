@@ -23,7 +23,7 @@ if (urlParams.get("category_id") === "all") {
       table_content.innerHTML = allpost_lst
         .map((item) => {
           return `
-            <div class="td_row" onclick="findpost(${item.comment_id})">
+            <div class="td_row" onclick="findpost(${item.comment_id},0)">
             <div class="td_img">
               <div class="table_img">
                 <img
@@ -78,7 +78,7 @@ if (urlParams.get("category_id") === "all") {
         table_content.innerHTML = category_post
           .map((item) => {
             return `
-            <div class="td_row" onclick="findpost(${item.comment_id})">
+            <div class="td_row" onclick="findpost(${item.comment_id},${id})">
             <div class="td_img">
               <div class="table_img">
                 <img
@@ -109,7 +109,7 @@ function createPost() {
 }
 
 //각 포스트 클릭
-function findpost(element) {
+function findpost(element, cate) {
   //console.log("findpost click");
-  window.location.href = `/post?comment_id=${element}`;
+  window.location.href = `/post?comment_id=${element}&category=${cate}`;
 }
