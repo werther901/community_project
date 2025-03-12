@@ -5,13 +5,14 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
-  background-color: #f9f9f9;
+  /*background-color: #f9f9f9;*/
   padding: 20px;
+  margin-top: 80px;
 }
 
 /* 메인 컨테이너 */
 .container_main {
-  width: 90%;
+  width: 100%;
   max-width: 1000px;
   background: white;
   padding: 20px;
@@ -22,7 +23,7 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 15px;
-  border-bottom: 3px solid #03c75a;
+  border-bottom: 3px solid #4b89dc;
 }
 
 .main_top_btn {
@@ -33,7 +34,7 @@
 
 .postModify_btn button,
 .postMove_btn button {
-  background-color: #03c75a;
+  background-color: #4b89dc;
   color: white;
   border: none;
   padding: 6px 10px;
@@ -129,7 +130,7 @@
 }
 
 .main_bottom button {
-  background-color: #03c75a;
+  background-color: #4b89dc;
   color: white;
   font-size: 12px;
   padding: 5px 8px;

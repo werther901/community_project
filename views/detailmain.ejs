@@ -10,6 +10,7 @@
     <title>Document</title>
   </head>
   <body>
+    <%- include("./header") %>
     <div class="container_wrap">
       <h1 class="category_name"></h1>
       <div class="container_main">
@@ -23,7 +24,7 @@
           <div class="table_content"></div>
         </div>
         <div class="container_modify">
-          <button class="postbtn" onclick="createPost()">생성</button>
+          <button class="postbtn" onclick="createPost()">글쓰기</button>
         </div>
       </div>
       <%- include("./footer") %>

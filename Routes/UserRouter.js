@@ -28,7 +28,7 @@ router.post("/login", userController.loginProcess);
 router.get("/naver_login", userController.naverLogin);
 
 // kakao 로그인
-router.get("/kakao_login", userController.kakaoLogin)
+router.get("/kakao_login", userController.kakaoLogin);
 
 // 로그인 검증
 router.post("/verify", userController.verifyProcess);
@@ -44,6 +44,22 @@ router.post("/kakao_login", userController.kakaoLoginProcess);
 
 //최신 글 불러오기
 router.post("/recentpost", userController.recentPost);
+
+
+//맛집 이야기 글 불러오기
+router.post("/bestfoodpost", userController.bestFood);
+
+//전체 게시물 탐색
+router.post("/allpost", userController.allpost);
+
+//자유 게시판 탐색
+router.post("/categorypost", userController.categorypost);
+
+//자유 게시판 탐색
+router.post("/categorypost_news", userController.categorypost_news);
+
+//검색 기능
+router.post("/detailmain/searchstr", userController.search);
 
 
 module.exports = router;

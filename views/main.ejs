@@ -4,37 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/main.css" />
-    <!-- google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
   </head>
   <body>
+    <%- include("./header") %>
     <div class="container">
-      <div class="container_header">
-        <div class="main_logo">
-          <h1 onclick="main_reload()">Gather</h1>
-        </div>
-        <div class="sidemenu">
-          <div class="sidemenu_menu" onclick="menubar()">
-            <img class="imgstyle" src="/images/menu.png" alt="menu" />
-          </div>
-          <div class="welcome"></div>
-        </div>
-      </div>
-      <!-- menu click content -->
-      <div class="header_menu"></div>
-
       <!-- today topic -->
       <div class="today_menu">
         <h2>최신 글</h2>
-
         <div class="today_content">
           <!-- main -->
           <div class="today_main"></div>
@@ -43,52 +23,10 @@
         </div>
       </div>
 
-      <!-- main -->
-
+      <!-- main - food -->
       <div class="container_main">
-        <h2>맛집이야기</h2>
-        <div class="main_cards">
-          <div class="card">
-            <div class="card_content">
-              <div class="card_title">
-                서울에서 꼭 가봐야 할 숨은 맛집 추천!
-              </div>
-              <div class="card_name">나무아비</div>
-              <div class="card_comment">
-                서울에는 유명한 맛집도 많지만, 잘 알려지지 않은 숨은 맛집들도
-                많아요! 최근에 다녀온 곳 중에 강남의 작은 이자카야와 홍대의
-                수제버거 가게가 정말 인상적이었어요. 분위기도 좋고, 음식
-                퀄리티도 최고였답니다. 여러분이 아는 서울의 숨은 맛집이 있다면
-                댓글로 추천해주세요!
-              </div>
-            </div>
-            <div class="card_img">
-              <div class="card_img_style">
-                <img class="imgstyle" src="/images/main_logo.png" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_content">
-              <div class="card_title">
-                서울에서 꼭 가봐야 할 숨은 맛집 추천!
-              </div>
-              <div class="card_name">나무아비</div>
-              <div class="card_comment">
-                서울에는 유명한 맛집도 많지만, 잘 알려지지 않은 숨은 맛집들도
-                많아요! 최근에 다녀온 곳 중에 강남의 작은 이자카야와 홍대의
-                수제버거 가게가 정말 인상적이었어요. 분위기도 좋고, 음식
-                퀄리티도 최고였답니다. 여러분이 아는 서울의 숨은 맛집이 있다면
-                댓글로 추천해주세요!
-              </div>
-            </div>
-            <div class="card_img">
-              <div class="card_img_style">
-                <img class="imgstyle" src="/images/main_logo.png" alt="" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <h2>맛집 베스트 이야기</h2>
+        <div class="main_cards"></div>
       </div>
 
       <!-- 3열 게시판 -->
@@ -99,9 +37,7 @@
               <div>전체 게시판</div>
               <div class="moreview" onclick="allpostview()">더보기</div>
             </div>
-            <div class="submain_content">
-              <div class="submain_content_row">김밥천국 위생논란</div>
-            </div>
+            <div class="submain_content_all"></div>
           </div>
         </div>
         <div class="submain_section_2">
@@ -110,9 +46,7 @@
               <div>자유 게시판</div>
               <div class="moreview" onclick="freepostview()">더보기</div>
             </div>
-            <div class="submain_content">
-              <div class="submain_content_row">김밥천국 위생논란</div>
-            </div>
+            <div class="submain_content_free"></div>
           </div>
         </div>
 
@@ -122,11 +56,18 @@
               <div>뉴스 게시판</div>
               <div class="moreview" onclick="newspostview()">더보기</div>
             </div>
-            <div class="submain_content">
-              <div class="submain_content_row">김밥천국 위생논란</div>
-            </div>
+            <div class="submain_content_news"></div>
           </div>
         </div>
+      </div>
+
+      <!-- 검색 -->
+      <div class="search">
+        <div class="search_select">선택</div>
+        <div class="search_input_div">
+          <input class="search_input" type="text" />
+        </div>
+        <div class="search_submit" onclick="search()">확인</div>
       </div>
       <%- include("./footer") %>
     </div>

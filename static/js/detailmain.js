@@ -4,10 +4,11 @@ const table_content = document.querySelector(".table_content");
 //h1 change title
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
+const search_url = urlParams.get("search");
 //console.log("urlSearch", urlParams.get("category_id"));
 
 //main에서 전체 게시판 클릭 시
-if (urlParams.get("category_id") === "all") {
+if (Number(urlParams.get("category_id")) === 0 && !urlParams.get("search")) {
   category_name.innerHTML = "<div>전체 게시판</div>";
 
   //전체 내용 띄우기
@@ -44,7 +45,10 @@ if (urlParams.get("category_id") === "all") {
     .catch((e) => {
       console.log("error", e);
     });
-} else {
+} else if (
+  Number(urlParams.get("category_id")) !== 0 &&
+  !urlParams.get("search")
+) {
   console.log(Number(urlParams.get("category_id")));
   //main에서 전체 게시판 외 다른 게시판 클릭 시 - 카테고리 요청
   axios({
@@ -113,3 +117,54 @@ function findpost(element, cate) {
   //console.log("findpost click");
   window.location.href = `/post?comment_id=${element}&category=${cate}`;
 }
+
+// 사용자 검증
+(async function () {
+  try {
+    // 쿠키에서 토큰 추출하기
+    // 브라우저에는 쿠키가 하나의 문자열로 관리되고 ';'를 기준으로 여러개 저장되기 때문에 token만 뽑으려고 split(";")하는 것
+    const cookies = document.cookie.split("; ");
+    const tokenCookie = cookies.find((item) =>
+      item.trim().startsWith("token=")
+    );
+
+    if (!tokenCookie) {
+      //alert("토큰이 없습니다.");
+      const postbtn = document.querySelector(".postbtn");
+      postbtn.style.display = "none";
+      //window.location.href = "/login";
+      return;
+    }
+
+    // 토큰 값만 추출 (token= 부분 제거)
+    const token = tokenCookie.trim().substring(6);
+
+    // 토큰 검증 요청
+    const res = await axios.post(
+      "/verify",
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (res.data.result) {
+      userid = res.data.id; //현재 접속한 user의 id(user table의 id)
+      console.log("현재 접속한 유저의 id(PK)", userid);
+    }
+  } catch (error) {
+    console.error("Authentication error:", error);
+  }
+})();
+
+//만약 search 쿼리 스트링이 있는 경우 -> 검색을 해서 들어온 경우
+// if (search_url) {
+//   //write table에 comment열을 비교 후 해당 쿼리 스트링이 있는 경우만 출력
+//   console.log(search_url);
+//   axios({
+//     method: "post",
+//     url: "/detailmain/searchstr",
+//     data: { str: search_url },
+//   }).then((res) => {
+//     console.log("search res", res);
+//   });
+// }

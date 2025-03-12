@@ -74,6 +74,14 @@ function like_num() {
       like_number.innerHTML = `<div>${data_lst.length}</div>`;
     }
   });
+
+  // axios({
+  //   method : "put",
+  //   url : "/post/updatelike",
+  //   data: { comment_id: current_category_num },
+  // }).then((res) => {
+
+  // })
 }
 
 // 사용자 검증
@@ -87,7 +95,8 @@ function like_num() {
     );
 
     if (!tokenCookie) {
-      alert("토큰이 없습니다");
+      alert("로그인 후 사용이 가능합니다.");
+      window.location.href = "/login";
       return;
     }
 
@@ -118,7 +127,7 @@ function like_num() {
           comment_id: current_category_num,
         },
       }).then((res) => {
-        console.log("res", res);
+        console.log("checkuser res", res);
         if (res.data.user === null) {
           //만약 data > user > null인 경우 -> 데이터가 없어 빈 하트인 경우
           heart_img.src = "/images/heart.png";

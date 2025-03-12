@@ -37,13 +37,20 @@ const deleteData = async (req, res) => {
   res.status(200).send("User is deleted");
 };
 
+//이전 글 / 다음 글
 const movePost = async (req, res) => {
   //console.log("req", req.body.now_category);
+  let current_category = Number(req.body.now_category);
 
-  let data_lst = await Write.findAll({
-    where: { category: req.body.now_category },
-  }).catch((err) => console.log(err));
-  res.send(data_lst);
+  if (current_category !== 0) {
+    let data_lst = await Write.findAll({
+      where: { category: current_category },
+    }).catch((err) => console.log(err));
+    res.send(data_lst);
+  } else {
+    let data_lst = await Write.findAll({}).catch((err) => console.log(err));
+    res.send(data_lst);
+  }
 };
 
 //like 테이블에 삽입
@@ -56,6 +63,7 @@ const addUser = async (req, res) => {
     is_liked: 1,
   };
 
+  //like 테이블에 삽입
   const user = await Like.create(info).catch((err) => console.log(err));
 
   res.send({ user });
@@ -83,9 +91,20 @@ const findUser = async (req, res) => {
 //해당 comment id에 따른 길이 찾기
 const Row = async (req, res) => {
   const comment_id = req.body.comment_id;
+
+  //전체 데이터 찾기
   let data_lst = await Like.findAll({
     where: { comment_id: comment_id },
   }).catch((err) => console.log(err));
+
+  //write 테이블 likes_cnt 수정
+  await Write.update(
+    { likes_cnt: data_lst.length },
+    {
+      where: { comment_id: comment_id },
+    }
+  );
+
   res.send(data_lst);
 };
 

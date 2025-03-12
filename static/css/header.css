@@ -1,0 +1,150 @@
+.container_header {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  justify-content: space-between;
+  width: 100%;
+  height: 70px;
+  background-color: #4b89dc;
+  /*background-color: white;*/
+}
+
+.main_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 40px;
+  cursor: pointer;
+}
+.main_logo > h1 {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.sidemenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 40px;
+  gap: 10px;
+}
+.sidemenu_menu {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.imgstyle {
+  width: 100%;
+  height: 100%;
+}
+
+.welcome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.welcome > div {
+  color: white;
+  font-size: 14px;
+}
+.welcome > button {
+  padding: 5px;
+  border: none;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+/* 게시판 테이블 */
+.header_menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 10;
+  position: fixed;
+}
+
+.header_menu_container {
+  position: fixed;
+  top: 70px;
+  left: 0%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0px auto;
+  flex-direction: column;
+  padding: 10px 0px;
+  background-color: white;
+}
+
+.header_menu_header {
+  display: flex;
+  justify-content: center;
+  background: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.header_menu_header_item {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border-right: 1px solid #ccc;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.header_menu_row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.header_menu_item {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  border-right: 1px solid #b1ccf0;
+  transition: all 0.3s ease-in-out;
+}
+
+.header_menu_item:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+.header_menu_item:last-child,
+.header_menu_header_item:last-child {
+  border-right: none; /* 마지막 열 border 제거 */
+}
+
+.header_menu_footer {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  border-top: 1px solid #b1ccf0;
+  padding: 20px;
+}
+.my_page {
+  font-weight: bold;
+  cursor: pointer;
+}
+.header_menu_footer_links {
+  display: flex;
+  gap: 15px;
+  color: gray;
+}
+
+.moreview {
+  cursor: pointer;
+}
