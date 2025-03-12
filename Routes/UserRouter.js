@@ -57,4 +57,7 @@ router.post("/categorypost", userController.categorypost);
 //자유 게시판 탐색
 router.post("/categorypost_news", userController.categorypost_news);
 
+//검색 기능
+router.post("/detailmain/searchstr", userController.search);
+
 module.exports = router;

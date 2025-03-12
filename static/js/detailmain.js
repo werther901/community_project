@@ -4,6 +4,7 @@ const table_content = document.querySelector(".table_content");
 //h1 change title
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
+const search_url = urlParams.get("search");
 //console.log("urlSearch", urlParams.get("category_id"));
 
 //main에서 전체 게시판 클릭 시
@@ -44,7 +45,10 @@ if (Number(urlParams.get("category_id")) === 0 && !urlParams.get("search")) {
     .catch((e) => {
       console.log("error", e);
     });
-} else {
+} else if (
+  Number(urlParams.get("category_id")) !== 0 &&
+  !urlParams.get("search")
+) {
   console.log(Number(urlParams.get("category_id")));
   //main에서 전체 게시판 외 다른 게시판 클릭 시 - 카테고리 요청
   axios({
@@ -151,3 +155,16 @@ function findpost(element, cate) {
     console.error("Authentication error:", error);
   }
 })();
+
+//만약 search 쿼리 스트링이 있는 경우 -> 검색을 해서 들어온 경우
+// if (search_url) {
+//   //write table에 comment열을 비교 후 해당 쿼리 스트링이 있는 경우만 출력
+//   console.log(search_url);
+//   axios({
+//     method: "post",
+//     url: "/detailmain/searchstr",
+//     data: { str: search_url },
+//   }).then((res) => {
+//     console.log("search res", res);
+//   });
+// }

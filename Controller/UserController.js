@@ -400,6 +400,18 @@ const categorypost_news = async (req, res) => {
   res.send(postdata);
 };
 
+const search = async (req, res) => {
+  const str = req.body.str;
+  let data_lst = await Category.findAll({
+    where: {
+      comment: {
+        [Op.like]: "%" + str + "%",
+      },
+    },
+  }).catch((err) => console.log(err));
+  res.send(data_lst);
+};
+
 module.exports = {
   main,
   signup,
@@ -420,4 +432,5 @@ module.exports = {
   allpost,
   categorypost,
   categorypost_news,
+  search,
 };
