@@ -7,7 +7,7 @@ const urlParams = url.searchParams;
 //console.log("urlSearch", urlParams.get("category_id"));
 
 //main에서 전체 게시판 클릭 시
-if (urlParams.get("category_id") === "all") {
+if (Number(urlParams.get("category_id")) === 0 && !urlParams.get("search")) {
   category_name.innerHTML = "<div>전체 게시판</div>";
 
   //전체 내용 띄우기

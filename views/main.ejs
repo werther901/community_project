@@ -4,33 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/main.css" />
-    <!-- google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
   </head>
   <body>
+    <%- include("./header") %>
     <div class="container">
-      <div class="container_header">
-        <div class="main_logo">
-          <h1 onclick="main_reload()">Gather</h1>
-        </div>
-        <div class="sidemenu">
-          <div class="sidemenu_menu" onclick="menubar()">
-            <img class="imgstyle" src="/images/menu.png" alt="menu" />
-          </div>
-          <div class="welcome"></div>
-        </div>
-      </div>
-      <!-- menu click content -->
-      <div class="header_menu"></div>
-
       <!-- today topic -->
       <div class="today_menu">
         <h2>최신 글</h2>
@@ -78,6 +59,15 @@
             <div class="submain_content_news"></div>
           </div>
         </div>
+      </div>
+
+      <!-- 검색 -->
+      <div class="search">
+        <div class="search_select">선택</div>
+        <div class="search_input_div">
+          <input class="search_input" type="text" />
+        </div>
+        <div class="search_submit" onclick="search()">확인</div>
       </div>
       <%- include("./footer") %>
     </div>

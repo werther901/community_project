@@ -1,11 +1,9 @@
 /* 전체 컨테이너 스타일 */
 .container_wrap {
-  max-width: 1000px;
-  margin: 50px auto;
+  max-width: 1280px;
+  margin: 80px auto 0 auto;
   padding: 20px;
   background-color: #ffffff;
-  /* border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 /* 제목 스타일 */
@@ -30,14 +28,18 @@ h1 {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid #ddd;
 }
 
 /* 테이블 헤더 스타일 */
 .talbe_column {
   display: flex;
 }
-.talbe_column > div {
-  background-color: #03c75a;
+.th_img,
+.th_title,
+.th_user,
+.th_like {
+  background-color: #4b89dc;
   color: white;
   padding: 10px;
   font-size: 14px;
@@ -52,12 +54,14 @@ h1 {
   width: 100%;
 }
 
-.table_content > div {
+.td_img,
+.td_title,
+.td_like,
+.td_user {
   padding: 10px;
   text-align: center;
   font-size: 14px;
   color: #444;
-  border-bottom: 1px solid #ddd;
 }
 .th_img,
 .td_img {
@@ -66,6 +70,15 @@ h1 {
 .th_title,
 .td_title {
   width: 60%;
+}
+.td_title {
+  display: flex;
+  justify-content: left;
+}
+.td_like,
+.td_user {
+  display: flex;
+  justify-content: center;
 }
 
 .th_user,
@@ -85,13 +98,13 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   margin: 0px auto;
 }
 /* 테이블 행 호버 효과 */
 .td_row:hover {
-  background-color: rgba(3, 199, 90, 0.1);
+  background-color: #cbddf5;
   transition: background-color 0.3s ease;
 }
 
@@ -115,7 +128,7 @@ h1 {
 
 /* 버튼 기본 스타일 */
 .postbtn {
-  background-color: #03c75a;
+  background-color: #4b89dc;
   color: white;
   font-size: 12px;
   font-weight: bold;

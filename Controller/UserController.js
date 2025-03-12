@@ -349,7 +349,7 @@ const bestFood = async (req, res) => {
       },
     ],
     where: { category: 2 },
-    order: [["likes_cnt", "asc"]],
+    order: [["likes_cnt", "desc"]],
     limit: 2,
   }).catch((err) => console.log(err));
   //console.log("recent", recentdata);
@@ -399,6 +399,7 @@ const categorypost_news = async (req, res) => {
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
+
 module.exports = {
   main,
   signup,

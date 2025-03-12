@@ -22,14 +22,18 @@ const getCategory = async (req, res) => {
 const getCategoryOne = async (req, res) => {
   console.log("res num", req.body.num);
   let num = req.body.num;
-  let categoryname = await Category.findOne({
-    where: { category_id: Number(num) },
-  }).catch((err) => console.log(err));
-  console.log("catename", categoryname);
-  res.send({
-    cate_id: categoryname.dataValues.category_id,
-    name: categoryname.dataValues.name,
-  });
+
+  if (num !== 0) {
+    let categoryname = await Category.findOne({
+      where: { category_id: Number(num) },
+    }).catch((err) => console.log(err));
+    console.log("catename", categoryname);
+
+    res.send({
+      cate_id: categoryname.dataValues.category_id,
+      name: categoryname.dataValues.name,
+    });
+  }
 };
 
 //전체 포스트 요청 - all
