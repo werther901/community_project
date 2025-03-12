@@ -3,11 +3,11 @@ const container_category = document.querySelector(".container_category");
 const header_menu = document.querySelector(".header_menu");
 const today_main = document.querySelector(".today_main");
 const today_sub = document.querySelector(".today_sub");
-
+const main_cards = document.querySelector(".main_cards");
 //버튼 클릭 확인용
 let menu_chk = true;
 
-//table 생성성
+//header - table 생성성
 function createTable() {
   header_menu.innerHTML = `
             <div class="header_menu_container">
@@ -136,6 +136,33 @@ window.onload = function () {
     .catch((e) => {
       console.log("error : ", e);
     });
+
+  //좋아요 높은 맛집 카테고리 글 2개
+  axios({
+    method: "post",
+    url: "/bestfoodpost",
+  }).then((res) => {
+    console.log("res", res);
+    let bestfood_lst = res.data.food_data;
+    main_cards.innerHTML = bestfood_lst
+      .map((item) => {
+        return `
+          <div class="card" onclick="postMove(${item.comment_id})">
+            <div class="card_content">
+              <div class="card_title">${item.title}</div>
+              <div class="card_name">${item.User.name}</div>
+              <div class="card_comment">${item.comment}</div>
+            </div>
+            <div class="card_img">
+              <div class="card_img_style">
+                <img class="imgstyle" src="${item.photo_address}" alt="food_img" />
+              </div>
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+  });
 };
 
 //로그인 클릭 버튼
@@ -234,7 +261,7 @@ const logoutFunc = () => {
     info.innerHTML = data;
   } catch (error) {
     console.error("Authentication error:", error);
-    alert('로그인 인증 시간이 만료 되었습니다. 다시 로그인 해주세요.');
+    alert("로그인 인증 시간이 만료 되었습니다. 다시 로그인 해주세요.");
     info.innerHTML = `<a href="/login" class="login">로그인</a>
         <a href="/signup" class="signup" >회원가입</a>`;
     window.location.replace("/login");
@@ -254,4 +281,9 @@ function sub_moreview(id) {
 //logo 클릭
 function main_reload() {
   window.location.reload();
+}
+
+//맛집 베스트 이야기 페이지 이동
+function postMove(id) {
+  window.location.href = `/post?comment_id=${id}&category=0`;
 }
