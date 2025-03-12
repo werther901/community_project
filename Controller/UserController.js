@@ -7,7 +7,7 @@ const moment = require("moment");
 // env
 require("dotenv").config();
 // 데이터베이스 모델
-const { User, Category } = require("../models/index");
+const { Write, User, Category } = require("../models/index");
 
 // 메인 페이지
 const main = async (req, res) => {
@@ -75,6 +75,7 @@ const idCheck = async (req, res) => {
 // 회원가입 처리
 const signupProcess = async (req, res) => {
   const { userId, password, name, address, phoneNumber, gender, birth, signup_method } = req.body;
+
 
   console.log(req.body);
   const date = moment(birth, "YYYY-MM-DD").format("YYYY-MM-DD");
@@ -175,7 +176,9 @@ const verifyProcess = async (req, res) => {
 // 네이버 로그인 요청
 const naverLoginProcess = async (req, res) => {
   // 로그인 요청 데이터
+
   const { email, name, gender, birthday, phoneNumber, signup_method } = req.body;
+
   const user = await User.findOne({ where: { userId: email } });
   console.log(user);
 
@@ -196,6 +199,7 @@ const naverLoginProcess = async (req, res) => {
       res.cookie("token", token, { maxAge: 60 * 60 * 1000 });
       // 토큰 응답
       return res.json({ result: true, token });
+
     }
     // user가 있으면 로그인 방법 일치여부 체크
     if (user.dataValues.signup_method !== signup_method) {
@@ -272,6 +276,18 @@ const getCategory = async (req, res) => {
   res.send({ category: cate });
 };
 
+//최신 글 요청
+const recentPost = async (req, res) => {
+  /* findall를 통해 전체 데이터를 가지고 온 후 id를 
+  기준으로 내림차순 후 4개만 전송하기 */
+  let recentdata = await Write.findAll({
+    order: [["comment_id", "desc"]],
+    limit: 4,
+  }).catch((err) => console.log(err));
+  //console.log("recent", recentdata);
+  res.send({ recentdata });
+};
+
 module.exports = {
   main,
   signup,
@@ -287,4 +303,5 @@ module.exports = {
   verifyProcess,
   getCategory,
   detailmain,
+  recentPost,
 };

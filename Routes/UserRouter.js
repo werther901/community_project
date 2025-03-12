@@ -43,5 +43,5 @@ router.post("/naver_login", userController.naverLoginProcess);
 router.post("/kakao_login", userController.kakaoLoginProcess);
 
 //최신 글 불러오기
-
+router.post("/recentpost", userController.recentPost);
 module.exports = router;

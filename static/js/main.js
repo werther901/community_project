@@ -1,6 +1,8 @@
 //변수 선언 - dom
 const container_category = document.querySelector(".container_category");
 const header_menu = document.querySelector(".header_menu");
+const today_main = document.querySelector(".today_main");
+const today_sub = document.querySelector(".today_sub");
 
 //버튼 클릭 확인용
 let menu_chk = true;
@@ -59,18 +61,6 @@ function createTable() {
             `;
 }
 
-//최신 글 axios 요청
-axios({
-  method: "post",
-  url: "/recentpost",
-})
-  .then((res) => {
-    console.log("Res", res);
-  })
-  .catch((e) => {
-    console.log("error : ", e);
-  });
-
 //window 실행 시
 window.onload = function () {
   //카테고리 표시
@@ -106,6 +96,45 @@ window.onload = function () {
     })
     .catch((e) => {
       console.log("error", e);
+    });
+
+  //최신 글 axios 요청
+  axios({
+    method: "post",
+    url: "/recentpost",
+  })
+    .then((res) => {
+      console.log("Res", res);
+      let recentdata_lst = res.data.recentdata;
+
+      //최신 글 - main
+      today_main.innerHTML = `
+        <div class="today_main_img">
+            <img class="imgstyle" src="${recentdata_lst[0].photo_address}" alt="bird" />
+        </div>
+        <div class="today_main_comment">
+            <div class="today_more" onclick="main_moreview(${recentdata_lst[0].comment_id})">더보기</div>
+            <div class="today_main_title">${recentdata_lst[0].title}</div>
+            <div class="today_main_content">
+            ${recentdata_lst[0].comment}
+            </div>
+        </div>
+      `;
+
+      //최신 글 - sub
+      for (let i = 1; i < 4; i++) {
+        today_sub.innerHTML += `
+          <div class="today_sub_${i}" onclick="sub_moreview(${recentdata_lst[i].comment_id})">
+            <div class="today_sub_title">${recentdata_lst[i].title}</div>
+            <div class="today_sub_img">
+            <img class="imgstyle" src="${recentdata_lst[i].photo_address}" alt="battle" />
+            </div>
+          </div>
+        `;
+      }
+    })
+    .catch((e) => {
+      console.log("error : ", e);
     });
 };
 
@@ -211,3 +240,18 @@ const logoutFunc = () => {
     window.location.replace("/login");
   }
 })();
+
+//최신글 더보기 클릭
+function main_moreview(id) {
+  window.location.href = `/post?comment_id=${id}&category=0`;
+}
+
+//최신글 클릭 - sub
+function sub_moreview(id) {
+  window.location.href = `/post?comment_id=${id}&category=0`;
+}
+
+//logo 클릭
+function main_reload() {
+  window.location.reload();
+}
