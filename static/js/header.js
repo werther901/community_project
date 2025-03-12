@@ -158,3 +158,11 @@ const logoutFunc = () => {
 function mypage() {
   window.location.href = "/mypage";
 }
+// 카테고리 상세 페이지 이동
+function categoryMove(categoryid) {
+  if (categoryid === "all") {
+    window.location.href = `/detailmain?category_id=0`;
+  } else {
+    window.location.href = `/detailmain?category_id=${categoryid}`;
+  }
+}

@@ -163,15 +163,6 @@ function newspostview() {
   window.location.href = "/detailmain?category_id=3";
 }
 
-// 카테고리 상세 페이지 이동
-function categoryMove(categoryid) {
-  if (categoryid === "all") {
-    window.location.href = `/detailmain?category_id=0`;
-  } else {
-    window.location.href = `/detailmain?category_id=${categoryid}`;
-  }
-}
-
 //최신글 더보기 클릭
 function main_moreview(id) {
   window.location.href = `/post?comment_id=${id}&category=0`;
