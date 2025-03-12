@@ -120,11 +120,16 @@ a {
 
 .header_logo {
   height: 78px;
-  padding: 24px 10px 24px 56px;
+  padding: 24px 10px 24px 38px;
 }
 
 .header_logo_content {
-  font-size: 24px;
+  font-size: 25px;
+  color: #4B89DC;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .profile_area {
@@ -223,7 +228,7 @@ footer {
   width: 100%;
   height: 100%;
   background-color: #fafbfc;
-  padding: 64px 30px 0 60px;
+  padding: 56px 30px 0 60px;
   /* margin-top: 64px; */
 }
 
@@ -232,7 +237,7 @@ footer {
   padding: 16px 17px 0;
   border-radius: 12px;
   box-shadow: 2px 2px 14px 0 rgba(0, 164, 73, .08);
-  border: solid 1px #81e3ac;
+  border: solid 1px #98BBEB;
   background-color: #fff;
   box-sizing: border-box;
   width: 694px;

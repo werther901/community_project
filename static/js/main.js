@@ -205,6 +205,9 @@ const logoutFunc = () => {
     info.innerHTML = data;
   } catch (error) {
     console.error("Authentication error:", error);
-    info.innerHTML = "<span>인증 오류가 발생했습니다</span>";
+    alert('로그인 인증 시간이 만료 되었습니다. 다시 로그인 해주세요.');
+    info.innerHTML = `<a href="/login" class="login">로그인</a>
+        <a href="/signup" class="signup" >회원가입</a>`;
+    window.location.replace("/login");
   }
 })();

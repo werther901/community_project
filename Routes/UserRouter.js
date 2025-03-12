@@ -27,6 +27,9 @@ router.post("/login", userController.loginProcess);
 // naver 로그인
 router.get("/naver_login", userController.naverLogin);
 
+// kakao 로그인
+router.get("/kakao_login", userController.kakaoLogin)
+
 // 로그인 검증
 router.post("/verify", userController.verifyProcess);
 
@@ -35,6 +38,9 @@ router.post("/category", userController.getCategory);
 
 // naver 로그인 처리
 router.post("/naver_login", userController.naverLoginProcess);
+
+// kakao 로그인 처리
+router.post("/kakao_login", userController.kakaoLoginProcess);
 
 //최신 글 불러오기
 

@@ -66,6 +66,7 @@ password.addEventListener('input', PwDelete);
 // 'x' 아이콘 클릭 시 input 값 삭제
 const deleteId = () => {
   id.value = '';
+  document.body.click();
   id_clear.style.display = 'none';
 }
 id_clear.addEventListener('click', deleteId);
@@ -100,6 +101,18 @@ const saveIdActivate = () => {
   }
 }
 saveId.addEventListener('click', saveIdActivate);
+
+// input_pw에 focus시 input_id의 border-bottom 0
+const inputPw = document.querySelector('.input_pw');
+const inputId = document.querySelector('.input_id');
+
+inputPw.addEventListener('focusin', () => {
+  inputId.style.borderBottom = 'none';
+});
+
+inputPw.addEventListener('focusout', () => {
+  inputId.style.borderBottom = ''; // 원래 스타일로 복원
+});
 
 
 // <---------------기능----------------->
@@ -173,5 +186,15 @@ var naverLogin = new naver.LoginWithNaverId(
 naverLogin.init();
 
 // 카카오 로그인
-// KaKao.init('e95f2489046becded19c7e9c57932c61');
+const kakaoLogin = document.getElementById('kakaoLogin');
+kakaoLogin.addEventListener('click', loginWithKakao);
+
+Kakao.init('2c79626d0c9dd2c46bd9e5efad8122be');
+// 바로 밑줄 console.log 코드 삭제 지양
 // console.log(Kakao.isInitialized());
+
+function loginWithKakao() {
+  Kakao.Auth.authorize({
+    redirectUri: 'http://localhost:3000/kakao_login'
+  });
+}

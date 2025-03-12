@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+      integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <p id="token-result"></p>
+  </body>
+
+  <script>
+
+    (async function () {
+      const info = document.querySelector("#token-result");
+      // url에서 code값 추출
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+
+      try {
+        // 1. code값을 담아 kakao에 유저 token 요청
+        const tokenResponse = await axios.post(
+          "https://kauth.kakao.com/oauth/token",
+          {
+            grant_type: "authorization_code",
+            client_id: "946b658605822c7be369028353d1c7a9",
+            redirect_uri: "http://localhost:3000/kakao_login",
+            code: `${code}`,
+          },
+          {
+            headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
+          }
+        );
+        const accessToken = tokenResponse.data.access_token;
+
+        // 2. 유저 token으로 kakao에 유저 정보 요청
+        const userInfo = await axios.get("https://kapi.kakao.com/v2/user/me",
+          {
+            headers: { Authorization: `Bearer ${accessToken}` }
+          }
+        );
+
+        // kakao 토큰 인증으로 받아온 유저 정보 저장
+        const email = userInfo.data.kakao_account.email;
+        const name = userInfo.data.kakao_account.name;
+        const gender = userInfo.data.kakao_account.gender;
+        const birthyear = userInfo.data.kakao_account.birthyear;
+        const birthday = userInfo.data.kakao_account.birthday;
+        const phone_number = userInfo.data.kakao_account.phone_number;
+
+        const birthday02 = birthday.slice(0, 2) + "-" + birthday.slice(2);
+        const birth = `${birthyear}-${birthday02}`;
+        const phone = phone_number.startsWith("+82 ") ? "0" + phone_number.slice(4) : phone_number;
+        
+        // 3. 서버 로그인 또는 회원가입 요청
+        const kakaoLoginReq = await axios.post(
+          "/kakao_login",
+          {
+            email: email,
+            name: name,
+            gender: gender,
+            birthday: birth,
+            phoneNumber: phone_number,
+            signup_method: 'kakao',
+          }
+        );
+        
+        // // 서버에서 받은 응답 처리
+        if (kakaoLoginReq.data.result) {
+          alert('카카오 로그인 성공');
+          window.location.href = "http://localhost:3000";
+          // window.close();
+        } else {
+          alert(`카카오 로그인 실패 : ${kakaoLoginReq.data.message}`);
+          window.location.href = "http://localhost:3000/login";
+        }
+        
+      } catch (error) {
+        console.error("Authentication error:", error);
+      }
+    })();
+  </script>
+</html>
