@@ -1,33 +1,7 @@
 
-// --------------css 관련 ----------------
-// 툴팁 토글
-const info01 = document.querySelector('.info01');
-const info_toolTip = document.querySelector('.info_toolTip');
-const exit_btn = document.querySelector('.exit_btn');
-
-const toolTipToggle = () => {
-  if (info_toolTip.style.display == "none") {
-    info_toolTip.style.display = "block";
-  } else {
-    info_toolTip.style.display = "none";
-  }
-  
-}
-info01.addEventListener('click', toolTipToggle);
-
-// 툴팁 닫기
-const toolTopExit = () => {
-  info_toolTip.style.display = "none";
-}
-exit_btn.addEventListener('click', toolTopExit);
-
-// --------------기능 관련 ----------------
 
 // 사용자 검증
 (async function () {
-  // const info = document.querySelector(".welcome");
-  const name_text = document.querySelector('.name_text');
-  const email_text = document.querySelector('.email_text');
 
   try {
     // 쿠키에서 토큰 추출하기
@@ -56,10 +30,16 @@ exit_btn.addEventListener('click', toolTopExit);
       }
     );
     
+    // 검증된 사용자를 다시 axios요청해서 해당 사용자가 좋아요 한 글의 데이터만 받아서 테이블로 만들기 
     if (res.data.result) {
-      console.log(res.data);
-      name_text.textContent = res.data.name;
-      email_text.textContent = res.data.email;
+      console.log(res.data.id);
+
+      const res_02 = await axios.post(
+        "/mypage/user_liked", 
+        {
+          id: res.data.id
+        }
+      )
     }
     
   } catch (error) {

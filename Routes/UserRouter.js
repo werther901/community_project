@@ -13,7 +13,7 @@ router.get("/login", userController.login);
 router.get("/detailmain", userController.detailmain);
 
 // 마이페이지 이동
-router.get("/mypage", userController.mypage);
+// router.get("/mypage", userController.mypage);
 
 // 이메일 중복 검사
 router.get("/idCheck", userController.idCheck);
@@ -44,4 +44,6 @@ router.post("/kakao_login", userController.kakaoLoginProcess);
 
 //최신 글 불러오기
 router.post("/recentpost", userController.recentPost);
+
+
 module.exports = router;

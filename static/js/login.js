@@ -134,6 +134,7 @@ const login = (e) => {
   axios
     .post("/login", { id: id.value, pw: password.value })
     .then((res) => {
+      console.log(res.status);
       if (res.data.result) {
         // '아이디 저장' 체크 시 쿠키에 아이디 저장
         if (saveId.checked) {
@@ -146,7 +147,8 @@ const login = (e) => {
         // 토큰이 있으면 홈으로 이동
         window.location.href = "/";
       } else {
-        alert(result.data.message);
+        content01.innerHTML = `${res.data.message}`;
+        return;
       }
     })
     .catch((err) => {
