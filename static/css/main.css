@@ -219,9 +219,30 @@ body {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  font-size: 14px;
 }
 .search_input {
-  width: 250px;
+  width: 300px;
   border: none;
   border-bottom: 1px solid #4b89dc;
+  padding: 5px;
+  outline: none;
+}
+.search_select {
+  display: flex;
+  justify-content: center;
+  border: none;
+  padding: 5px;
+}
+.search_submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 30px;
+  padding: 5px 8px;
+  border-radius: 10px;
+  background-color: #7eaae6;
+  color: white;
+  cursor: pointer;
 }

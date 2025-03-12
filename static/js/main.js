@@ -7,7 +7,7 @@ const submain_content_all = document.querySelector(".submain_content_all");
 const submain_content_free = document.querySelector(".submain_content_free");
 const submain_content_news = document.querySelector(".submain_content_news");
 const search_input = document.querySelector(".search_input");
-
+const search_select = document.querySelector(".search_select");
 //window 실행 시
 window.onload = function () {
   //최신 글 axios 요청
@@ -181,5 +181,8 @@ function postMove(id) {
 //검색 기능
 function search() {
   let search_str = search_input.value;
-  window.location.href = `/detailmain?search=${search_str}`;
+  //console.log("search_select", search_select.value);
+  window.location.href = `/detailmain?select=${
+    search_select.value
+  }&search=${search_str.trim()}`;
 }
