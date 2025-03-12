@@ -48,4 +48,13 @@ router.post("/recentpost", userController.recentPost);
 //맛집 이야기 글 불러오기
 router.post("/bestfoodpost", userController.bestFood);
 
+//전체 게시물 탐색
+router.post("/allpost", userController.allpost);
+
+//자유 게시판 탐색
+router.post("/categorypost", userController.categorypost);
+
+//자유 게시판 탐색
+router.post("/categorypost_news", userController.categorypost_news);
+
 module.exports = router;

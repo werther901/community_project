@@ -129,7 +129,8 @@ body {
 .container_submain {
   display: flex;
   width: 100%;
-  height: 40%;
+
+  height: 400px;
   justify-content: center;
   gap: 20px;
   /* background-color: blue; */
@@ -147,6 +148,7 @@ body {
   justify-content: center;
   align-items: center;
   padding-left: 40px;
+  cursor: pointer;
 }
 .main_logo > h1 {
   color: white;
@@ -231,6 +233,21 @@ body {
   justify-content: space-between;
   color: #4b89dc;
   border-bottom: 1px solid #4b89dc;
+}
+.submain_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #7eaae6;
+}
+
+.submain_row_name {
+  font-size: 12px;
+}
+.submain_content_row {
+  padding: 7px 0px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 /* 게시판 테이블 */

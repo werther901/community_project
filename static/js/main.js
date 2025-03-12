@@ -4,6 +4,10 @@ const header_menu = document.querySelector(".header_menu");
 const today_main = document.querySelector(".today_main");
 const today_sub = document.querySelector(".today_sub");
 const main_cards = document.querySelector(".main_cards");
+const submain_content_all = document.querySelector(".submain_content_all");
+const submain_content_free = document.querySelector(".submain_content_free");
+const submain_content_news = document.querySelector(".submain_content_news");
+
 //버튼 클릭 확인용
 let menu_chk = true;
 
@@ -160,6 +164,62 @@ window.onload = function () {
             </div>
           </div>
         `;
+      })
+      .join("");
+  });
+
+  //게시물 탐색 - 전체게시판
+  axios({
+    method: "post",
+    url: "/allpost",
+  }).then((res) => {
+    console.log("allpost - res : ", res);
+    let all_data = res.data;
+    submain_content_all.innerHTML = all_data
+      .map((item) => {
+        return `
+        <div class="submain_content">
+          <div class="submain_content_row" onclick="postMove(${item.comment_id})">${item.title}</div>
+          <div class="submain_row_name">${item.User.name}</div>
+        </div>
+        `;
+      })
+      .join("");
+  });
+
+  //게시물 탐색 - 자유 게시판
+  axios({
+    method: "post",
+    url: "/categorypost",
+  }).then((res) => {
+    console.log("post - res : ", res);
+    let all_data = res.data;
+    submain_content_free.innerHTML = all_data
+      .map((item) => {
+        return `
+        <div class="submain_content">
+          <div class="submain_content_row" onclick="postMove(${item.comment_id})">${item.title}</div>
+          <div class="submain_row_name">${item.User.name}</div>
+        </div>
+      `;
+      })
+      .join("");
+  });
+  //게시물 탐색 - 자유 게시판
+  axios({
+    method: "post",
+    url: "/categorypost_news",
+  }).then((res) => {
+    console.log("post - res : ", res);
+    let all_data = res.data;
+    submain_content_news.innerHTML = all_data
+      .map((item) => {
+        return `
+        <div class="submain_content">
+          <div class="submain_content_row" onclick="postMove(${item.comment_id})">${item.title}</div>
+          <div class="submain_row_name">${item.User.name}</div>
+        </div>
+      `;
       })
       .join("");
   });

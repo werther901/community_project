@@ -8,6 +8,7 @@ const moment = require("moment");
 require("dotenv").config();
 // 데이터베이스 모델
 const { Write, User, Category } = require("../models/index");
+const { post } = require("../Routes/UserRouter");
 
 // 메인 페이지
 const main = async (req, res) => {
@@ -355,6 +356,49 @@ const bestFood = async (req, res) => {
   res.send({ food_data });
 };
 
+//전체 게시물 탐색
+const allpost = async (req, res) => {
+  let postdata = await Write.findAll({
+    include: [
+      {
+        model: User, // User 모델과 조인
+        attributes: ["name"], // User 테이블에서 name 값만 가져옴
+      },
+    ],
+    limit: 8,
+  }).catch((err) => console.log(err));
+  res.send(postdata);
+};
+
+//나머지 게시물 탐색
+const categorypost = async (req, res) => {
+  let postdata = await Write.findAll({
+    where: { category: 1 },
+    include: [
+      {
+        model: User, // User 모델과 조인
+        attributes: ["name"], // User 테이블에서 name 값만 가져옴
+      },
+    ],
+    limit: 8,
+  }).catch((err) => console.log(err));
+  res.send(postdata);
+};
+
+//나머지 게시물 탐색
+const categorypost_news = async (req, res) => {
+  let postdata = await Write.findAll({
+    where: { category: 3 },
+    include: [
+      {
+        model: User, // User 모델과 조인
+        attributes: ["name"], // User 테이블에서 name 값만 가져옴
+      },
+    ],
+    limit: 8,
+  }).catch((err) => console.log(err));
+  res.send(postdata);
+};
 module.exports = {
   main,
   signup,
@@ -372,4 +416,7 @@ module.exports = {
   detailmain,
   recentPost,
   bestFood,
+  allpost,
+  categorypost,
+  categorypost_news,
 };
