@@ -1,6 +1,8 @@
 //변수선언 - dom
 const category_name = document.querySelector(".category_name");
 const table_content = document.querySelector(".table_content");
+const td_row = document.querySelector(".td_row");
+
 //h1 change title
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
@@ -191,3 +193,12 @@ if (search_url) {
     console.error("Authentication error:", error);
   }
 })();
+
+const io = new IntersectionObserver(
+  (entries, observer) => {
+    console.log(observer);
+  },
+  { threshold: 0.7 }
+);
+
+io.observe(table_content);

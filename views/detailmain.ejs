@@ -13,6 +13,9 @@
     <%- include("./header") %>
     <div class="container_wrap">
       <h1 class="category_name"></h1>
+      <div class="container_modify">
+        <button class="postbtn" onclick="createPost()">글쓰기</button>
+      </div>
       <div class="container_main">
         <div class="table">
           <div class="talbe_column">
@@ -22,9 +25,6 @@
             <div class="th_like">좋아요</div>
           </div>
           <div class="table_content"></div>
-        </div>
-        <div class="container_modify">
-          <button class="postbtn" onclick="createPost()">글쓰기</button>
         </div>
       </div>
       <%- include("./footer") %>
