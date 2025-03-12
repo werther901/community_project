@@ -218,7 +218,8 @@ const signup = () => {
       address: address.value,
       phoneNumber: phone.value,
       gender: genderChecked.value,
-      birth: dateBirth
+      birth: dateBirth,
+      signup_method: 'local'
     })
     .then((res) => {
       console.log(res);

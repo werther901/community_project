@@ -63,8 +63,15 @@ body {
   margin: 0;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .saveId_label::before,
-.icon_delete {
+.icon_delete,
+.icon_view {
   background-image: url(../images/login.png);
   background-size: 336px 330px;
   background-repeat: no-repeat;
@@ -91,6 +98,14 @@ header {
   background-repeat: no-repeat;
   width: 155px;
   height: 30px;
+}
+
+.login_logo h1 {
+  color: #4B89DC;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .login_wrap {
@@ -157,16 +172,9 @@ header {
   z-index: 5;
 }
 
-/* .text_label span {
-  position: absolute;
-  left: 0;
-  bottom: 5px;
-  transition: 0.3s;
-} */
-
 .input_id:focus-within,
 .input_pw:focus-within {
-  border: 2px solid #09aa5c;
+  border: 2px solid #6499E1;
   outline: none;
 }
 
@@ -179,9 +187,35 @@ header {
 
 #password:focus + .text_label,
 #password:valid + .text_label { 
-  transform: translateY(-51%);
+  transform: translateY(-50%);
   font-size: 12px;
   color: #a9aeb4;
+}
+
+.btn_view {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 36px;
+  width: 40px;
+  height: 40px;
+  z-index: 7;
+}
+
+.btn_view .icon_view {
+  display: inline-block;
+  background-position: -292px -48px;
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 22px;
+}
+
+.btn_view.hide .icon_view {
+  display: inline-block;
+  background-position: -292px -72px;
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 22px;
 }
 
 .btn_delete {
@@ -214,6 +248,7 @@ header {
   font-weight: 400;
   line-height: 20px;
   color: #767678;
+  cursor: pointer;
 }
 
 .saveId_label::before {
@@ -229,6 +264,17 @@ header {
   cursor: pointer;
 }
 
+#saveId:checked + .saveId_label {
+  color: #303038;
+}
+
+#saveId:checked + .saveId_label::before {
+  background-position: -66px -292px;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+}
+
 .content01, .content02 {
   color: red;
   font-size: 12px;
@@ -238,12 +284,11 @@ header {
 .login-btn {
   width: 100%;
   padding: 13px 20px;
-  background-color: #fff;
-  color: #09aa5c;
+  background-color: #4B89DC;
+  color: #fff;
   font-size: 16px;
   font-weight: 700;
-  border: 1px solid #09aa5c;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   margin-top: 10px;
 }
@@ -260,13 +305,9 @@ header {
   color: #fff;
 }
 
-/* #naver_id_login {
+#naverIdLogin {
   display: none;
-} */
-
-/* #naverIdLogin {
-  display: none;
-} */
+}
 
 #naverLoginCostom {
   position: relative;
@@ -277,7 +318,7 @@ header {
   font-size: 16px;
   font-weight: 700;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   margin-top: 10px;
   text-align: center;
@@ -295,6 +336,34 @@ header {
   left: 2px;
 }
 
+#kakaoLogin {
+  position: relative;
+  width: 410.222px;
+  height: 48.222px;
+  padding: 13px 20px;
+  background-color: #FEE500;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#kakaoLogin::before {
+  position: absolute;
+  content: "";
+  width: 30px;
+	height: 30px;
+  margin-left: 10px;
+  background-image: url(../images/icon-kakao.svg);
+  background-size: 19px;
+  background-repeat: no-repeat;
+  top: 15px;
+  left: 7px;
+}
 
 /* 아이디 찾기, 비밀번호 찾기, 회원가입을 한 줄에 정렬 */
 .links {
@@ -330,4 +399,63 @@ header {
 
 .links a:hover {
   text-decoration: underline;
+}
+
+footer {
+  padding: 48px 0 32px;
+  box-sizing: border-box;
+  margin: 100px 0 36px 0;
+}
+
+.footer_inner {
+  position: relative;
+  text-align: center;
+}
+
+.footer_link li {
+  display: inline-block;
+}
+
+.footer_link li + li {
+  position: relative;
+  padding-left: 13px;
+  font-size: 12px;
+}
+
+.footer_link li + li::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 1px;
+  height: 11px;
+  background-color: #dadada;
+}
+
+.text {
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -.5px;
+  color: #888;
+}
+
+.corp {
+  padding: 0 2px;
+  font-weight: 500;
+  color: #000;
+}
+
+.footer_right {
+  display: flex;
+  justify-content: center;
+  margin-top: 9px;
+}
+
+.footer_logo {
+  color: #4B89DC;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  margin-right: 3px;
 }

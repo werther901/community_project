@@ -4,11 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>로그인</title>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/login.css" />
-    <!-- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
-    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script>
+    <!-- naver login api -->
+    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <!-- kakao login api -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+  integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
 
@@ -18,42 +24,51 @@
 
       <header>
         <div class="header_container">
-          <a href="#" class="login_logo">
-            <h1>로고</h1>
+          <a href="/" class="login_logo">
+            <h1>Gather</h1>
           </a>
         </div>
       </header>
 
-      <form class="login-container">
-        <div class="login_wrap">
-          <div class="login_box">
-            <div class="input_item input_id">
-              <input type="text" class="input-box" id="id" name="id" required />
-              <label for="id" class="text_label"><span>아이디</span></label>
-              <button class="btn_delete" id="id_clear" style="display: none;">
-                <span class="icon_delete"></span>
-              </button>
+      <div style="flex: 1;">
+        <form class="login-container">
+          <div class="login_wrap">
+            <div class="login_box">
+              <div class="input_item input_id">
+                <input type="text" class="input-box" id="id" name="id" maxlength="41" required />
+                <label for="id" class="text_label"><span>아이디</span></label>
+                <button class="btn_delete" id="id_clear" style="display: none;">
+                  <span class="icon_delete"></span>
+                </button>
+              </div>
+              <div class="input_item input_pw">
+                <input type="password" class="input-box" id="password" name="pass" maxlength="16" required />
+                <label for="password" class="text_label"><span>비밀번호</span></label>
+                <button type="button" id="pw_hide" class="btn_view hide" style="display: none;">
+                  <span class="icon_view"></span>
+                </button>
+                <button class="btn_delete" id="pw_clear"style="display: none;">
+                  <span class="icon_delete"></span>
+                </button>
+              </div>
             </div>
-            <div class="input_item input_pw">
-              <input type="password" class="input-box" id="password" name="pass" required />
-              <label for="password" class="text_label"><span>비밀번호</span></label>
-              <button class="btn_delete" id="pw_clear"style="display: none;">
-                <span class="icon_delete"></span>
-              </button>
+            <div class="saveId_wrap">
+              <input type="checkbox" name="saveId" id="saveId" value="off">
+              <label for="saveId" class="saveId_label">아이디 저장</label>
+            </div>
+            <div class="content01"></div>
+            <div class="content02"></div>
+            <button class="login-btn" type="button" disabled>로그인</button>
+            <!-- <div id="naver_id_login"></div> -->
+            <div id="naverIdLogin"></div>
+            <div id="naverLoginCostom">네이버 로그인</div>
+            <div>
+              <button type="button" id="kakaoLogin">카카오 로그인</button>
             </div>
           </div>
-          <div class="saveId_wrap">
-            <input type="checkbox" name="saveId" id="saveId" value="off">
-            <label for="saveId" class="saveId_label">아이디 저장</label>
-          </div>
-          <div class="content01"></div>
-          <div class="content02"></div>
-          <button class="login-btn" type="button" disabled>로그인</button>
-          <!-- <div id="naver_id_login"></div> -->
-          <div id="naverIdLogin"></div>
-          <div id="naverLoginCostom">네이버 로그인</div>
+        </form>
+        
 
-        </div>
         <ul class="links">
           <li>
             <a href="/findId">아이디 찾기</a>
@@ -65,7 +80,46 @@
             <a href="/signup">회원가입</a>
           </li>
         </ul>
-      </form>
+      </div>
+
+      <footer>
+        <div class="footer_inner">
+          <ul class="footer_link">
+            <li>
+              <a href="#">
+                <span class="text">이용약관</span></a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="text"><strong>개인정보처리방침</strong></span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="text">책임의 한계와 법적고지</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="text">회원정보 고객센터</span>
+              </a>
+            </li>
+          </ul>
+          <div class="footer_right">
+            <div>
+              <a href="/" class="footer_logo">Gather</a>
+            </div>
+            <div>
+              <span class="text">Copyright</span>
+              <span class="text corp">© Gather Corp.</span>
+              <span class="text">All Rights Reserved.</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+
 
     </div>
 
