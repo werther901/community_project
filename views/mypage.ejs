@@ -8,64 +8,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- local css -->
+  <link rel="stylesheet" href="/css/mypage_common.css">
   <link rel="stylesheet" href="/css/mypage.css">
+  <!-- axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   
   <div class="container">
 
-    <!-- <div class="header">
-      <h1>회원 정보 수정</h1>
-    </div> -->
     <div class="both_container">
-      <div class="left_container">
-        <div class="header_logo">
-          <a href="/">
-            <h1 class="header_logo_content">
-              <span>Gather</span>
-            </h1>
-          </a>
-        </div>
-        <div class="profile_area">
-          <ul>
-            <li>
-              <a href="#">
-                <div class="menu_text on">내 정보관리</div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div class="menu_text">좋아요한 글</div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div class="menu_text">내가 작성한 글</div>
-              </a>
-            </li>
-          </ul>
-          <footer>
-            <ul class="left_guide">
-              <li>
-                <a href="#">
-                  <div class="footer_text">로그아웃</div>
-                </a>
-              </li>
-              <li class="footer_b">
-                <a href="#">
-                  <div class="footer_text">고객센터</div>
-                </a>
-              </li>
-              <li class="footer_b">
-                <a href="#" class="item_arrow">
-                  <div class="footer_text">한국어</div>
-                </a>
-              </li>
-            </ul>
-          </footer>
-        </div>
-      </div>
+      <% include mypage_common.ejs %>
 
       <div class="right_container">
         <div class="subRight_container">

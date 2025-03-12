@@ -36,9 +36,9 @@ const kakaoLogin = (req, res) => {
 };
 
 // 마이페이지
-const mypage = (req, res) => {
-  res.render("mypage");
-};
+// const mypage = (req, res) => {
+//   res.render("mypage");
+// };
 
 // 글 쓰기 페이지
 const write = (req, res) => {
@@ -54,18 +54,7 @@ const detailmain = (req, res) => {
 const idCheck = async (req, res) => {
   const userId = req.query.userId;
   const checkId = await User.findOne({ where: { userId } });
-  // console.log(checkId.dataValues.userId);
-  // if(checkId !== null) {
-  //   try {
-  //     if (!checkId.dataValues.userId) {
-  //       res.send(true); // 사용 가능
-  //     } else {
-  //       res.send(false); // 중복
-  //     }
-  //   } catch (error) {
-  //     res.status(500).json({ error: "아이디(이메일) 찾기 실패", message: error.message })
-  //   }
-  // }
+
   if (checkId) {
     res.send(false); // 중복 아이디
   } else {
@@ -75,16 +64,9 @@ const idCheck = async (req, res) => {
 
 // 회원가입 처리
 const signupProcess = async (req, res) => {
-  const {
-    userId,
-    password,
-    name,
-    address,
-    phoneNumber,
-    gender,
-    birth,
-    signup_method,
-  } = req.body;
+
+  const { userId, password, name, address, phoneNumber, gender, birth, signup_method } = req.body;
+
 
   console.log(req.body);
   const date = moment(birth, "YYYY-MM-DD").format("YYYY-MM-DD");
@@ -155,7 +137,7 @@ const loginProcess = async (req, res) => {
       return res.status(401).json({ result: false, message: "로그인 실패" });
     }
   } else {
-    res.status(401).json({ result: false, message: "회원정보가 없습니다." });
+    res.json({ result: false, message: "아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요." });
   }
 };
 
@@ -183,7 +165,7 @@ const verifyProcess = async (req, res) => {
           .json({ result: false, message: "유저 정보 조회 실패" });
       }
       // 성공
-      res.json({ result: true, name: user.name, id: user.id });
+      res.json({ result: true, name: user.name, id: user.id, email: user.userId, phoneNumber: user.phoneNumber });
     } catch (e) {
       return res
         .status(403)
@@ -315,6 +297,8 @@ const kakaoLoginProcess = async (req, res) => {
   }
 };
 
+// 마이페이지에 유저 정보 전달
+
 // 카테고리 요청 - all
 const getCategory = async (req, res) => {
   let categoryname = await Category.findAll({}).catch((err) =>
@@ -418,7 +402,6 @@ module.exports = {
   login,
   naverLogin,
   kakaoLogin,
-  mypage,
   idCheck,
   signupProcess,
   loginProcess,

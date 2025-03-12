@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이페이지</title>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <!-- local css -->
+    <link rel="stylesheet" href="/css/mypage_common.css" />
+    <link rel="stylesheet" href="/css/likedpage.css" />
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="both_container">
+        <% include mypage_common.ejs %>
+
+        <div class="right_container">
+          <!-- <div>좋아요 한 글목록</div> -->
+          <table>
+            <thead>
+              <tr class="table_title">
+                <th class="count">번호</th>
+                <th class="title">제목</th>
+                <th class="writer">글쓴이</th>
+                <th class="crationDate">작성날짜</th>
+                <th class="views">조회수</th>
+              </tr>
+            </thead>
+            <tbody class="inputData">
+              <tr class="tbody_data">
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+              <tr class="tbody_data">
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+              <tr class="tbody_data">
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="/js/likedpage.js"></script>
+</html>
