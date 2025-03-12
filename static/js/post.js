@@ -87,7 +87,8 @@ function like_num() {
     );
 
     if (!tokenCookie) {
-      alert("토큰이 없습니다");
+      alert("로그인 후 사용이 가능합니다.");
+      window.location.href = "/login";
       return;
     }
 

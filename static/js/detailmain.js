@@ -113,3 +113,41 @@ function findpost(element, cate) {
   //console.log("findpost click");
   window.location.href = `/post?comment_id=${element}&category=${cate}`;
 }
+
+// 사용자 검증
+(async function () {
+  try {
+    // 쿠키에서 토큰 추출하기
+    // 브라우저에는 쿠키가 하나의 문자열로 관리되고 ';'를 기준으로 여러개 저장되기 때문에 token만 뽑으려고 split(";")하는 것
+    const cookies = document.cookie.split("; ");
+    const tokenCookie = cookies.find((item) =>
+      item.trim().startsWith("token=")
+    );
+
+    if (!tokenCookie) {
+      //alert("토큰이 없습니다.");
+      const postbtn = document.querySelector(".postbtn");
+      postbtn.style.display = "none";
+      //window.location.href = "/login";
+      return;
+    }
+
+    // 토큰 값만 추출 (token= 부분 제거)
+    const token = tokenCookie.trim().substring(6);
+
+    // 토큰 검증 요청
+    const res = await axios.post(
+      "/verify",
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (res.data.result) {
+      userid = res.data.id; //현재 접속한 user의 id(user table의 id)
+      console.log("현재 접속한 유저의 id(PK)", userid);
+    }
+  } catch (error) {
+    console.error("Authentication error:", error);
+  }
+})();
