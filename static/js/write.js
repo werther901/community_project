@@ -21,7 +21,7 @@ const editor = new window.toastui.Editor({
 });
 
 if (urlParams.get("comment_id")) {
-  //값이 존재하는 경우
+  //쿼리 스트링이 존재하는 경우 - 수정버튼으로 들어온 경우
   axios({
     method: "post",
     url: "/write/modify",

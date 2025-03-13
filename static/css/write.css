@@ -97,7 +97,7 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
-  border-color: #03c75a;
+  border-color: #4b89dc;
 }
 
 .container_mid {
@@ -116,7 +116,7 @@ input[type="text"]:focus {
 }
 
 .container_mid input:focus {
-  border-color: #03c75a;
+  border-color: #4b89dc;
 }
 
 .preview {

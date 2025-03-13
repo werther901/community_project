@@ -6,10 +6,11 @@ const urlParams = url.searchParams;
 // 변수 선언
 const main_content = document.querySelector(".main_content");
 let postdata = {};
-const current_category = urlParams.get("category");
-const current_category_num = Number(urlParams.get("comment_id"));
+const current_category = urlParams.get("category"); //현재 url category number
+const current_category_num = Number(urlParams.get("comment_id")); //현재 url comment_id
 const modifybtn = document.querySelector(".modifybtn");
 const deletebtn = document.querySelector(".deletebtn");
+const sub_post = document.querySelector(".sub_post");
 
 // 페이지 로드 시 axios 요청
 axios({
@@ -144,13 +145,13 @@ function like_num() {
 
         if (res.data.user === null) {
           //만약 data > user > null인 경우 -> 데이터가 없어 빈 하트인 경우
-          heart_img.src = "/images/heart.png";
+          heart_img.src = "images/heart.png";
           heart_img.style.display = "none";
           //좋아요 숫자 표시
           like_num();
         } else {
           //좋아요 버튼을 이미 누른 상태
-          heart_img.src = "/images/fullheart.png";
+          heart_img.src = "images/fullheart.png";
           heart_img.style.display = "none";
           //좋아요 숫자 표시
           like_num();
@@ -218,7 +219,7 @@ function postMove_pre() {
     data: { now_category: current_category },
   })
     .then((res) => {
-      console.log("res", res.data);
+      console.log("movePost res : ", res.data);
       const category_data_lst = res.data;
       let category_id_lst = []; //comment_id 비교 리스트
 
@@ -349,4 +350,74 @@ function likes() {
       });
     }
   });
+}
+
+//화면 로드 시 sub_post 포스트 최대 5개 보여주기
+axios({
+  method: "post",
+  url: "/post/movePost",
+  data: { now_category: current_category },
+}).then((res) => {
+  console.log("subpost : ", res);
+  let data_lst = res.data;
+  console.log("dta_lst", data_lst);
+  let data_lst_id = [];
+  data_lst.map((item) => {
+    data_lst_id.push(item.comment_id);
+  });
+
+  //전체 배열 중 몇 번째에 위치한지 찾기
+  let cnt = 0;
+  data_lst_id.forEach((element, index) => {
+    //console.log("E", element, index);
+    if (current_category_num === element) {
+      cnt = index; //현재 페이지 번호
+    }
+  });
+
+  // 앞 2개, 현재, 뒤 2개 (경계 검사)
+  let start = Math.max(cnt - 2, 0);
+  let end = Math.min(cnt + 2, data_lst.length - 1);
+  console.log("cnt", cnt, "Start", start, "end", end);
+  let selectedCards = data_lst.slice(start, end + 1); // 5개 선택
+
+  console.log("selectedCards", selectedCards);
+
+  for (let i = start; i < start + 5; i++) {
+    console.log("Data list", data_lst_id[i]); //14 현16
+
+    if (data_lst_id[i] !== undefined && Number(current_category) !== 0) {
+      let currentItem = data_lst[i]; //현재를 기준으로 처음 값
+      let isCurrent = currentItem.comment_id === current_category_num; //현재의 comment_id값
+      let cardClass = isCurrent ? "card current" : "card"; //스타일 지정
+
+      sub_post.innerHTML += `
+      <div class="${cardClass}" 
+        onclick="movePage(${currentItem.comment_id}, ${current_category})">
+        <div> 
+          <img class="imgstyle cardstyle" 
+             src="${currentItem.photo_address}" alt="">
+        </div>
+      </div>
+    `;
+    } else if (data_lst_id[i] !== undefined && Number(current_category) === 0) {
+      let currentItem = data_lst[i];
+      let isCurrent = currentItem.comment_id === current_category_num;
+      let cardClass = isCurrent ? "card current" : "card";
+
+      sub_post.innerHTML += `
+      <div class="${cardClass}" 
+        onclick="movePage(${currentItem.comment_id},0)">
+        <div> 
+          <img class="imgstyle cardstyle" 
+             src="${currentItem.photo_address}" alt="">
+        </div>
+      </div>
+    `;
+    }
+  }
+});
+
+function movePage(comment_id, category) {
+  window.location.href = `/post?comment_id=${comment_id}&category=${category}`;
 }

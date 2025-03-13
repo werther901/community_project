@@ -19,9 +19,9 @@ body {
   padding: 0px 40px;
   width: 100%;
 }
+
 .today_content {
   display: flex;
-  gap: 10px;
 }
 .today_main,
 .today_sub {
@@ -31,13 +31,17 @@ body {
 .today_main {
   display: flex;
   width: 50%;
+  border: 1px solid #b1ccf0;
+  border-radius: 10px;
+  padding: 10px;
 }
 .today_sub {
   display: flex;
   width: 50%;
-  height: 100%;
-  border-left: 2px solid #b1ccf0;
+  justify-content: center;
+  /* border-left: 2px solid #b1ccf0; */
   flex-direction: column;
+  gap: 10px;
 }
 .today_main_title {
   padding-top: 20px;
@@ -64,19 +68,19 @@ body {
 .today_sub_2,
 .today_sub_3 {
   width: 90%;
-  height: 30%;
+  height: 100px;
   display: flex;
-  margin: 0px auto;
+  margin: auto;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 10px 0px;
   align-items: center;
   cursor: pointer;
 }
 .today_sub_1,
 .today_sub_2 {
+  border: none;
   border-bottom: 1px solid #b1ccf0;
 }
-
 .today_sub_title {
   padding-left: 30px;
 }
