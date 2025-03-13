@@ -472,6 +472,13 @@ const search = async (req, res) => {
   }
 };
 
+const Userstr = async (req, res) => {
+  let data_lst = await Write.findAll({
+    userId: req.body.user,
+  }).catch((err) => console.log(err));
+  res.send({ data_lst });
+};
+
 module.exports = {
   main,
   signup,
@@ -492,4 +499,5 @@ module.exports = {
   categorypost,
   categorypost_news,
   search,
+  Userstr,
 };

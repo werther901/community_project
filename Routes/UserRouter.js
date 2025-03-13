@@ -45,7 +45,6 @@ router.post("/kakao_login", userController.kakaoLoginProcess);
 //최신 글 불러오기
 router.post("/recentpost", userController.recentPost);
 
-
 //맛집 이야기 글 불러오기
 router.post("/bestfoodpost", userController.bestFood);
 
@@ -61,5 +60,7 @@ router.post("/categorypost_news", userController.categorypost_news);
 //검색 기능
 router.post("/detailmain/searchstr", userController.search);
 
+//user 찾기 기능
+router.post("/detailmain/userstr", userController.Userstr);
 
 module.exports = router;

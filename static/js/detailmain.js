@@ -8,10 +8,15 @@ const url = new URL(window.location.href);
 const urlParams = url.searchParams;
 const search_url = urlParams.get("search");
 const select_url = urlParams.get("select");
+const user_url = urlParams.get("user");
 //console.log("urlSearch", urlParams.get("category_id"));
 
 //main에서 전체 게시판 클릭 시
-if (Number(urlParams.get("category_id")) === 0 && !urlParams.get("search")) {
+if (
+  Number(urlParams.get("category_id")) === 0 &&
+  !urlParams.get("search") &&
+  !user_url
+) {
   category_name.innerHTML = "<div>전체 게시판</div>";
 
   //전체 내용 띄우기
@@ -50,7 +55,8 @@ if (Number(urlParams.get("category_id")) === 0 && !urlParams.get("search")) {
     });
 } else if (
   Number(urlParams.get("category_id")) !== 0 &&
-  !urlParams.get("search")
+  !urlParams.get("search") &&
+  !user_url
 ) {
   console.log(Number(urlParams.get("category_id")));
   //main에서 전체 게시판 외 다른 게시판 클릭 시 - 카테고리 요청
@@ -203,3 +209,37 @@ const io = new IntersectionObserver(
 );
 
 io.observe(table_content);
+
+//만약 user url이 있는경우
+if (user_url) {
+  axios({
+    method: "post",
+    url: "/detailmain/userstr",
+    data: { user: user_url },
+  });
+
+  // .then((res) => {
+  //   console.log("res", res);
+  //   let data = res.data.data_lst;
+  //   table_content.innerHTML = data
+  //     .map((item) => {
+  //       return `
+  //           <div class="td_row" onclick="findpost(${item.comment_id},0)">
+  //           <div class="td_img">
+  //             <div class="table_img">
+  //               <img
+  //                 class="imgstyle"
+  //                 src="${item.photo_address}"
+  //                 alt="table_img"
+  //               />
+  //             </div>
+  //           </div>
+  //           <div class="td_title">${item.title}</div>
+  //           <div class="td_user">${item.User.name}</div>
+  //           <div class="td_like">${item.likes_cnt}</div>
+  //         </div>
+  //       `;
+  //     })
+  //     .join("");
+  // });
+}

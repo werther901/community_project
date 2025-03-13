@@ -11,7 +11,7 @@ const current_category_num = Number(urlParams.get("comment_id")); //현재 url c
 const modifybtn = document.querySelector(".modifybtn");
 const deletebtn = document.querySelector(".deletebtn");
 const sub_post = document.querySelector(".sub_post");
-
+let check = 0; //유저이름 클릭 시 페이지 이동 용
 // 페이지 로드 시 axios 요청
 axios({
   method: "post",
@@ -28,7 +28,8 @@ axios({
             <div class="content_category">${postdata.Category.name}</div>
             <div class="content_title">${postdata.title}</div>
             <div class="content_detils">
-              <div class="content_userid">${postdata.User.name}</div>
+              <div class="content_userid" onclick="usermodal()">${postdata.User.name}</div>
+              <div class="content_userid_modal" onclick="userpost(${postdata.userId})">- 게시글 보기</div>
               <div class="content_detils_right">
                 <div class="copyurl" onclick="copyurl()">url복사</div>
                 <div class="moreview" onclick="printer()">Print</div>
@@ -420,4 +421,24 @@ axios({
 
 function movePage(comment_id, category) {
   window.location.href = `/post?comment_id=${comment_id}&category=${category}`;
+}
+
+//이름 클릭 함수
+function usermodal() {
+  const content_userid_modal = document.querySelector(".content_userid_modal");
+
+  if (check === 0) {
+    //초기 상태
+    content_userid_modal.style.display = "block";
+    check = 1;
+  } else if (check === 1) {
+    //처음 클릭할때
+    content_userid_modal.style.display = "none";
+    check = 0;
+  }
+}
+
+//이름 게시글 보기 클릭
+function userpost(userid) {
+  window.location.href = `/detailmain?user=${userid}&category_id=0`;
 }
