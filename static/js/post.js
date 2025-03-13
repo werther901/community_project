@@ -74,14 +74,6 @@ function like_num() {
       like_number.innerHTML = `<div>${data_lst.length}</div>`;
     }
   });
-
-  // axios({
-  //   method : "put",
-  //   url : "/post/updatelike",
-  //   data: { comment_id: current_category_num },
-  // }).then((res) => {
-
-  // })
 }
 
 // 사용자 검증
@@ -131,11 +123,13 @@ function like_num() {
         if (res.data.user === null) {
           //만약 data > user > null인 경우 -> 데이터가 없어 빈 하트인 경우
           heart_img.src = "/images/heart.png";
+          heart_img.style.display = "none";
           //좋아요 숫자 표시
           like_num();
         } else {
           //좋아요 버튼을 이미 누른 상태
           heart_img.src = "/images/fullheart.png";
+          heart_img.style.display = "none";
           //좋아요 숫자 표시
           like_num();
         }
@@ -304,7 +298,15 @@ function likes() {
       }).then((res) => {
         console.log("res", res);
         heart_img.src = "/images/fullheart.png";
-        like_num();
+
+        //좋아요 글자 위로 하트 나오는 CSS
+        heart_img.style.display = "block";
+        heart_img.classList.add("animated");
+        setTimeout(() => {
+          heart_img.style.display = "none";
+        }, 2000);
+
+        like_num(); //숫자변경
       });
     } else {
       //좋아요 버튼을 이미 누른 상태
@@ -315,6 +317,12 @@ function likes() {
       }).then((res) => {
         console.log("res", res);
         heart_img.src = "/images/heart.png";
+        //좋아요 글자 위로 하트 나오는 CSS
+        heart_img.style.display = "block";
+        heart_img.classList.add("animated");
+        setTimeout(() => {
+          heart_img.style.display = "none";
+        }, 2000);
         like_num();
       });
     }

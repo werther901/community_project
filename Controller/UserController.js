@@ -6,6 +6,8 @@ const bcrypt = require("bcrypt");
 const moment = require("moment");
 // env
 require("dotenv").config();
+const sequelize = require("sequelize"); //시퀄라이즈
+const Op = sequelize.Op; //포함 여부를 알기 위해 사용
 // 데이터베이스 모델
 const { Write, User, Category } = require("../models/index");
 const { post } = require("../Routes/UserRouter");
@@ -64,9 +66,16 @@ const idCheck = async (req, res) => {
 
 // 회원가입 처리
 const signupProcess = async (req, res) => {
-
-  const { userId, password, name, address, phoneNumber, gender, birth, signup_method } = req.body;
-
+  const {
+    userId,
+    password,
+    name,
+    address,
+    phoneNumber,
+    gender,
+    birth,
+    signup_method,
+  } = req.body;
 
   console.log(req.body);
   const date = moment(birth, "YYYY-MM-DD").format("YYYY-MM-DD");
@@ -137,7 +146,11 @@ const loginProcess = async (req, res) => {
       return res.status(401).json({ result: false, message: "로그인 실패" });
     }
   } else {
-    res.json({ result: false, message: "아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요." });
+    res.json({
+      result: false,
+      message:
+        "아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.",
+    });
   }
 };
 
@@ -165,7 +178,13 @@ const verifyProcess = async (req, res) => {
           .json({ result: false, message: "유저 정보 조회 실패" });
       }
       // 성공
-      res.json({ result: true, name: user.name, id: user.id, email: user.userId, phoneNumber: user.phoneNumber });
+      res.json({
+        result: true,
+        name: user.name,
+        id: user.id,
+        email: user.userId,
+        phoneNumber: user.phoneNumber,
+      });
     } catch (e) {
       return res
         .status(403)
@@ -384,14 +403,53 @@ const categorypost_news = async (req, res) => {
 
 const search = async (req, res) => {
   const str = req.body.str;
-  let data_lst = await Category.findAll({
-    where: {
-      comment: {
-        [Op.like]: "%" + str + "%",
+  const select = req.body.select;
+  if (select === "title") {
+    let data_lst = await Write.findAll({
+      include: [
+        {
+          model: User, // User 모델과 조인
+          attributes: ["name"], // User 테이블에서 name 값만 가져옴
+        },
+      ],
+      where: {
+        title: {
+          [Op.like]: "%" + str + "%",
+        },
       },
-    },
-  }).catch((err) => console.log(err));
-  res.send(data_lst);
+    }).catch((err) => console.log(err));
+    res.send(data_lst);
+  } else if (select === "comment") {
+    let data_lst = await Write.findAll({
+      include: [
+        {
+          model: User, // User 모델과 조인
+          attributes: ["name"], // User 테이블에서 name 값만 가져옴
+        },
+      ],
+      where: {
+        comment: {
+          [Op.like]: "%" + str + "%",
+        },
+      },
+    }).catch((err) => console.log(err));
+    res.send(data_lst);
+  } else if (select === "user") {
+    let data_lst = await Write.findAll({
+      include: [
+        {
+          model: User, // User 모델과 조인
+          attributes: ["name"], // User 테이블에서 name 값만 가져옴
+        },
+      ],
+      where: {
+        userId: {
+          [Op.like]: "%" + str + "%",
+        },
+      },
+    }).catch((err) => console.log(err));
+    res.send(data_lst);
+  }
 };
 
 module.exports = {

@@ -7,7 +7,7 @@ const submain_content_all = document.querySelector(".submain_content_all");
 const submain_content_free = document.querySelector(".submain_content_free");
 const submain_content_news = document.querySelector(".submain_content_news");
 const search_input = document.querySelector(".search_input");
-
+const search_select = document.querySelector(".search_select");
 //window 실행 시
 window.onload = function () {
   //최신 글 axios 요청
@@ -106,7 +106,7 @@ window.onload = function () {
       .map((item) => {
         return `
         <div class="submain_content">
-          <div class="submain_content_row" onclick="postMove(${item.comment_id})">${item.title}</div>
+          <div class="submain_content_row" onclick="postMove(${item.comment_id},1)">${item.title}</div>
           <div class="submain_row_name">${item.User.name}</div>
         </div>
       `;
@@ -124,7 +124,7 @@ window.onload = function () {
       .map((item) => {
         return `
         <div class="submain_content">
-          <div class="submain_content_row" onclick="postMove(${item.comment_id})">${item.title}</div>
+          <div class="submain_content_row" onclick="postMove(${item.comment_id},3)">${item.title}</div>
           <div class="submain_row_name">${item.User.name}</div>
         </div>
       `;
@@ -163,15 +163,6 @@ function newspostview() {
   window.location.href = "/detailmain?category_id=3";
 }
 
-// 카테고리 상세 페이지 이동
-function categoryMove(categoryid) {
-  if (categoryid === "all") {
-    window.location.href = `/detailmain?category_id=0`;
-  } else {
-    window.location.href = `/detailmain?category_id=${categoryid}`;
-  }
-}
-
 //최신글 더보기 클릭
 function main_moreview(id) {
   window.location.href = `/post?comment_id=${id}&category=0`;
@@ -190,5 +181,8 @@ function postMove(id) {
 //검색 기능
 function search() {
   let search_str = search_input.value;
-  window.location.href = `/detailmain?search=${search_str}`;
+  //console.log("search_select", search_select.value);
+  window.location.href = `/detailmain?select=${
+    search_select.value
+  }&search=${search_str.trim()}`;
 }

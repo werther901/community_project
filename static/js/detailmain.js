@@ -1,10 +1,13 @@
 //변수선언 - dom
 const category_name = document.querySelector(".category_name");
 const table_content = document.querySelector(".table_content");
+const td_row = document.querySelector(".td_row");
+
 //h1 change title
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
 const search_url = urlParams.get("search");
+const select_url = urlParams.get("select");
 //console.log("urlSearch", urlParams.get("category_id"));
 
 //main에서 전체 게시판 클릭 시
@@ -58,7 +61,7 @@ if (Number(urlParams.get("category_id")) === 0 && !urlParams.get("search")) {
   })
     .then((res) => {
       console.log("Res", res);
-      let id = res.data.cate_id;
+      let id = res.data.cate_id; //카테고리 아이디
       let name = res.data.name; //카테고리 이름
       if (name.includes("게시판")) {
         category_name.innerHTML = `<div>${res.data.name}</div>`;
@@ -118,6 +121,41 @@ function findpost(element, cate) {
   window.location.href = `/post?comment_id=${element}&category=${cate}`;
 }
 
+//만약 search 쿼리 스트링이 있는 경우 -> 검색을 해서 들어온 경우
+if (search_url) {
+  //write table에 comment열을 비교 후 해당 쿼리 스트링이 있는 경우만 출력
+  //console.log(search_url);
+  axios({
+    method: "post",
+    url: "/detailmain/searchstr",
+    data: { str: search_url, select: select_url },
+  }).then((res) => {
+    console.log("search res", res);
+    category_name.innerHTML = `<div>"${search_url}"의 검색 결과</div>`;
+    let search_data = res.data; //검색 포함 내용 리스트
+    table_content.innerHTML = search_data
+      .map((item) => {
+        return `
+            <div class="td_row" onclick="findpost(${item.comment_id},0)">
+            <div class="td_img">
+              <div class="table_img">
+                <img
+                  class="imgstyle"
+                  src="${item.photo_address}"
+                  alt="table_img"
+                />
+              </div>
+            </div>
+            <div class="td_title">${item.title}</div>
+            <div class="td_user">${item.User.name}</div>
+            <div class="td_like">${item.likes_cnt}</div>
+          </div>
+        `;
+      })
+      .join("");
+  });
+}
+
 // 사용자 검증
 (async function () {
   try {
@@ -156,15 +194,11 @@ function findpost(element, cate) {
   }
 })();
 
-//만약 search 쿼리 스트링이 있는 경우 -> 검색을 해서 들어온 경우
-// if (search_url) {
-//   //write table에 comment열을 비교 후 해당 쿼리 스트링이 있는 경우만 출력
-//   console.log(search_url);
-//   axios({
-//     method: "post",
-//     url: "/detailmain/searchstr",
-//     data: { str: search_url },
-//   }).then((res) => {
-//     console.log("search res", res);
-//   });
-// }
+const io = new IntersectionObserver(
+  (entries, observer) => {
+    console.log(observer);
+  },
+  { threshold: 0.7 }
+);
+
+io.observe(table_content);

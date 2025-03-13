@@ -9,46 +9,46 @@ function createTable() {
                 <div class="header_menu_header"></div>
                 <div class="header_menu_row">
                     <div class="header_menu_item"  onclick="categoryMove(0)">전체게시판</div>
-                    <div class="header_menu_item">서울</div>
-                    <div class="header_menu_item">정치</div>
-                    <div class="header_menu_item">보드게임</div>
-                    <div class="header_menu_item">헬스</div>
+                    <div class="header_menu_item" onclick="subcategory()">서울</div>
+                    <div class="header_menu_item" onclick="subcategory()">정치</div>
+                    <div class="header_menu_item" onclick="subcategory()">보드게임</div>
+                    <div class="header_menu_item" onclick="subcategory()">헬스</div>
                 </div>
                 <div class="header_menu_row">
-                    <div class="header_menu_item">자유게시판</div>
-                    <div class="header_menu_item">경기도</div>
-                    <div class="header_menu_item">경제</div>
-                    <div class="header_menu_item">스팀</div>
-                    <div class="header_menu_item">수영</div>
-                </div>
-                <div class="header_menu_row">
-                    <div class="header_menu_item"></div>
-                    <div class="header_menu_item">경상도</div>
-                    <div class="header_menu_item">사회</div>
-                    <div class="header_menu_item">오리진</div>
-                    <div class="header_menu_item">필라테스</div>
+                    <div class="header_menu_item" onclick="categoryMove(1)">자유게시판</div>
+                    <div class="header_menu_item" onclick="subcategory()">경기도</div>
+                    <div class="header_menu_item" onclick="subcategory()">경제</div>
+                    <div class="header_menu_item" onclick="subcategory()">스팀</div>
+                    <div class="header_menu_item" onclick="subcategory()">수영</div>
                 </div>
                 <div class="header_menu_row">
                     <div class="header_menu_item"></div>
-                    <div class="header_menu_item">충청도</div>
-                    <div class="header_menu_item">과학</div>
-                    <div class="header_menu_item">닌텐도</div>
-                    <div class="header_menu_item">골프</div>
+                    <div class="header_menu_item" onclick="subcategory()">경상도</div>
+                    <div class="header_menu_item" onclick="subcategory()">사회</div>
+                    <div class="header_menu_item" onclick="subcategory()">오리진</div>
+                    <div class="header_menu_item" onclick="subcategory()">필라테스</div>
                 </div>
                 <div class="header_menu_row">
                     <div class="header_menu_item"></div>
-                    <div class="header_menu_item">전라도</div>
-                    <div class="header_menu_item">국제</div>
-                    <div class="header_menu_item">기타</div>
-                    <div class="header_menu_item">사격</div>
+                    <div class="header_menu_item" onclick="subcategory()">충청도</div>
+                    <div class="header_menu_item" onclick="subcategory()">과학</div>
+                    <div class="header_menu_item" onclick="subcategory()">닌텐도</div>
+                    <div class="header_menu_item" onclick="subcategory()">골프</div>
+                </div>
+                <div class="header_menu_row">
+                    <div class="header_menu_item"></div>
+                    <div class="header_menu_item" onclick="subcategory()">전라도</div>
+                    <div class="header_menu_item" onclick="subcategory()">국제</div>
+                    <div class="header_menu_item" onclick="subcategory()">기타</div>
+                    <div class="header_menu_item" onclick="subcategory()">사격</div>
                 </div>
               
                 <!-- 마이페이지 & 고객센터 -->
                 <div class="header_menu_footer">
                     <div class="my_page" onclick="mypage()">마이페이지</div>
                     <div class="header_menu_footer_links">
-                        <div>고객센터</div>
-                        <div>Gather 이용안내</div>
+                        <div class="header_menu_footer_right" onclick="subcategory()">고객센터</div>
+                        <div class="header_menu_footer_right" onclick="subcategory()">Gather 이용안내</div>
                     </div>
                 </div>
             </div>
@@ -157,4 +157,17 @@ const logoutFunc = () => {
 
 function mypage() {
   window.location.href = "/mypage";
+}
+// 카테고리 상세 페이지 이동
+function categoryMove(categoryid) {
+  if (categoryid === "all") {
+    window.location.href = `/detailmain?category_id=0`;
+  } else {
+    window.location.href = `/detailmain?category_id=${categoryid}`;
+  }
+}
+
+//subcategory
+function subcategory() {
+  alert("준비중입니다");
 }

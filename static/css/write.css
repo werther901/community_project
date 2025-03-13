@@ -26,19 +26,19 @@ body {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 10px;
-  border-bottom: 2px solid #03c75a;
+  border-bottom: 2px solid #4b89dc;
 }
 
 .title {
   font-size: 20px;
   font-weight: bold;
-  color: #03c75a;
+  color: #4b89dc;
 }
 
 .form_submit {
   padding: 8px 16px;
   width: 100px;
-  background-color: #03c75a;
+  background-color: #7eaae6;
   color: white;
   border: none;
   border-radius: 5px;
@@ -47,7 +47,7 @@ body {
 }
 
 .form_submit:hover {
-  background-color: #029e4a;
+  background-color: #4b89dc;
 }
 
 .container_content {
