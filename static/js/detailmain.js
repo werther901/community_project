@@ -194,6 +194,7 @@ if (search_url) {
   }
 })();
 
+//무한 스크롤
 const io = new IntersectionObserver(
   (entries, observer) => {
     console.log(observer);
