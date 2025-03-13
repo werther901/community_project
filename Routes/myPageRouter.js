@@ -12,4 +12,7 @@ router.get("/view_mypost", myPageController.view_mypost);
 // 유저가 좋아요 한 글 표시
 router.post("/user_liked", myPageController.user_liked_post);
 
+// 유저가 작성한 글 표시
+router.post("/view_mypost", myPageController.user_view_mypost);
+
 module.exports = router;

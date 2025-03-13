@@ -45,9 +45,6 @@
       const inputData = document.querySelector('.inputData');
 
       const tableData = res_02.data.map((x) => {
-        console.log(x.write.User);
-        console.log(x.write.User.name)
-        // return x.write.User;
         return `<tr class="tbody_data">
                 <td>${x.write.comment_id}</td>
                 <td class="cont_title">

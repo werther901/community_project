@@ -195,6 +195,10 @@
   position: relative;
 }
 
+.required {
+  color: red;
+}
+
 .btn_switch {
   position: relative;
   float: right;
@@ -360,6 +364,25 @@
   line-height: 18px;
   letter-spacing: -.47px;
   color: #747783;
+}
+
+.edit_btn_parent {
+  text-align: end;
+  margin-right: 21px;
+  margin-top: 10px;  
+}
+
+.edit_btn {
+  position: relative;
+  height: 29px;
+}
+
+.content01 {
+  position: absolute;
+  bottom: 6px;
+  color: red;
+  /* margin-top: 5px; */
+  font-size: 15px;
 }
 
 .sub_title_container {

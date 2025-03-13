@@ -28,16 +28,16 @@
       <ul class="left_guide">
         <li>
           <a href="#">
-            <div class="footer_text">로그아웃</div>
+            <div class="footer_text" onclick="YesOrNo()">로그아웃</div>
           </a>
         </li>
         <li class="footer_b">
           <a href="#">
-            <div class="footer_text">고객센터</div>
+            <div class="footer_text" onclick="ready()">고객센터</div>
           </a>
         </li>
         <li class="footer_b">
-          <a href="#" class="item_arrow">
+          <a href="#" class="item_arrow" onclick="ready()">
             <div class="footer_text">한국어</div>
           </a>
         </li>
@@ -45,3 +45,31 @@
     </footer>
   </div>
 </div>
+
+<script>
+  // 로그아웃 하시겠습니까?
+  const YesOrNo = () => {
+    const isConfirmed = confirm("로그아웃 하시겠습니까?");
+
+    if (isConfirmed) {
+        logoutFunc();
+    } else {
+        return;
+    }
+  }
+
+  // 로그아웃
+  const logoutFunc = () => {
+    // 쿠키 삭제
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // 페이지 새로고침
+    // window.location.reload();
+    window.location.href = "http://localhost:3000";
+  };
+
+  // 준비중입니다
+  const ready = () => {
+    alert('준비중 입니다.');
+  }
+
+</script>
