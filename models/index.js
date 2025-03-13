@@ -43,6 +43,12 @@ db.Category.hasMany(db.Write, {
   sourceKey: "category_id",
 });
 
+// Like 테이블과 user, write테이블간 관계 설정
+db.User.hasMany(db.Like, { foreignKey: "user_id", sourceKey: "id" });
+db.Like.belongsTo(db.User, { foreignKey: "user_id", targetKey: "id" });
+db.Write.hasMany(db.Like, { foreignKey: "comment_id", sourceKey: "comment_id" });
+db.Like.belongsTo(db.Write, { foreignKey: "comment_id", targetKey: "comment_id" });
+
 // 이건 app.js에 작성하는게 좋음
 sequelize
   .sync({ alter: true })

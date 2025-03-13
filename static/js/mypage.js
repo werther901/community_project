@@ -5,7 +5,7 @@ const info_toolTip = document.querySelector(".info_toolTip");
 const exit_btn = document.querySelector(".exit_btn");
 
 //주소 input
-const input_A = document.getElementById("input_A");
+const address = document.getElementById("address");
 
 const toolTipToggle = () => {
   if (info_toolTip.style.display == "none") {
@@ -69,7 +69,8 @@ exit_btn.addEventListener("click", toolTopExit);
   }
 })();
 
-input_A.addEventListener("click", function (e) {
+
+address.addEventListener("click", function (e) {
   e.preventDefault();
   //카카오 주소 api
   new daum.Postcode({
@@ -81,3 +82,112 @@ input_A.addEventListener("click", function (e) {
     },
   }).open();
 });
+
+// 전화번호 max length입력 시 다음 input 이동
+const movePhoneInput = (num) => {
+  if (num === 1 && phoneNum_01.value.length === 3) {
+    phoneNum_02.focus();
+  } else if (num === 2 && phoneNum_02.value.length === 4) {
+    phoneNum_03.focus();
+  }
+}
+
+// 내 정보 수정
+let nowPwValue = false;
+let newPwValue = false;
+let newCheckPwValue = false;
+let addressValue = false;
+let phoneValue = false;
+
+const now_password = document.getElementById('now_password');
+const new_password = document.getElementById('new_password');
+const new_password_check = document.getElementById('new_password_check');
+const address = document.getElementById('address');
+const phoneNum_01 = document.getElementById('phoneNum_01');
+const phoneNum_02 = document.getElementById('phoneNum_02');
+const phoneNum_03 = document.getElementById('phoneNum_03');
+const edit_btn = document.querySelector('.edit_btn');
+const content01 = document.querySelector('.content01');
+
+// '수정하기' 클릭 -> 유효성 검증 -> 통과되면 axios요청
+const edit_info = (e) => {
+  e.preventDefault();
+
+  // 유효성 검증
+  // 1. 비밀번호 변경 시 포맷 검증
+  if (new_password.value !== "" && new_password_check.value !== "") {
+    if (new_password.value !== new_password_check.value) {
+      content01.innerHTML = `비밀번호 일치여부를 확인해주세요.`;
+      return ;
+    } else {
+      content01.innerHTML = '';
+      valuePW(new_password.value);
+    }
+  } else if (new_password.value !== "" || new_password_check.value !== "") {
+    content01.innerHTML = `비밀번호 입력을 확인해주세요.`;
+    return ;
+  } else {
+    content01.innerHTML = '';
+  }
+
+  // 2. 주소 변경 시
+  let addressEdit = "";
+
+  if (address.value == "") {
+    addressEdit = "";
+  }
+
+  // 3. 전화번호
+  if (phoneNum_01.value !== "" && phoneNum_02.value !== "" && phoneNum_03.value !== "") {
+    console.log('다 안비어잇음');
+    const phone = `${phoneNum_01.value}-${phoneNum_02.value}-${phoneNum_03.value}`;
+    valuePhone(phone);
+    console.log('성공')
+    return phone;
+  } else {
+    console.log('한 군데는 비어있다')
+    return ;
+  }
+
+  // const check = confirm(``);
+  // if (check) {
+  //   // axios 보내긩
+  // }
+
+
+  // 현재비번은 무조건 서버로 보내서 현재 비밀번호와 같으면 같은 비밀번호 안된다고 return
+  // const res = axios.put(
+  //   "",
+  //   {
+
+  //   }
+  // )
+}
+edit_btn.addEventListener('click', edit_info);
+
+// 비번 유효성(정규식)
+const valuePW = (pw) => {
+  // let inspectPassWord = "Abcd123!";
+  const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/;
+  if (regex.test(pw)) {
+    content01.innerHTML = "";
+  } else {
+    content01.innerHTML = `<div>비밀번호는 특수문자 1자, 영어 대소문자 각 1자 포함 8자 이상이어야 합니다.</div>`;
+    return;
+  }
+};
+
+// 휴대전화번호 유효성(정규식)
+const valuePhone = (phoneNumber) => {
+  const regex = /^01[0-9]\d{3,4}\d{4}$/;
+  const regex02 = /^01[0-9]-\d{3,4}-\d{4}$/;
+
+  if (regex.test(phoneNumber) || regex02.test(phoneNumber)) {
+    content01.innerHTML = "";
+    return phoneNumber;
+  } else {
+    content01.innerHTML = `<div>휴대전화번호가 정확한지 확인해 주세요.</div>`;
+    return;
+  }
+};
+
