@@ -456,8 +456,7 @@ const search = async (req, res) => {
       data_result.push(item.id);
     });
 
-    console.log("data : ", data[0].id);
-    //let data_result = data[0].id;
+    //console.log("data : ", data[0].id);
     let data_lst = await Write.findAll({
       include: [
         {

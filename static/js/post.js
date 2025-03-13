@@ -8,6 +8,8 @@ const main_content = document.querySelector(".main_content");
 let postdata = {};
 const current_category = urlParams.get("category");
 const current_category_num = Number(urlParams.get("comment_id"));
+const modifybtn = document.querySelector(".modifybtn");
+const deletebtn = document.querySelector(".deletebtn");
 
 // 페이지 로드 시 axios 요청
 axios({
@@ -110,6 +112,25 @@ function like_num() {
       //페이지 로드 시 DOM 변수 선언
       const heart_img = document.querySelector(".heart_img");
 
+      //해당 아이디가 아닌 경우 수정 삭제 버튼 없애기
+      axios({
+        method: "post",
+        url: "/post/checkloginuser",
+        data: {
+          userid: userid,
+          comment_id: current_category_num,
+        },
+      }).then((res) => {
+        console.log("/post/checkloginuser : ", res.data.user.userId);
+        if (Number(userid) !== Number(res.data.user.userId)) {
+          modifybtn.style.display = "none";
+          deletebtn.style.display = "none";
+        } else {
+          modifybtn.style.display = "block";
+          deletebtn.style.display = "block";
+        }
+      });
+
       //axios - 요청 like 테이블에 값이 있는지 확인 - 초기 heart_img src 세팅
       axios({
         method: "post",
@@ -120,6 +141,7 @@ function like_num() {
         },
       }).then((res) => {
         console.log("checkuser res", res);
+
         if (res.data.user === null) {
           //만약 data > user > null인 경우 -> 데이터가 없어 빈 하트인 경우
           heart_img.src = "/images/heart.png";

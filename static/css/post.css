@@ -32,6 +32,9 @@
   justify-content: space-between;
 }
 
+.postModify_btn {
+  display: flex;
+}
 .postModify_btn button,
 .postMove_btn button {
   background-color: #4b89dc;
