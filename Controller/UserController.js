@@ -152,11 +152,11 @@ const verifyProcess = async (req, res) => {
     // 토큰 검증
     try {
       const { id } = jwt.verify(token, process.env.SECRET_KEY);
-      console.log(id);
+      // console.log(id);
 
       // 데이터베이스 유저 조회
       const user = await User.findOne({ where: { id } });
-      console.log(user);
+      // console.log(user);
 
       if (!user.dataValues.id) {
         // 로그인 실패
@@ -296,8 +296,6 @@ const kakaoLoginProcess = async (req, res) => {
       .json({ result: false, message: "카카오 로그인 실패" });
   }
 };
-
-// 마이페이지에 유저 정보 전달
 
 // 카테고리 요청 - all
 const getCategory = async (req, res) => {

@@ -40,6 +40,26 @@
           id: res.data.id
         }
       )
+      console.log(res_02.data);
+
+      const inputData = document.querySelector('.inputData');
+
+      const tableData = res_02.data.map((x) => {
+        console.log(x.write.User);
+        console.log(x.write.User.name)
+        // return x.write.User;
+        return `<tr class="tbody_data">
+                <td>${x.write.comment_id}</td>
+                <td class="cont_title">
+                  <a href="/post?comment_id=${x.write.comment_id}&category=0">${x.write.title}</a>
+                </td>
+                <td>${x.write.User.name}</td>
+                <td>작성날짜</td>
+                <td>조회수</td>
+              </tr>`
+      });
+      console.log(tableData);
+      inputData.innerHTML = tableData.join("")
     }
     
   } catch (error) {
