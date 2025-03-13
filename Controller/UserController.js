@@ -435,6 +435,26 @@ const search = async (req, res) => {
     }).catch((err) => console.log(err));
     res.send(data_lst);
   } else if (select === "user") {
+    /* 
+    현재 str은 이름이 입력되어 있음. 이후 findall를 통해 해당 userid를
+    찾고 해당 userid를 통해 comment를 찾음
+    */
+    let data_result = [];
+    let data = await User.findAll({
+      attributes: ["name", "id"],
+      where: {
+        name: {
+          [Op.like]: "%" + str + "%",
+        },
+      },
+      raw: true,
+    }).catch((err) => console.log(err));
+
+    data.map((item) => {
+      data_result.push(item.id);
+    });
+
+    //console.log("data : ", data[0].id);
     let data_lst = await Write.findAll({
       include: [
         {
@@ -443,13 +463,18 @@ const search = async (req, res) => {
         },
       ],
       where: {
-        userId: {
-          [Op.like]: "%" + str + "%",
-        },
+        userId: data_result,
       },
     }).catch((err) => console.log(err));
     res.send(data_lst);
   }
+};
+
+const Userstr = async (req, res) => {
+  let data_lst = await Write.findAll({
+    userId: req.body.user,
+  }).catch((err) => console.log(err));
+  res.send({ data_lst });
 };
 
 module.exports = {
@@ -472,4 +497,5 @@ module.exports = {
   categorypost,
   categorypost_news,
   search,
+  Userstr,
 };

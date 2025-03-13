@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>마이페이지</title>
-  <!-- google font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <!-- local css -->
-  <link rel="stylesheet" href="/css/mypage_common.css">
-  <link rel="stylesheet" href="/css/mypage.css">
-  <!-- axios -->
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-  
-  <div class="container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이페이지</title>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- local css -->
+    <link rel="stylesheet" href="/css/mypage_common.css" />
+    <link rel="stylesheet" href="/css/mypage.css" />
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 카카오 주소 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="both_container">
+        <% include mypage_common.ejs %>
 
-    <div class="both_container">
-      <% include mypage_common.ejs %>
-
-      <div class="right_container">
+        <div class="right_container">
 
         <form action="" method="put" style="position: relative;">
+        
           <div class="subRight_container">
             <div class="info_title">
               <h3>기본정보</h3>
               <a href="#" class="info01"></a>
+
               <div class="info_toolTip" style="display: none;">
                 <strong class="info_head" style="padding: 0;">사용자 이름</strong>
                 <p class="info_desc">
@@ -44,6 +49,7 @@
                 <strong class="info_head">본인확인 이메일</strong>
                 <p class="info_desc">
                   아이디, 비밀번호 찾기, 로그인이 안되는 경우 등 본인확인이 필요한 경우 사용합니다.
+
                 </p>
                 <button class="exit_btn"></button>
               </div>
@@ -52,6 +58,7 @@
               <div style="position: relative;">
                 <p class="name_text">홍길동</p>
                 <button class="name_btn" onclick="ready()">
+
                   <span class="text">실명수정</span>
                 </button>
               </div>
@@ -118,42 +125,47 @@
                     <span class="switch_on">ON</span>
                     <span class="switch_off">OFF</span>
                   </label>
+
+                </div>
+              </div>
+              <div class="input_position_container">
+                <div
+                  class="input_container block_img sp_btwn"
+                  style="border-bottom: none"
+                >
+                  <span class="input_title">해외 로그인 차단</span>
                 </div>
               </div>
             </div>
-            <div class="input_position_container">
-              <div class="input_container block_img sp_btwn" style="border-bottom: none;">
-                <span class="input_title">해외 로그인 차단</span>
+          </div>
+          <div class="sub_title_container">
+            <div>
+              <h2 class="sub_title">내 활동 기록</h2>
+            </div>
+            <div class="subRight_container subRight_02">
+              <div class="input_position_container">
+                <div class="input_container loginRecord_img">
+                  <span class="input_title">로그인 기록</span>
+                </div>
+              </div>
+              <div class="input_position_container">
+                <div
+                  class="input_container infoEdit_img"
+                  style="border-bottom: none"
+                >
+                  <span class="input_title">정보수정 이력</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="sub_title_container">
-          <div>
-            <h2 class="sub_title">내 활동 기록</h2>
+          <div class="delete_account">
+            <a href="#">
+              <span class="text">회원탈퇴</span>
+            </a>
           </div>
-          <div class="subRight_container subRight_02">
-            <div class="input_position_container">
-              <div class="input_container loginRecord_img">
-                <span class="input_title">로그인 기록</span>
-              </div>
-            </div>
-            <div class="input_position_container">
-              <div class="input_container infoEdit_img" style="border-bottom: none;">
-                <span class="input_title">정보수정 이력</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="delete_account">
-          <a href="#">
-            <span class="text">회원탈퇴</span>
-          </a>
         </div>
       </div>
     </div>
-
-  </div>
-</body>
-<script src="/js/mypage.js"></script>
+  </body>
+  <script src="/js/mypage.js"></script>
 </html>

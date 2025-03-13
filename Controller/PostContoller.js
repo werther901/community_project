@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken"); // 토큰 라이브러리
 const bcrypt = require("bcrypt"); // 비밀번호 암호화 라이브러리
-
+const { Op } = require("sequelize");
 require("dotenv").config(); // env
 
 const { Category, User, Write, Like } = require("../models/index"); // 데이터베이스 모델
@@ -88,6 +88,16 @@ const findUser = async (req, res) => {
   res.send({ user });
 };
 
+//로그인한 사람한테만 수정 삭제 버튼이 보이도록 하기
+const checkLoginUser = async (req, res) => {
+  const { userid, comment_id } = req.body;
+
+  const user = await Write.findOne({
+    where: { comment_id: comment_id },
+  });
+  res.send({ user });
+};
+
 //해당 comment id에 따른 길이 찾기
 const Row = async (req, res) => {
   const comment_id = req.body.comment_id;
@@ -117,4 +127,5 @@ module.exports = {
   deleteUser,
   findUser,
   Row,
+  checkLoginUser,
 };

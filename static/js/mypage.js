@@ -1,9 +1,11 @@
-
 // --------------css 관련 ----------------
 // 툴팁 토글
-const info01 = document.querySelector('.info01');
-const info_toolTip = document.querySelector('.info_toolTip');
-const exit_btn = document.querySelector('.exit_btn');
+const info01 = document.querySelector(".info01");
+const info_toolTip = document.querySelector(".info_toolTip");
+const exit_btn = document.querySelector(".exit_btn");
+
+//주소 input
+const address = document.getElementById("address");
 
 const toolTipToggle = () => {
   if (info_toolTip.style.display == "none") {
@@ -11,23 +13,22 @@ const toolTipToggle = () => {
   } else {
     info_toolTip.style.display = "none";
   }
-  
-}
-info01.addEventListener('click', toolTipToggle);
+};
+info01.addEventListener("click", toolTipToggle);
 
 // 툴팁 닫기
 const toolTopExit = () => {
   info_toolTip.style.display = "none";
-}
-exit_btn.addEventListener('click', toolTopExit);
+};
+exit_btn.addEventListener("click", toolTopExit);
 
 // --------------기능 관련 ----------------
 
 // 사용자 검증
 (async function () {
   // const info = document.querySelector(".welcome");
-  const name_text = document.querySelector('.name_text');
-  const email_text = document.querySelector('.email_text');
+  const name_text = document.querySelector(".name_text");
+  const email_text = document.querySelector(".email_text");
 
   try {
     // 쿠키에서 토큰 추출하기
@@ -39,7 +40,7 @@ exit_btn.addEventListener('click', toolTopExit);
 
     if (!tokenCookie) {
       // 토큰이 없으면 '로그인이 필요한 서비스입니다' 후 메인페이지 이동
-      alert('로그인이 필요한 서비스입니다.');
+      alert("로그인이 필요한 서비스입니다.");
       window.location.href = "http://localhost:3000";
       return;
     }
@@ -55,19 +56,32 @@ exit_btn.addEventListener('click', toolTopExit);
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    
+
     if (res.data.result) {
       console.log(res.data);
       name_text.textContent = res.data.name;
       email_text.textContent = res.data.email;
     }
-    
   } catch (error) {
     console.error("Authentication error:", error);
-    alert('로그인 인증 시간이 만료 되었습니다. 다시 로그인 해주세요.');
+    alert("로그인 인증 시간이 만료 되었습니다. 다시 로그인 해주세요.");
     window.location.replace("/login");
   }
 })();
+
+
+address.addEventListener("click", function (e) {
+  e.preventDefault();
+  //카카오 주소 api
+  new daum.Postcode({
+    oncomplete: function (data) {
+      // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+      // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+      //console.log("address", data.address);
+      input_A.value = data.address;
+    },
+  }).open();
+});
 
 // 전화번호 max length입력 시 다음 input 이동
 const movePhoneInput = (num) => {
@@ -176,3 +190,4 @@ const valuePhone = (phoneNumber) => {
     return;
   }
 };
+
