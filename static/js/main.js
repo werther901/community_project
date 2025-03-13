@@ -106,7 +106,7 @@ window.onload = function () {
       .map((item) => {
         return `
         <div class="submain_content">
-          <div class="submain_content_row" onclick="postMove(${item.comment_id})">${item.title}</div>
+          <div class="submain_content_row" onclick="postMove(${item.comment_id},1)">${item.title}</div>
           <div class="submain_row_name">${item.User.name}</div>
         </div>
       `;
@@ -124,7 +124,7 @@ window.onload = function () {
       .map((item) => {
         return `
         <div class="submain_content">
-          <div class="submain_content_row" onclick="postMove(${item.comment_id})">${item.title}</div>
+          <div class="submain_content_row" onclick="postMove(${item.comment_id},3)">${item.title}</div>
           <div class="submain_row_name">${item.User.name}</div>
         </div>
       `;
