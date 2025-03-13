@@ -472,7 +472,13 @@ const search = async (req, res) => {
 
 const Userstr = async (req, res) => {
   let data_lst = await Write.findAll({
-    userId: req.body.user,
+    include: [
+      {
+        model: User, // User 모델과 조인
+        attributes: ["name"], // User 테이블에서 name 값만 가져옴
+      },
+    ],
+    where: { userId: req.body.user },
   }).catch((err) => console.log(err));
   res.send({ data_lst });
 };

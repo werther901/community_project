@@ -216,30 +216,29 @@ if (user_url) {
     method: "post",
     url: "/detailmain/userstr",
     data: { user: user_url },
+  }).then((res) => {
+    console.log("res", res);
+    let data = res.data.data_lst;
+    category_name.innerHTML = `<div>"${res.data.data_lst[0].User.name}"님의 게시글 목록</div>`;
+    table_content.innerHTML = data
+      .map((item) => {
+        return `
+            <div class="td_row" onclick="findpost(${item.comment_id},0)">
+            <div class="td_img">
+              <div class="table_img">
+                <img
+                  class="imgstyle"
+                  src="${item.photo_address}"
+                  alt="table_img"
+                />
+              </div>
+            </div>
+            <div class="td_title">${item.title}</div>
+            <div class="td_user">${item.User.name}</div>
+            <div class="td_like">${item.likes_cnt}</div>
+          </div>
+        `;
+      })
+      .join("");
   });
-
-  // .then((res) => {
-  //   console.log("res", res);
-  //   let data = res.data.data_lst;
-  //   table_content.innerHTML = data
-  //     .map((item) => {
-  //       return `
-  //           <div class="td_row" onclick="findpost(${item.comment_id},0)">
-  //           <div class="td_img">
-  //             <div class="table_img">
-  //               <img
-  //                 class="imgstyle"
-  //                 src="${item.photo_address}"
-  //                 alt="table_img"
-  //               />
-  //             </div>
-  //           </div>
-  //           <div class="td_title">${item.title}</div>
-  //           <div class="td_user">${item.User.name}</div>
-  //           <div class="td_like">${item.likes_cnt}</div>
-  //         </div>
-  //       `;
-  //     })
-  //     .join("");
-  // });
 }

@@ -69,7 +69,6 @@ exit_btn.addEventListener("click", toolTopExit);
   }
 })();
 
-
 address.addEventListener("click", function (e) {
   e.preventDefault();
   //카카오 주소 api
@@ -90,7 +89,7 @@ const movePhoneInput = (num) => {
   } else if (num === 2 && phoneNum_02.value.length === 4) {
     phoneNum_03.focus();
   }
-}
+};
 
 // 내 정보 수정
 let nowPwValue = false;
@@ -99,15 +98,15 @@ let newCheckPwValue = false;
 let addressValue = false;
 let phoneValue = false;
 
-const now_password = document.getElementById('now_password');
-const new_password = document.getElementById('new_password');
-const new_password_check = document.getElementById('new_password_check');
-const address = document.getElementById('address');
-const phoneNum_01 = document.getElementById('phoneNum_01');
-const phoneNum_02 = document.getElementById('phoneNum_02');
-const phoneNum_03 = document.getElementById('phoneNum_03');
-const edit_btn = document.querySelector('.edit_btn');
-const content01 = document.querySelector('.content01');
+const now_password = document.getElementById("now_password");
+const new_password = document.getElementById("new_password");
+const new_password_check = document.getElementById("new_password_check");
+
+const phoneNum_01 = document.getElementById("phoneNum_01");
+const phoneNum_02 = document.getElementById("phoneNum_02");
+const phoneNum_03 = document.getElementById("phoneNum_03");
+const edit_btn = document.querySelector(".edit_btn");
+const content01 = document.querySelector(".content01");
 
 // '수정하기' 클릭 -> 유효성 검증 -> 통과되면 axios요청
 const edit_info = (e) => {
@@ -118,16 +117,16 @@ const edit_info = (e) => {
   if (new_password.value !== "" && new_password_check.value !== "") {
     if (new_password.value !== new_password_check.value) {
       content01.innerHTML = `비밀번호 일치여부를 확인해주세요.`;
-      return ;
+      return;
     } else {
-      content01.innerHTML = '';
+      content01.innerHTML = "";
       valuePW(new_password.value);
     }
   } else if (new_password.value !== "" || new_password_check.value !== "") {
     content01.innerHTML = `비밀번호 입력을 확인해주세요.`;
-    return ;
+    return;
   } else {
-    content01.innerHTML = '';
+    content01.innerHTML = "";
   }
 
   // 2. 주소 변경 시
@@ -138,22 +137,25 @@ const edit_info = (e) => {
   }
 
   // 3. 전화번호
-  if (phoneNum_01.value !== "" && phoneNum_02.value !== "" && phoneNum_03.value !== "") {
-    console.log('다 안비어잇음');
+  if (
+    phoneNum_01.value !== "" &&
+    phoneNum_02.value !== "" &&
+    phoneNum_03.value !== ""
+  ) {
+    console.log("다 안비어잇음");
     const phone = `${phoneNum_01.value}-${phoneNum_02.value}-${phoneNum_03.value}`;
     valuePhone(phone);
-    console.log('성공')
+    console.log("성공");
     return phone;
   } else {
-    console.log('한 군데는 비어있다')
-    return ;
+    console.log("한 군데는 비어있다");
+    return;
   }
 
   // const check = confirm(``);
   // if (check) {
   //   // axios 보내긩
   // }
-
 
   // 현재비번은 무조건 서버로 보내서 현재 비밀번호와 같으면 같은 비밀번호 안된다고 return
   // const res = axios.put(
@@ -162,13 +164,14 @@ const edit_info = (e) => {
 
   //   }
   // )
-}
-edit_btn.addEventListener('click', edit_info);
+};
+edit_btn.addEventListener("click", edit_info);
 
 // 비번 유효성(정규식)
 const valuePW = (pw) => {
   // let inspectPassWord = "Abcd123!";
-  const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/;
+  const regex =
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/;
   if (regex.test(pw)) {
     content01.innerHTML = "";
   } else {
@@ -190,4 +193,3 @@ const valuePhone = (phoneNumber) => {
     return;
   }
 };
-
