@@ -42,13 +42,30 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       comment: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.TEXT,
         allowNull: false,
+      },
+      view_cnt: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0, // 기본값 0 설정
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW, // 기본값 설정
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW, // 기본값 설정
+        onUpdate: DataTypes.NOW, // 업데이트 시 자동 갱신
       },
     },
     {
       tableName: "write",
-      timestamps: false,
+      timestamps: true,
+      timezone: "+09:00"
     }
   );
   Write.associate = (models) => {
