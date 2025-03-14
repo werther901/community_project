@@ -30,6 +30,7 @@ db.User = require("./user.js")(sequelize, Sequelize.DataTypes);
 db.Category = require("./category.js")(sequelize, Sequelize.DataTypes);
 db.Write = require("./write.js")(sequelize, Sequelize.DataTypes);
 db.Like = require("./like.js")(sequelize, Sequelize.DataTypes);
+db.View = require("./view.js")(sequelize, Sequelize.DataTypes);
 
 // 관계 설정
 db.Write.belongsTo(db.User, { foreignKey: "userId", targetKey: "id" });
@@ -46,8 +47,26 @@ db.Category.hasMany(db.Write, {
 // Like 테이블과 user, write테이블간 관계 설정
 db.User.hasMany(db.Like, { foreignKey: "user_id", sourceKey: "id" });
 db.Like.belongsTo(db.User, { foreignKey: "user_id", targetKey: "id" });
-db.Write.hasMany(db.Like, { foreignKey: "comment_id", sourceKey: "comment_id" });
-db.Like.belongsTo(db.Write, { foreignKey: "comment_id", targetKey: "comment_id" });
+db.Write.hasMany(db.Like, {
+  foreignKey: "comment_id",
+  sourceKey: "comment_id",
+});
+db.Like.belongsTo(db.Write, {
+  foreignKey: "comment_id",
+  targetKey: "comment_id",
+});
+
+// View 테이블과 user, write테이블간 관계 설정
+db.User.hasMany(db.View, { foreignKey: "user_id", sourceKey: "id" });
+db.View.belongsTo(db.User, { foreignKey: "user_id", targetKey: "id" });
+db.Write.hasMany(db.View, {
+  foreignKey: "comment_id",
+  sourceKey: "comment_id",
+});
+db.View.belongsTo(db.Write, {
+  foreignKey: "comment_id",
+  targetKey: "comment_id",
+});
 
 // 이건 app.js에 작성하는게 좋음
 sequelize

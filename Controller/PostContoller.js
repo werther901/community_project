@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt"); // 비밀번호 암호화 라이브러리
 const { Op } = require("sequelize");
 require("dotenv").config(); // env
 
-const { Category, User, Write, Like } = require("../models/index"); // 데이터베이스 모델
+const { View, Category, User, Write, Like } = require("../models/index"); // 데이터베이스 모델
 
 const postMove = async (req, res) => {
   res.render("post");
@@ -12,6 +12,37 @@ const postMove = async (req, res) => {
 const ViewPost = async (req, res) => {
   //console.log("req", req.body.viewurl);
   const comment_id = req.body.viewurl;
+  // const userid = req.body.userid;
+
+  // const view_lst = await View.findAll({
+  //   where: { user_id: Number(userid), comment_id: Number(comment_id) },
+  // });
+  // console.log("view_lst", view_lst);
+  // let info = {
+  //   user_id: Number(userid),
+  //   comment_id: Number(comment_id),
+  // };
+  // console.log("info", info);
+  // //처음 들어온 페이지라면
+  // // if (view_lst.length === 0) {
+  // //   await View.create(info).catch((err) => console.log("err", err));
+  // // }
+
+  // //view테이블에서 comment_id값 찾기
+  // const view_user_lst = await View.findAll({
+  //   where: { comment_id: Number(comment_id) },
+  // });
+  // console.log("view_user_lst", view_user_lst.length);
+  //write 테이블 view_cnt 수정
+  // await Write.update(
+  //   { view_cnt: view_user_lst.length },
+  //   {
+  //     where: { comment_id: comment_id },
+  //   }
+  // );
+
+  // console.log("view", view_lst, "info", info);
+
   const write = await Write.findOne({
     include: [
       {
@@ -25,6 +56,7 @@ const ViewPost = async (req, res) => {
     ],
     where: { comment_id },
   });
+
   res.send({ write });
 };
 
@@ -95,7 +127,36 @@ const checkLoginUser = async (req, res) => {
   const user = await Write.findOne({
     where: { comment_id: comment_id },
   });
-  res.send({ user });
+
+  const view_lst = await View.findAll({
+    where: { user_id: Number(userid), comment_id: Number(comment_id) },
+  });
+
+  let info = {
+    user_id: Number(userid),
+    comment_id: Number(comment_id),
+  };
+
+  //처음 들어온 페이지라면
+  if (view_lst.length === 0) {
+    await View.create(info).catch((err) => console.log(err));
+  }
+
+  //view테이블에서 comment_id값 찾기
+  const view_user_lst = await View.findAll({
+    where: { comment_id: Number(comment_id) },
+  });
+  console.log("view_user_lst", view_user_lst.length);
+  //write 테이블 view_cnt 수정
+  await Write.update(
+    { view_cnt: view_user_lst.length },
+    {
+      where: { comment_id: comment_id },
+    }
+  );
+
+  console.log("view", view_lst, "info", info);
+  res.send({ user: user });
 };
 
 //해당 comment id에 따른 길이 찾기
