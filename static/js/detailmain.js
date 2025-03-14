@@ -2,6 +2,7 @@
 const category_name = document.querySelector(".category_name");
 const table_content = document.querySelector(".table_content");
 const td_row = document.querySelector(".td_row");
+const pagination = document.querySelector(".pagination");
 
 //h1 change title
 const url = new URL(window.location.href);
@@ -11,27 +12,42 @@ const select_url = urlParams.get("select");
 const user_url = urlParams.get("user");
 //console.log("urlSearch", urlParams.get("category_id"));
 
-//main에서 전체 게시판 클릭 시
-if (
-  Number(urlParams.get("category_id")) === 0 &&
-  !urlParams.get("search") &&
-  !user_url
-) {
-  category_name.innerHTML = "<div>전체 게시판</div>";
+//pagination
+function pagenation(category) {
+  axios({
+    method: "post",
+    url: "/detailmain/allPost_pagi",
+    data: { category: category },
+  }).then((res) => {
+    let len = res.data.allpost.length;
+    let total_group = Math.ceil(len / 5);
 
-  //전체 내용 띄우기
+    for (let i = 1; i <= total_group; i++) {
+      pagination.innerHTML += `<button class="pagi_btn" onclick="pageMove(${i},${category},this)">${i}</button>`;
+    }
+  });
+}
+
+//페이지 이동 - 페이지네이션 버튼 클릭
+function pageMove(num, category, btn) {
   axios({
     method: "post",
     url: "/detailmain/allPost",
-  })
-    .then((res) => {
-      console.log("res", res);
+    data: { pageNum: num, category: category },
+  }).then((res) => {
+    makeTable(res.data.allpost);
+    document.querySelectorAll(".pagi_btn").forEach((button) => {
+      button.style.backgroundColor = "#cbddf5";
+    });
+    btn.style.backgroundColor = "#4B89DC";
+  });
+}
 
-      let allpost_lst = res.data.allpost;
-
-      table_content.innerHTML = allpost_lst
-        .map((item) => {
-          return `
+//table 생성
+function makeTable(lst) {
+  table_content.innerHTML = lst
+    .map((item) => {
+      return `
             <div class="td_row" onclick="findpost(${item.comment_id},0)">
             <div class="td_img">
               <div class="table_img">
@@ -47,8 +63,29 @@ if (
             <div class="td_like">${item.likes_cnt}</div>
           </div>
         `;
-        })
-        .join("");
+    })
+    .join("");
+}
+//main에서 전체 게시판 클릭 시
+if (
+  Number(urlParams.get("category_id")) === 0 &&
+  !urlParams.get("search") &&
+  !user_url
+) {
+  category_name.innerHTML = "<div>전체 게시판</div>";
+
+  //전체 내용 띄우기
+  axios({
+    method: "post",
+    url: "/detailmain/allPost",
+    data: { pageNum: 0, category: 0 },
+  })
+    .then((res) => {
+      //console.log("res", res);
+
+      let allpost_lst = res.data.allpost;
+      pagenation(0);
+      makeTable(allpost_lst);
     })
     .catch((e) => {
       console.log("error", e);
@@ -58,7 +95,8 @@ if (
   !urlParams.get("search") &&
   !user_url
 ) {
-  console.log(Number(urlParams.get("category_id")));
+  //console.log(Number(urlParams.get("category_id")));
+
   //main에서 전체 게시판 외 다른 게시판 클릭 시 - 카테고리 요청
   axios({
     method: "post",
@@ -79,35 +117,18 @@ if (
       axios({
         method: "post",
         url: "/detailmain/allPost",
+        data: { pageNum: 0, category: Number(urlParams.get("category_id")) },
       }).then((res) => {
-        //console.log("res", res);
+        console.log("res", res);
         let postlist = res.data.allpost;
 
-        const category_post = postlist.filter((element) => {
-          //console.log("element", element.category, "id", id);
-          return Number(element.category) === Number(id);
-        });
-        console.log("category_post", category_post);
-        table_content.innerHTML = category_post
-          .map((item) => {
-            return `
-            <div class="td_row" onclick="findpost(${item.comment_id},${id})">
-            <div class="td_img">
-              <div class="table_img">
-                <img
-                  class="imgstyle"
-                  src="${item.photo_address}"
-                  alt="table_img"
-                />
-              </div>
-            </div>
-            <div class="td_title">${item.title}</div>
-            <div class="td_user">${item.User.name}</div>
-            <div class="td_like">${item.likes_cnt}</div>
-          </div>
-        `;
-          })
-          .join("");
+        // const category_post = postlist.filter((element) => {
+        //   //console.log("element", element.category, "id", id);
+        //   return Number(element.category) === Number(id);
+        // });
+        //console.log("category_post", category_post);
+        pagenation(Number(urlParams.get("category_id")));
+        makeTable(postlist);
       });
     })
     .catch((e) => {
@@ -136,29 +157,10 @@ if (search_url) {
     url: "/detailmain/searchstr",
     data: { str: search_url, select: select_url },
   }).then((res) => {
-    console.log("search res", res);
+    ///console.log("search res", res);
     category_name.innerHTML = `<div>"${search_url}"의 검색 결과</div>`;
     let search_data = res.data; //검색 포함 내용 리스트
-    table_content.innerHTML = search_data
-      .map((item) => {
-        return `
-            <div class="td_row" onclick="findpost(${item.comment_id},0)">
-            <div class="td_img">
-              <div class="table_img">
-                <img
-                  class="imgstyle"
-                  src="${item.photo_address}"
-                  alt="table_img"
-                />
-              </div>
-            </div>
-            <div class="td_title">${item.title}</div>
-            <div class="td_user">${item.User.name}</div>
-            <div class="td_like">${item.likes_cnt}</div>
-          </div>
-        `;
-      })
-      .join("");
+    makeTable(search_data);
   });
 }
 
@@ -200,45 +202,16 @@ if (search_url) {
   }
 })();
 
-//무한 스크롤
-const io = new IntersectionObserver(
-  (entries, observer) => {
-    console.log(observer);
-  },
-  { threshold: 0.7 }
-);
-
-io.observe(table_content);
-
-//만약 user url이 있는경우
+//만약 user url이 있는경우 -> post페이지에서 user 게시글 보기를 클릭해서 들어온 경우
 if (user_url) {
   axios({
     method: "post",
     url: "/detailmain/userstr",
     data: { user: user_url },
   }).then((res) => {
-    console.log("res", res);
+    //console.log("res", res);
     let data = res.data.data_lst;
     category_name.innerHTML = `<div>"${res.data.data_lst[0].User.name}"님의 게시글 목록</div>`;
-    table_content.innerHTML = data
-      .map((item) => {
-        return `
-            <div class="td_row" onclick="findpost(${item.comment_id},0)">
-            <div class="td_img">
-              <div class="table_img">
-                <img
-                  class="imgstyle"
-                  src="${item.photo_address}"
-                  alt="table_img"
-                />
-              </div>
-            </div>
-            <div class="td_title">${item.title}</div>
-            <div class="td_user">${item.User.name}</div>
-            <div class="td_like">${item.likes_cnt}</div>
-          </div>
-        `;
-      })
-      .join("");
+    makeTable(data);
   });
 }
