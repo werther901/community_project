@@ -37,7 +37,8 @@ h1 {
 .th_img,
 .th_title,
 .th_user,
-.th_like {
+.th_like,
+.th_show {
   background-color: #4b89dc;
   color: white;
   padding: 10px;
@@ -63,8 +64,14 @@ h1 {
   color: #444;
 }
 .th_img,
-.td_img {
-  width: 20%;
+.td_img,
+.th_user,
+.th_like,
+.td_user,
+.td_like,
+.th_show,
+.td_show {
+  width: 10%;
 }
 .th_title,
 .td_title {
@@ -75,16 +82,10 @@ h1 {
   justify-content: left;
 }
 .td_like,
-.td_user {
+.td_user,
+.td_show {
   display: flex;
   justify-content: center;
-}
-
-.th_user,
-.th_like,
-.td_user,
-.td_like {
-  width: 10%;
 }
 
 /* 이미지 셀 스타일 */

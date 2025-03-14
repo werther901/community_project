@@ -12,6 +12,8 @@ const modifybtn = document.querySelector(".modifybtn");
 const deletebtn = document.querySelector(".deletebtn");
 const sub_post = document.querySelector(".sub_post");
 let check = 0; //유저이름 클릭 시 페이지 이동 용
+//let current_user_id = "";
+
 // 페이지 로드 시 axios 요청
 axios({
   method: "post",
@@ -19,9 +21,11 @@ axios({
   data: { viewurl: urlParams.get("comment_id") },
 })
   .then((res) => {
-    console.log("res", res);
+    //console.log("res", res);
     postdata = res.data.write;
+    let current_date = postdata.createdAt;
 
+    console.log("Date", current_date);
     //화면 표시하기
     main_content.innerHTML = `
           <div class="content_top">
@@ -31,6 +35,8 @@ axios({
               <div class="content_userid" onclick="usermodal()">${postdata.User.name}</div>
               <div class="content_userid_modal" onclick="userpost(${postdata.userId})">- 게시글 보기</div>
               <div class="content_detils_right">
+                <div class="write_time">작성시간 ${postdata.createdAt}</div>
+                <div class="show">조회수 ${postdata.view_cnt}</div>
                 <div class="copyurl" onclick="copyurl()">url복사</div>
                 <div class="moreview" onclick="printer()">Print</div>
               </div>
@@ -44,7 +50,7 @@ axios({
             <div class="bottom_like">
               <div class="like_btn" onclick="likes()">좋아요</div> 
               <div class="like_img">
-                <img class="imgstyle heart_img" alt="heart_img" />
+                <img class="imgstyle heart_img" src ="" alt="heart_img" />
               </div>
               <div class="like_number"></div>
             </div>
@@ -70,7 +76,7 @@ function like_num() {
     url: "/post/row",
     data: { comment_id: current_category_num },
   }).then((res) => {
-    console.log("res", res);
+    //console.log("res", res);
     let data_lst = res.data;
     if (data_lst.length === 0) {
       like_number.innerHTML = `<div>0</div>`;
@@ -123,7 +129,7 @@ function like_num() {
           comment_id: current_category_num,
         },
       }).then((res) => {
-        console.log("/post/checkloginuser : ", res.data.user.userId);
+        console.log("/post/checkloginuser : ", res.data.user);
         if (Number(userid) !== Number(res.data.user.userId)) {
           modifybtn.style.display = "none";
           deletebtn.style.display = "none";
@@ -142,7 +148,7 @@ function like_num() {
           comment_id: current_category_num,
         },
       }).then((res) => {
-        console.log("checkuser res", res);
+        //console.log("checkuser res", res);
 
         if (res.data.user === null) {
           //만약 data > user > null인 경우 -> 데이터가 없어 빈 하트인 경우
@@ -359,9 +365,9 @@ axios({
   url: "/post/movePost",
   data: { now_category: current_category },
 }).then((res) => {
-  console.log("subpost : ", res);
+  //console.log("subpost : ", res);
   let data_lst = res.data;
-  console.log("dta_lst", data_lst);
+  //console.log("dta_lst", data_lst);
   let data_lst_id = [];
   data_lst.map((item) => {
     data_lst_id.push(item.comment_id);
@@ -370,7 +376,6 @@ axios({
   //전체 배열 중 몇 번째에 위치한지 찾기
   let cnt = 0;
   data_lst_id.forEach((element, index) => {
-    //console.log("E", element, index);
     if (current_category_num === element) {
       cnt = index; //현재 페이지 번호
     }
@@ -379,13 +384,13 @@ axios({
   // 앞 2개, 현재, 뒤 2개 (경계 검사)
   let start = Math.max(cnt - 2, 0);
   let end = Math.min(cnt + 2, data_lst.length - 1);
-  console.log("cnt", cnt, "Start", start, "end", end);
+  //console.log("cnt", cnt, "Start", start, "end", end);
   let selectedCards = data_lst.slice(start, end + 1); // 5개 선택
 
-  console.log("selectedCards", selectedCards);
+  //console.log("selectedCards", selectedCards);
 
   for (let i = start; i < start + 5; i++) {
-    console.log("Data list", data_lst_id[i]); //14 현16
+    //console.log("Data list", data_lst_id[i]); //14 현16
 
     if (data_lst_id[i] !== undefined && Number(current_category) !== 0) {
       let currentItem = data_lst[i]; //현재를 기준으로 처음 값

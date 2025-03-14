@@ -61,6 +61,7 @@ function makeTable(lst) {
             <div class="td_title">${item.title}</div>
             <div class="td_user">${item.User.name}</div>
             <div class="td_like">${item.likes_cnt}</div>
+            <div class="td_show">${item.view_cnt}</div>
           </div>
         `;
     })
@@ -81,7 +82,7 @@ if (
     data: { pageNum: 0, category: 0 },
   })
     .then((res) => {
-      //console.log("res", res);
+      console.log("res", res);
 
       let allpost_lst = res.data.allpost;
       pagenation(0);

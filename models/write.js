@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: "write",
       timestamps: true,
-      timezone: "+09:00"
+      timezone: "+09:00",
     }
   );
   Write.associate = (models) => {

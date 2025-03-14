@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     // 1. 조회수 컬럼 추가
     await queryInterface.addColumn("write", "view_cnt", {
       type: Sequelize.INTEGER,
@@ -31,12 +31,14 @@ module.exports = {
     });
   },
 
+
   async down (queryInterface, Sequelize) {
     await queryInterface.removeColumn("write", "view_cnt", {
       type: Sequelize.INTEGER,
       allowNull: false,
       defaultValue: 0, // 기본값 0 설정
     });
+
 
     await queryInterface.changeColumn("write", "comment", {
       type: Sequelize.STRING(255),
@@ -46,5 +48,10 @@ module.exports = {
     await queryInterface.removeColumn("write", "createdAt");
 
     await queryInterface.removeColumn("write", "updatedAt");
-  }
+    await queryInterface.removeColumn("write", "view_cnt", {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 0, // 기본값 0 설정
+    });
+  },
 };

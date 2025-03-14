@@ -21,13 +21,13 @@ window.onload = function () {
 
       //최신 글 - main
       today_main.innerHTML = `
-        <div class="today_main_img">
+        <div class="today_main_img" onclick="postMove(${recentdata_lst[0].comment_id})">
             <img class="imgstyle" src="${recentdata_lst[0].photo_address}" alt="bird" />
         </div>
         <div class="today_main_comment">
-            <div class="today_more" onclick="main_moreview(${recentdata_lst[0].comment_id})">더보기</div>
-            <div class="today_main_title">${recentdata_lst[0].title}</div>
-            <div class="today_main_content">
+            <div class="today_more" onclick="main_moreview(${recentdata_lst[0].category})">더보기</div>
+            <div class="today_main_title" onclick="postMove(${recentdata_lst[0].comment_id})">${recentdata_lst[0].title}</div>
+            <div class="today_main_content" onclick="postMove(${recentdata_lst[0].comment_id})">
             ${recentdata_lst[0].comment}
             </div>
         </div>
@@ -135,37 +135,37 @@ window.onload = function () {
 
 //로그인 클릭 버튼
 function login() {
-  console.log("login click");
+  //console.log("login click");
   window.location.href = "/login";
 }
 
 //회원가입 클릭 버튼
 function signup() {
-  console.log("signup click");
+  //console.log("signup click");
   window.location.href = "/signup";
 }
 
 //전체 게시판 더보기 클릭
 function allpostview() {
-  console.log("allpostview click");
+  //console.log("allpostview click");
   window.location.href = "/detailmain?category_id=0";
 }
 
 //자유 게시판 더보기 클릭
 function freepostview() {
-  console.log("freepostview click");
+  //console.log("freepostview click");
   window.location.href = "/detailmain?category_id=1";
 }
 
 //뉴스 게시판 더보기 클릭
 function newspostview() {
-  console.log("newspostview click");
+  //console.log("newspostview click");
   window.location.href = "/detailmain?category_id=3";
 }
 
 //최신글 더보기 클릭
 function main_moreview(id) {
-  window.location.href = `/post?comment_id=${id}&category=0`;
+  window.location.href = `/detailmain?category_id=${id}`;
 }
 
 //최신글 클릭 - sub
