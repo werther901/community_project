@@ -88,11 +88,11 @@ a {
 
 .header_logo {
   height: 78px;
-  padding: 24px 10px 24px 38px;
+  padding: 17px 10px 17px 40px;
 }
 
 .header_logo_content {
-  font-size: 28px;
+  font-size: 32px;
   color: #4B89DC;
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -101,7 +101,7 @@ a {
 }
 
 .profile_area {
-  padding: 0 39px;
+  padding: 0 40px;
 }
 
 .profile_area li {

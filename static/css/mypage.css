@@ -281,6 +281,15 @@
   border: 1px solid #c8c8c8;
 }
 
+#address {
+  width: 174px;
+}
+
+#address_detail {
+  width: 200px;
+  margin-left: 10px;
+}
+
 .phone_img,
 .address_img,
 .now_pw,
@@ -340,8 +349,12 @@
 }
 
 .input_phoneNumber {
-  width: 100px;
-  margin-right: 10px;
+  width: 90px;
+  /* margin-right: 10px; */
+}
+
+.betweenNumber {
+  margin: 0 3px;
 }
 
 .name_btn {
@@ -404,7 +417,7 @@
 }
 
 .delete_account {
-  padding: 24px 0 0 18px;
+  padding: 24px 0 24px 18px;
 }
 
 .delete_account .text {

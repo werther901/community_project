@@ -77,7 +77,7 @@ address.addEventListener("click", function (e) {
       // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
       // 예제를 참고하여 다양한 활용법을 확인해 보세요.
       //console.log("address", data.address);
-      input_A.value = data.address;
+      address.value = data.address;
     },
   }).open();
 });
@@ -98,21 +98,31 @@ let newCheckPwValue = false;
 let addressValue = false;
 let phoneValue = false;
 
-const now_password = document.getElementById("now_password");
-const new_password = document.getElementById("new_password");
-const new_password_check = document.getElementById("new_password_check");
 
-const phoneNum_01 = document.getElementById("phoneNum_01");
-const phoneNum_02 = document.getElementById("phoneNum_02");
-const phoneNum_03 = document.getElementById("phoneNum_03");
-const edit_btn = document.querySelector(".edit_btn");
-const content01 = document.querySelector(".content01");
+const now_password = document.getElementById('now_password');
+const new_password = document.getElementById('new_password');
+const new_password_check = document.getElementById('new_password_check');
+const address_detail = document.getElementById('address_detail');
+const phoneNum_01 = document.getElementById('phoneNum_01');
+const phoneNum_02 = document.getElementById('phoneNum_02');
+const phoneNum_03 = document.getElementById('phoneNum_03');
+const edit_btn = document.querySelector('.edit_btn');
+const content01 = document.querySelector('.content01');
+
 
 // '수정하기' 클릭 -> 유효성 검증 -> 통과되면 axios요청
 const edit_info = (e) => {
   e.preventDefault();
 
+  const email_text = document.querySelector('.email_text');
+
   // 유효성 검증
+  // 0. 현재 비밀번호 작성 여부
+  if (now_password.value === "") {
+    content01.innerHTML = `현재 비밀번호는 필수 작성항목 입니다.`;
+    return ;
+  }
+
   // 1. 비밀번호 변경 시 포맷 검증
   if (new_password.value !== "" && new_password_check.value !== "") {
     if (new_password.value !== new_password_check.value) {
@@ -129,43 +139,73 @@ const edit_info = (e) => {
     content01.innerHTML = "";
   }
 
-  // 2. 주소 변경 시
-  let addressEdit = "";
+  // 2. 주소 입력
+  let address_edit = "";
 
-  if (address.value == "") {
-    addressEdit = "";
+  if (address.value !== "") {
+    if (address_detail.value == "") {
+      content01.innerHTML = `상세주소를 입력해주세요.`;
+      return ;
+    } else {
+      content01.innerHTML = "";
+      address_edit = `${address.value} ${address_detail.value}`;
+    }
   }
 
   // 3. 전화번호
-  if (
-    phoneNum_01.value !== "" &&
-    phoneNum_02.value !== "" &&
-    phoneNum_03.value !== ""
-  ) {
-    console.log("다 안비어잇음");
+
+  let validatedPhone = "";
+
+  if (phoneNum_01.value !== "" && phoneNum_02.value !== "" && phoneNum_03.value !== "") {
     const phone = `${phoneNum_01.value}-${phoneNum_02.value}-${phoneNum_03.value}`;
-    valuePhone(phone);
-    console.log("성공");
-    return phone;
+    validatedPhone = valuePhone(phone);
+
+  } else if (phoneNum_01.value !== "" || phoneNum_02.value !== "" || phoneNum_03.value !== "") {
+    content01.innerHTML = `<div>휴대전화번호를 입력해 주세요.</div>`;
+    return;
   } else {
-    console.log("한 군데는 비어있다");
+    content01.innerHTML = '';
+  }
+
+  console.log(validatedPhone)
+  const check = confirm(`회원 정보를 수정하시겠습니까?`);
+
+  if (check) {
+    axios({
+      method: "put",
+      url: "/mypage/edit_userInfo",
+      data: {
+        id: email_text.textContent,
+        password: now_password.value,
+        new_password: new_password.value,
+        new_password_check: new_password_check.value,
+        address: address_edit,
+        phoneNumber: validatedPhone
+        }
+      })
+      .then((res) => {
+        if(res.data.result) {
+          alert(`${res.data.message}`);
+          window.location.reload();
+        } else {
+          // 비밀번호가 틀렸습니다.
+          alert(`${res.data.message}`);
+        }
+
+      })
+      .catch((e) => {
+        console.log("회원정보 수정 에러 : ", e)
+      })
+
+  } else {
     return;
   }
 
-  // const check = confirm(``);
-  // if (check) {
-  //   // axios 보내긩
-  // }
-
   // 현재비번은 무조건 서버로 보내서 현재 비밀번호와 같으면 같은 비밀번호 안된다고 return
-  // const res = axios.put(
-  //   "",
-  //   {
 
-  //   }
-  // )
-};
-edit_btn.addEventListener("click", edit_info);
+}
+edit_btn.addEventListener('click', edit_info);
+
 
 // 비번 유효성(정규식)
 const valuePW = (pw) => {

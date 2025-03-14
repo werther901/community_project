@@ -15,4 +15,7 @@ router.post("/user_liked", myPageController.user_liked_post);
 // 유저가 작성한 글 표시
 router.post("/view_mypost", myPageController.user_view_mypost);
 
+// 회원 정보 수정
+router.put("/edit_userInfo", myPageController.edit_userInfo);
+
 module.exports = router;
