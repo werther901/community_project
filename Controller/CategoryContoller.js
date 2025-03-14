@@ -38,25 +38,78 @@ const getCategoryOne = async (req, res) => {
 
 //전체 포스트 요청 - all
 const allPost = async (req, res) => {
-  /*findAll를 통해 전체 데이터를 가져옴 
-  -> userId는 User Table에 있는 id값을 기준으로 name 가져오기*/
+  let pageNum = req.body.pageNum;
+  let category = req.body.category;
+  if (pageNum > 1) {
+    offset = 5 * (pageNum - 1);
+  } else if (pageNum <= 1) {
+    offset = 0;
+  }
+  //console.log("page", pageNum);
 
-  let allpost = await Write.findAll({
-    include: [
-      {
-        model: User, // User 모델과 조인
-        attributes: ["name"], // User 테이블에서 name 값만 가져옴
-      },
-    ],
-    // raw: true, // JOIN된 데이터를 평탄화 (User가 배열로 나오지 않음)
-    // nest: true, // JSON 구조 유지
-  }).catch((err) => console.log(err));
-  console.log("allpost", allpost);
-  res.send({ allpost });
+  if (category === 0) {
+    let allpost = await Write.findAll({
+      offset: offset,
+      limit: 5,
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+    }).catch((err) => console.log(err));
+    console.log("allpost", allpost);
+    res.send({ allpost });
+  } else {
+    let allpost = await Write.findAll({
+      offset: offset,
+      limit: 5,
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+      where: { category: category },
+    }).catch((err) => console.log(err));
+    console.log("allpost", allpost);
+    res.send({ allpost });
+  }
 };
 
+//페이지네이션 숫자에 따라 반환되는 테이블 내용
+const Pagi = async (req, res) => {
+  //console.log("req data", req.body.category);
+  let category_num = req.body.category;
+  if (category_num === 0) {
+    //전체 게시판 선택할 경우
+    let allpost = await Write.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+    }).catch((err) => console.log(err));
+    res.send({ allpost });
+  } else {
+    //category가 선택이 가능한 경우 -> 전체게시판 이외 선택
+    let allpost = await Write.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+      where: { category: category_num },
+    }).catch((err) => console.log(err));
+    //console.log("allpost", allpost);
+    res.send({ allpost });
+  }
+};
 module.exports = {
   getCategory,
   getCategoryOne,
   allPost,
+  Pagi,
 };

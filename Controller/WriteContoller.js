@@ -49,10 +49,18 @@ const postmodify = async (req, res) => {
 };
 
 const updateData = async (req, res) => {
-  console.log("req", req.body);
-
+  //console.log("req", req.body, req.file);
+  const imgsrc = req.file ? req.file.path : null;
+  //console.log("imgsrc", imgsrc);
+  let info = {
+    userId: req.body.userId,
+    title: req.body.title,
+    category: req.body.category,
+    photo_address: imgsrc,
+    comment: req.body.comment,
+  };
   let id = Number(req.body.comment_id);
-  const user = await Write.update(req.body, {
+  const user = await Write.update(info, {
     where: { comment_id: id },
   }).catch((err) => console.log(err));
   res.status(200).send(user);

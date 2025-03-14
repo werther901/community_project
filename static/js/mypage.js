@@ -89,7 +89,7 @@ const movePhoneInput = (num) => {
   } else if (num === 2 && phoneNum_02.value.length === 4) {
     phoneNum_03.focus();
   }
-}
+};
 
 // 내 정보 수정
 let nowPwValue = false;
@@ -97,6 +97,7 @@ let newPwValue = false;
 let newCheckPwValue = false;
 let addressValue = false;
 let phoneValue = false;
+
 
 const now_password = document.getElementById('now_password');
 const new_password = document.getElementById('new_password');
@@ -107,6 +108,7 @@ const phoneNum_02 = document.getElementById('phoneNum_02');
 const phoneNum_03 = document.getElementById('phoneNum_03');
 const edit_btn = document.querySelector('.edit_btn');
 const content01 = document.querySelector('.content01');
+
 
 // '수정하기' 클릭 -> 유효성 검증 -> 통과되면 axios요청
 const edit_info = (e) => {
@@ -125,16 +127,16 @@ const edit_info = (e) => {
   if (new_password.value !== "" && new_password_check.value !== "") {
     if (new_password.value !== new_password_check.value) {
       content01.innerHTML = `비밀번호 일치여부를 확인해주세요.`;
-      return ;
+      return;
     } else {
-      content01.innerHTML = '';
+      content01.innerHTML = "";
       valuePW(new_password.value);
     }
   } else if (new_password.value !== "" || new_password_check.value !== "") {
     content01.innerHTML = `비밀번호 입력을 확인해주세요.`;
-    return ;
+    return;
   } else {
-    content01.innerHTML = '';
+    content01.innerHTML = "";
   }
 
   // 2. 주소 입력
@@ -151,6 +153,7 @@ const edit_info = (e) => {
   }
 
   // 3. 전화번호
+
   let validatedPhone = "";
 
   if (phoneNum_01.value !== "" && phoneNum_02.value !== "" && phoneNum_03.value !== "") {
@@ -197,15 +200,18 @@ const edit_info = (e) => {
   } else {
     return;
   }
+
   // 현재비번은 무조건 서버로 보내서 현재 비밀번호와 같으면 같은 비밀번호 안된다고 return
 
 }
 edit_btn.addEventListener('click', edit_info);
 
+
 // 비번 유효성(정규식)
 const valuePW = (pw) => {
   // let inspectPassWord = "Abcd123!";
-  const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/;
+  const regex =
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/;
   if (regex.test(pw)) {
     content01.innerHTML = "";
   } else {
@@ -227,4 +233,3 @@ const valuePhone = (phoneNumber) => {
     return;
   }
 };
-

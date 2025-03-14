@@ -141,3 +141,24 @@ h1 {
 .table_img > img {
   border-radius: 10px;
 }
+
+.pagination {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagi_btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  color: white;
+  background-color: #cbddf5;
+  border: none;
+}
+.pagination > :first-child {
+  background-color: #4b89dc; /* 첫 번째 요소의 배경색 변경 */
+}

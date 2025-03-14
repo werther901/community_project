@@ -6,7 +6,7 @@ const input_title = write_form.input_title;
 const preview_image = document.getElementById("preview_image");
 
 let username = "";
-
+let comment_data_comment = ""; //db저장용 toast ui editor
 //url
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
@@ -31,14 +31,10 @@ if (urlParams.get("comment_id")) {
       console.log("res", res.data.user);
       let comment_data = res.data.user;
       input_title.value = comment_data.title;
-
+      preview_image.innerHTML = `<div class="preview"><img class="image_style" src="${res.data.user.photo_address}" /></div>`;
       // toast ui editor
-      const editor = new window.toastui.Editor({
-        el: document.querySelector("#editor"),
-        previewStyle: "vertical",
-        height: "400px",
-        initialValue: comment_data.comment,
-      });
+      editor.setMarkdown(comment_data.comment);
+      comment_data_comment = comment_data.comment;
     })
     .catch((e) => {
       console.log("error : ", e);
@@ -115,7 +111,7 @@ const readURL = (input) => {
 //등록 버튼 클릭
 function form_submit() {
   //console.log("fom_submit click");
-  //console.log("imgsrc", input_img.files[0]);
+  console.log("imgsrc", input_img.files[0]);
 
   /*
   1.파일 이미지 경로, select option값, 제목, 내용을 data에 담기
@@ -149,23 +145,27 @@ function form_submit() {
         console.log("error : ", e);
       });
   } else {
-    let data_lst = {
-      userId: username,
-      category: category.value,
-      title: input_title.value,
-      comment: editor.getMarkdown(),
-      photo_address: input_img.files[0],
-      comment_id: urlParams.get("comment_id"),
-    };
-
+    //쿼리 스트링이 있는 경우
+    let formData = new FormData();
+    formData.append("userId", username);
+    formData.append("category", category.value);
+    formData.append("title", input_title.value);
+    formData.append("comment", editor.getMarkdown() || comment_data_comment);
+    formData.append("comment_id", urlParams.get("comment_id"));
+    formData.append("imgsrc", input_img.files[0]);
+    //console.log("input_img.files[0]", input_img.files[0]);
     axios({
       method: "put",
       url: "/write/updateData",
-      data: data_lst,
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data", // 파일을 포함한 데이터 전송을 위한 헤더
+      },
     })
       .then((res) => {
-        console.log("put data", res);
-        window.location.href = "/";
+        //console.log("put data", res);
+        alert("수정이 완료 되었습니다.");
+        //window.location.href = "/";
       })
       .catch((e) => {
         console.log("error : ", e);
