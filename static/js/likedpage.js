@@ -39,15 +39,32 @@
       const inputData = document.querySelector(".inputData");
 
       const tableData = res_02.data.map((x) => {
+        const dbTime = x.write.createdAt;
+        const date = new Date(dbTime);
+        const options = {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+          timeZone: 'Asia/Seoul'
+        }
+
+        const formatDate = date.toLocaleString('ko-KR', options)
+
         return `<tr class="tbody_data">
                 <td>${x.write.comment_id}</td>
                 <td class="cont_title">
                   <a href="/post?comment_id=${x.write.comment_id}&category=0">${x.write.title}</a>
                 </td>
                 <td>${x.write.User.name}</td>
-                <td>작성날짜</td>
+
+                <td>${formatDate}</td>
                 <td>${x.write.view_cnt}</td>
-              </tr>`;
+              </tr>`
+
       });
       console.log(tableData);
       inputData.innerHTML = tableData.join("");

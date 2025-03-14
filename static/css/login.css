@@ -401,7 +401,14 @@ header {
   text-decoration: underline;
 }
 
-footer {
+.text {
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -.5px;
+  color: #888;
+}
+
+/* footer {
   padding: 48px 0 32px;
   box-sizing: border-box;
   margin: 100px 0 36px 0;
@@ -432,13 +439,6 @@ footer {
   background-color: #dadada;
 }
 
-.text {
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: -.5px;
-  color: #888;
-}
-
 .corp {
   padding: 0 2px;
   font-weight: 500;
@@ -458,4 +458,4 @@ footer {
   font-weight: 700;
   font-style: normal;
   margin-right: 3px;
-}
+} */

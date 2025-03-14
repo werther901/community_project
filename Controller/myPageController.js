@@ -27,7 +27,9 @@ const user_liked_post = async (req, res) => {
     include: [
       {
         model: Write,
-        attributes: ["comment_id", "title", "view_cnt"],
+
+        attributes: ["comment_id", "title",  "view_cnt","createdAt"],
+
         include: [
           {
             model: User,
@@ -153,11 +155,21 @@ const edit_userInfo = async (req, res) => {
   }
 };
 
-module.exports = {
-  mypage,
-  likedPage,
-  view_mypost,
-  user_liked_post,
-  user_view_mypost,
-  edit_userInfo,
-};
+
+// 회원탈퇴
+const leave_user = async (req, res) => {
+  const { email } = req.body;
+  const user = await User.destroy({ where: { userId: email }});
+
+  console.log(user);
+
+  if (user === 0) {
+    res.status(404).json({ result: false, message: "회원정보를 찾을 수 없습니다."});
+  }
+  
+  res.status(200).json({ result: true, message: "회원탈퇴가 완료되었습니다. 그동안 이용해주셔서 감사합니다."});  
+}
+
+
+module.exports = { mypage, likedPage, view_mypost, user_liked_post, user_view_mypost, edit_userInfo, leave_user };
+

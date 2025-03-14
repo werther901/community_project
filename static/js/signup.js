@@ -143,20 +143,20 @@ const valueBirth = () => {
 birth.addEventListener('blur', valueBirth);
 
 // 주소 작성여부 확인
-const address = document.getElementById('address');
-const content07 = document.querySelector(".content07");
+// const address = document.getElementById('address');
+// const content07 = document.querySelector(".content07");
 
-const valueAddress = () => {
-  if (address.value == "") {
-    content07.innerHTML = `<div>주소 : 필수정보 입니다.</div>`
-    addressValue = false;
-  } else {
-    content07.innerHTML = "";
-    addressValue = true;
-  }
-  ifTrue();
-}
-address.addEventListener('blur', valueAddress);
+// const valueAddress = () => {
+//   if (address.value == "") {
+//     content07.innerHTML = `<div>주소 : 필수정보 입니다.</div>`
+//     addressValue = false;
+//   } else {
+//     content07.innerHTML = "";
+//     addressValue = true;
+//   }
+//   ifTrue();
+// }
+// address.addEventListener('blur', valueAddress);
 
 // 휴대전화번호 유효성 검증
 const content05 = document.querySelector(".content05");

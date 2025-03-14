@@ -18,4 +18,7 @@ router.post("/view_mypost", myPageController.user_view_mypost);
 // 회원 정보 수정
 router.put("/edit_userInfo", myPageController.edit_userInfo);
 
+// 회원 탈퇴
+router.delete("/leave_user", myPageController.leave_user);
+
 module.exports = router;

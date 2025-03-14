@@ -233,3 +233,37 @@ const valuePhone = (phoneNumber) => {
     return;
   }
 };
+
+// 회원탈퇴
+const leaveUser = document.getElementById('leaveUser');
+
+const Leave = () => {
+  const email_text = document.querySelector('.email_text');
+
+  const rYouOk = confirm(`탈퇴한 회원의 정보는 복구할 수 없습니다.
+회원탈퇴 하시겠습니까?`);
+
+  if(rYouOk) {
+    const rYouOk_02 = confirm("정말로 회원탈퇴 하시겠습니까?");
+
+    if(rYouOk_02) {
+
+      axios({
+        method: "delete",
+        url: "/mypage/leave_user",
+        data: { email : email_text.textContent }
+      })
+      .then((res) => {
+        // token 쿠키 삭제
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        alert(`${res.data.message}`);
+        window.location.href = "http://localhost:3000"
+      })
+      .catch((e) => {
+        console.log("회원탈퇴 에러", e);
+      })
+    }
+  }
+
+}
+leaveUser.addEventListener('click', Leave);

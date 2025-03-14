@@ -2,15 +2,71 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f5f6f7;
+  margin: 0;
+  font-family: "Pretendard-Regular", sans-serif;
+  /* overflow: hidden; */
+  /* background-color: #fafbfc; */
+}
+
+div {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: 0 0;
+  font-family: "Pretendard-Regular", sans-serif;
+}
+
+input {
+  font-family: "Pretendard-Regular", sans-serif;
+}
+
+h1, h2, h3,
+ul,
+p,
+li {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+  display: inline-block;
+}
+
+.wrap {
+  height: 100%;
+}
+
+.wrap_02 {
+  width: 400px;
+  margin: 0 auto;
+  padding: 16px 0;
+}
+
+.container_before {
+  margin-bottom: 20px;
+}
+
+.container_before a .header_logo_content {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  color: #4B89DC;
 }
 
 .container {
@@ -51,7 +107,7 @@ input, select {
 .duplicateCheck {
   width: 100%;
   text-align: center;
-  background-color: #03C75A;
+  background-color: #6499E1;
   color: white;
   padding: 8px;
   border-radius: 5px;
@@ -60,10 +116,11 @@ input, select {
 }
 
 .duplicateCheck:hover {
-  background-color: #03c75bd3;
+  background-color: #6498e1e1;
 }
 
 .content01, .content02, .content03, .content04, .content05, .content06, .content07, .content08 {
+  position: relative;
   color: red;
   font-size: 12px;
   margin-top: 5px;
@@ -72,7 +129,7 @@ input, select {
 .saveData {
   width: 100%;
   padding: 10px;
-  background-color: #03C75A;
+  background-color: #6499E1;
   color: white;
   border: none;
   border-radius: 5px;
@@ -82,7 +139,7 @@ input, select {
 }
 
 .saveData:hover {
-  background-color: #03c75bd3;
+  background-color: #6498e1e1;
 }
 
 .saveData:disabled {
