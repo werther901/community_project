@@ -32,6 +32,12 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
+    await queryInterface.removeColumn("write", "view_cnt", {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 0, // 기본값 0 설정
+    });
+
     await queryInterface.changeColumn("write", "comment", {
       type: Sequelize.STRING(255),
       allowNull: false,

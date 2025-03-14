@@ -11,12 +11,23 @@ body {
   width: 100%;
   margin: 0;
 }
+h2 {
+  margin: 15px 0;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 .container {
   width: 100%;
   height: 100%;
+  flex: 1;
 }
 .today_menu {
-  margin-top: 91px;
+  margin-top: 85px;
   padding: 0px 40px;
   width: 100%;
 }
@@ -32,9 +43,8 @@ body {
 .today_main {
   display: flex;
   width: 50%;
-  border: 1px solid #b1ccf0;
-  border-radius: 10px;
-  padding: 10px;
+  border-right: 1px solid #b1ccf0;
+  padding: 10px 0;
 }
 .today_sub {
   display: flex;
@@ -57,6 +67,9 @@ body {
 .today_main_content {
   padding-top: 10px;
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .today_main_img {
   width: 40%;
@@ -71,7 +84,7 @@ body {
   width: 90%;
   height: 100px;
   display: flex;
-  margin: auto;
+  margin: 0 15px;
   justify-content: space-between;
   padding: 10px 0px;
   align-items: center;
@@ -107,6 +120,8 @@ body {
   justify-content: right;
   font-size: 14px;
   cursor: pointer;
+  color: #4b89dc;
+  text-decoration: underline;
 }
 
 .container_main {
@@ -115,7 +130,7 @@ body {
   flex-direction: column;
   width: 100%;
   height: 40%;
-  margin-top: 40px;
+  margin-top: 17px;
   padding: 0px 40px;
   /* background-color: bisque; */
 }
@@ -123,8 +138,7 @@ body {
 .container_submain {
   display: flex;
   width: 100%;
-
-  height: 400px;
+  height: 355px;
   justify-content: center;
   gap: 20px;
   /* background-color: blue; */
@@ -147,22 +161,29 @@ body {
   padding-right: 10px;
 }
 /* main */
+.main_cards {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 10px;
+}
 .card {
   display: flex;
   width: 100%;
   height: 200px;
   justify-content: space-between;
   border-bottom: 2px solid #b1ccf0;
-  margin-bottom: 50px;
+  border-top: 2px solid #b1ccf0;
+  /* margin-bottom: 50px; */
   cursor: pointer;
 }
 .card_content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 70%;
   padding: 10px 0px;
   gap: 5px;
+  justify-content: flex-start;
+  margin: 12px 0;
 }
 .card_title {
   font-size: 20px;
@@ -180,6 +201,7 @@ body {
 
 .card_comment {
   font-size: 17px;
+  margin-top: 18px;
 }
 .card_img_style {
   width: 150px;
@@ -201,6 +223,9 @@ body {
   justify-content: space-between;
   color: #4b89dc;
   border-bottom: 1px solid #4b89dc;
+}
+.submain_cont {
+  font-weight: 700;
 }
 .submain_content {
   display: flex;
@@ -250,4 +275,11 @@ body {
   background-color: #7eaae6;
   color: white;
   cursor: pointer;
+}
+
+.text {
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -.5px;
+  color: #888;
 }

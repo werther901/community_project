@@ -165,7 +165,7 @@ function form_submit() {
       .then((res) => {
         //console.log("put data", res);
         alert("수정이 완료 되었습니다.");
-        //window.location.href = "/";
+        window.location.href = "/";
       })
       .catch((e) => {
         console.log("error : ", e);

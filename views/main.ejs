@@ -10,73 +10,79 @@
     <title>Document</title>
   </head>
   <body>
-    <%- include("./header") %>
-    <div class="container">
-      <!-- today topic -->
-      <div class="today_menu">
-        <h2>최신 글</h2>
-        <div class="today_content">
-          <!-- main -->
-          <div class="today_main"></div>
-          <!-- sub -->
-          <div class="today_sub"></div>
-        </div>
-      </div>
+    
+    <div class="wrapper">
 
-      <!-- main - food -->
-      <div class="container_main">
-        <h2>맛집 베스트 이야기</h2>
-        <div class="main_cards"></div>
-      </div>
-
-      <!-- 3열 게시판 -->
-      <div class="container_submain">
-        <div class="submain_section_1">
-          <div class="submain_table">
-            <div class="submain_title">
-              <div>전체 게시판</div>
-              <div class="moreview" onclick="allpostview()">더보기</div>
-            </div>
-            <div class="submain_content_all"></div>
-          </div>
-        </div>
-        <div class="submain_section_2">
-          <div class="submain_table">
-            <div class="submain_title">
-              <div>자유 게시판</div>
-              <div class="moreview" onclick="freepostview()">더보기</div>
-            </div>
-            <div class="submain_content_free"></div>
+      <%- include("./header") %>
+      <div class="container">
+        <!-- today topic -->
+        <div class="today_menu">
+          <h2>최신 글</h2>
+          <div class="today_content">
+            <!-- main -->
+            <div class="today_main"></div>
+            <!-- sub -->
+            <div class="today_sub"></div>
           </div>
         </div>
 
-        <div class="submain_section_3">
-          <div class="submain_table">
-            <div class="submain_title">
-              <div>뉴스 게시판</div>
-              <div class="moreview" onclick="newspostview()">더보기</div>
+        <!-- main - food -->
+        <div class="container_main">
+          <h2>맛집 베스트 이야기</h2>
+          <div class="main_cards"></div>
+        </div>
+
+        <!-- 3열 게시판 -->
+        <div class="container_submain">
+          <div class="submain_section_1">
+            <div class="submain_table">
+              <div class="submain_title">
+                <div class="submain_cont">전체 게시판</div>
+                <div class="moreview" onclick="allpostview()">더보기</div>
+              </div>
+              <div class="submain_content_all"></div>
             </div>
-            <div class="submain_content_news"></div>
           </div>
+          <div class="submain_section_2">
+            <div class="submain_table">
+              <div class="submain_title">
+                <div class="submain_cont">자유 게시판</div>
+                <div class="moreview" onclick="freepostview()">더보기</div>
+              </div>
+              <div class="submain_content_free"></div>
+            </div>
+          </div>
+          <div class="submain_section_3">
+            <div class="submain_table">
+              <div class="submain_title">
+                <div class="submain_cont">뉴스 게시판</div>
+                <div class="moreview" onclick="newspostview()">더보기</div>
+              </div>
+              <div class="submain_content_news"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 검색 -->
+        <div class="search">
+          <div class="search_select_div">
+            <select class="search_select">
+              <option value="title">제목</option>
+              <option value="comment">내용</option>
+              <option value="user">사용자</option>
+            </select>
+          </div>
+          <div class="search_input_div">
+            <input class="search_input" type="text" />
+          </div>
+          <div class="search_submit" onclick="search()">확인</div>
         </div>
       </div>
 
-      <!-- 검색 -->
-      <div class="search">
-        <div class="search_select_div">
-          <select class="search_select">
-            <option value="title">제목</option>
-            <option value="comment">내용</option>
-            <option value="user">사용자</option>
-          </select>
-        </div>
-        <div class="search_input_div">
-          <input class="search_input" type="text" />
-        </div>
-        <div class="search_submit" onclick="search()">확인</div>
-      </div>
       <%- include("./footer") %>
+
     </div>
+
   </body>
   <script src="/js/main.js"></script>
 </html>

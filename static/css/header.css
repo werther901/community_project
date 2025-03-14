@@ -79,8 +79,9 @@
   justify-content: center;
   margin: 0px auto;
   flex-direction: column;
-  padding: 10px 0px;
+  padding: 10px 0 0 0;
   background-color: white;
+  box-shadow: 5px 8px 8px 0 rgba(0, 0, 0, .06);
 }
 
 .header_menu_header {
