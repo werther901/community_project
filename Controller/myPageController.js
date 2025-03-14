@@ -27,7 +27,7 @@ const user_liked_post = async (req, res) => {
     include: [
       {
         model: Write,
-        attributes: ["comment_id", "title"],
+        attributes: ["comment_id", "title", "view_cnt"],
         include: [
           {
             model: User,
@@ -87,7 +87,14 @@ const user_view_mypost = async (req, res) => {
 // 회원정보 수정
 const edit_userInfo = async (req, res) => {
   console.log(req.body);
-  const { id, password, new_password, new_password_check, address, phoneNumber } = req.body;
+  const {
+    id,
+    password,
+    new_password,
+    new_password_check,
+    address,
+    phoneNumber,
+  } = req.body;
   const user = await User.findOne({ where: { userId: id } });
 
   if (user) {
@@ -103,29 +110,41 @@ const edit_userInfo = async (req, res) => {
       if (new_password) {
         const hashedNewPassword = await bcrypt.hash(new_password, 10);
 
-        await User.update({
-          password: hashedNewPassword,
-          address: address || user.address,
-          phoneNumber: phoneNumber || user.phoneNumber
-        }, {
-          where: { userId: id }
+        await User.update(
+          {
+            password: hashedNewPassword,
+            address: address || user.address,
+            phoneNumber: phoneNumber || user.phoneNumber,
+          },
+          {
+            where: { userId: id },
+          }
+        );
+        return res.json({
+          result: true,
+          message: "회원정보가 성공적으로 수정되었습니다.",
         });
-        return res.json({ result: true, message: "회원정보가 성공적으로 수정되었습니다."})  
       }
       // 비밀번호 변경이 없을때
-      await User.update({
-        address: address || user.address,
-        phoneNumber: phoneNumber || user.phoneNumber
-      }, {
-        where: { userId: id }
+      await User.update(
+        {
+          address: address || user.address,
+          phoneNumber: phoneNumber || user.phoneNumber,
+        },
+        {
+          where: { userId: id },
+        }
+      );
+
+      return res.json({
+        result: true,
+        message: "회원정보가 성공적으로 수정되었습니다.",
       });
-      
-      return res.json({ result: true, message: "회원정보가 성공적으로 수정되었습니다."})      
-
     } catch (e) {
-      return res.status(401).json({ result: false, message: "회원정보 수정 실패" });
+      return res
+        .status(401)
+        .json({ result: false, message: "회원정보 수정 실패" });
     }
-
   } else {
     res.json({
       result: false,
@@ -134,4 +153,11 @@ const edit_userInfo = async (req, res) => {
   }
 };
 
-module.exports = { mypage, likedPage, view_mypost, user_liked_post, user_view_mypost, edit_userInfo };
+module.exports = {
+  mypage,
+  likedPage,
+  view_mypost,
+  user_liked_post,
+  user_view_mypost,
+  edit_userInfo,
+};
