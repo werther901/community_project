@@ -23,9 +23,22 @@ axios({
   .then((res) => {
     //console.log("res", res);
     postdata = res.data.write;
-    let current_date = postdata.createdAt;
+    let dbTime = postdata.createdAt;
+    //const dbTime = x.write.createdAt;
+    const date = new Date(dbTime);
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Seoul",
+    };
 
-    console.log("Date", current_date);
+    const formatDate = date.toLocaleString("ko-KR", options);
+    //console.log("Date", current_date);
     //화면 표시하기
     main_content.innerHTML = `
           <div class="content_top">
@@ -35,7 +48,7 @@ axios({
               <div class="content_userid" onclick="usermodal()">${postdata.User.name}</div>
               <div class="content_userid_modal" onclick="userpost(${postdata.userId})">- 게시글 보기</div>
               <div class="content_detils_right">
-                <div class="write_time">작성시간 ${postdata.createdAt}</div>
+                <div class="write_time">작성시간 : ${formatDate}</div>
                 <div class="show">조회수 ${postdata.view_cnt}</div>
                 <div class="copyurl" onclick="copyurl()">url복사</div>
                 <div class="moreview" onclick="printer()">Print</div>
