@@ -145,6 +145,11 @@ function form_submit() {
         console.log("error : ", e);
       });
   } else {
+    axios({
+      method: "post",
+      url: "/write",
+    });
+
     //쿼리 스트링이 있는 경우
     let formData = new FormData();
     formData.append("userId", username);
@@ -165,7 +170,7 @@ function form_submit() {
       .then((res) => {
         //console.log("put data", res);
         alert("수정이 완료 되었습니다.");
-        //window.location.href = "/";
+        window.location.href = "/";
       })
       .catch((e) => {
         console.log("error : ", e);

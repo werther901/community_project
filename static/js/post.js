@@ -23,7 +23,9 @@ axios({
   .then((res) => {
     //console.log("res", res);
     postdata = res.data.write;
+    let current_date = postdata.createdAt;
 
+    console.log("Date", current_date);
     //화면 표시하기
     main_content.innerHTML = `
           <div class="content_top">
@@ -33,6 +35,7 @@ axios({
               <div class="content_userid" onclick="usermodal()">${postdata.User.name}</div>
               <div class="content_userid_modal" onclick="userpost(${postdata.userId})">- 게시글 보기</div>
               <div class="content_detils_right">
+                <div class="write_time">작성시간 ${postdata.createdAt}</div>
                 <div class="show">조회수 ${postdata.view_cnt}</div>
                 <div class="copyurl" onclick="copyurl()">url복사</div>
                 <div class="moreview" onclick="printer()">Print</div>
@@ -111,9 +114,7 @@ function like_num() {
       }
     );
     if (res.data.result) {
-      //current_user_id = res.data.id;
       userid = res.data.id; //현재 접속한 user의 id(user table의 id)
-      //current_user_id = userid;
       console.log("현재 접속한 유저의 id(PK)", userid);
 
       //페이지 로드 시 DOM 변수 선언
@@ -128,7 +129,7 @@ function like_num() {
           comment_id: current_category_num,
         },
       }).then((res) => {
-        //console.log("/post/checkloginuser : ", res.data.user);
+        console.log("/post/checkloginuser : ", res.data.user);
         if (Number(userid) !== Number(res.data.user.userId)) {
           modifybtn.style.display = "none";
           deletebtn.style.display = "none";
@@ -136,10 +137,6 @@ function like_num() {
           modifybtn.style.display = "block";
           deletebtn.style.display = "block";
         }
-
-        //조회수 확인
-        // const show = document.querySelector(".show");
-        // show.innerHTML = `조회수 ${res.data.user.view_cnt}`;
       });
 
       //axios - 요청 like 테이블에 값이 있는지 확인 - 초기 heart_img src 세팅
@@ -379,7 +376,6 @@ axios({
   //전체 배열 중 몇 번째에 위치한지 찾기
   let cnt = 0;
   data_lst_id.forEach((element, index) => {
-    //console.log("E", element, index);
     if (current_category_num === element) {
       cnt = index; //현재 페이지 번호
     }
