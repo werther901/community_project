@@ -1,3 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
 /* 전체 레이아웃 */
 .container_wrap {
   display: flex;
@@ -5,7 +13,6 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
-  /*background-color: #f9f9f9;*/
   padding: 20px;
   margin-top: 80px;
 }
@@ -13,7 +20,7 @@
 /* 메인 컨테이너 */
 .container_main {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   background: white;
   padding: 20px;
 }
@@ -54,7 +61,7 @@
 }
 /* 게시글 내용 */
 .main_content {
-  padding: 20px 0;
+  padding-top: 20px;
   line-height: 1.6;
   font-size: 16px;
   color: #333;
@@ -137,9 +144,8 @@
 .main_bottom {
   display: flex;
   justify-content: right;
-  padding-top: 15px;
-  border-top: 2px solid #ddd;
   gap: 10px;
+  margin-top: 15px;
 }
 
 .main_bottom button {
@@ -210,18 +216,24 @@
   align-items: center;
   justify-content: center;
   gap: 50px;
+  margin-top: 40px;
 }
 .card {
   display: flex;
   justify-content: center;
+  align-items: center; /* 이미지 수직 정렬 */
   width: 100px;
   height: 100px;
+  overflow: hidden; /* 넘치는 이미지 숨기기 */
+  border-radius: 10px; /* 모서리 둥글게 */
 }
 .cardstyle {
-  display: flex;
-  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 비율 유지하면서 크기 맞추기 */
   transition: filter 0.3s ease-in-out;
 }
+
 .card.current {
   filter: brightness(50%); /* 밝기 조절하여 어둡게 */
 }
@@ -230,7 +242,7 @@
   display: flex;
   border-radius: 10px;
   position: relative;
-  left: -40%;
+  left: -28%;
   top: 0px;
   display: none;
   font-size: 12px;
@@ -240,25 +252,58 @@
   height: 15px;
 }
 /* 반응형 */
+
 @media (max-width: 768px) {
-  .container_main {
-    width: 95%;
+  .content_title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .content_comment {
+    font-size: 17px;
+    color: #666;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 이미지 수직 정렬 */
+    width: 80px;
+    height: 80px;
+    overflow: hidden; /* 넘치는 이미지 숨기기 */
+    border-radius: 10px; /* 모서리 둥글게 */
+  }
+}
+@media (max-width: 480px) {
+  .main_top_btn button {
+    font-size: 8px;
   }
 
-  .main_top,
-  .main_bottom {
+  .content_detils {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
   }
-
-  .main_top_btn {
+  .content_detils_right {
+    display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0px;
+  }
+  .content_title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .content_comment {
+    font-size: 14px;
+    color: #666;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  .sub_post {
+    display: none;
   }
 
-  .postModify_btn button,
-  .postMove_btn button {
-    width: 100%;
+  .main_bottom button,
+  .content_top_bottom {
+    font-size: 8px;
   }
 }
