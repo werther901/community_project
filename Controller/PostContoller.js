@@ -179,6 +179,11 @@ const Row = async (req, res) => {
   res.send(data_lst);
 };
 
+//카카오톡 공유
+const kakaoShare = async (req, res) => {
+  res.json({ kakao_key: process.env.kakao_key });
+};
+
 module.exports = {
   postMove,
   ViewPost,
@@ -189,4 +194,5 @@ module.exports = {
   findUser,
   Row,
   checkLoginUser,
+  kakaoShare,
 };

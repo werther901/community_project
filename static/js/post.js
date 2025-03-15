@@ -14,6 +14,15 @@ const sub_post = document.querySelector(".sub_post");
 let check = 0; //유저이름 클릭 시 페이지 이동 용
 //let current_user_id = "";
 
+axios({
+  method: "get",
+  url: "/post/kakao",
+}).then((res) => {
+  //console.log("kakao res", currentURL);
+  Kakao.init(res.data.kakao_key);
+  //console.log(Kakao.isInitialized());
+});
+
 // 페이지 로드 시 axios 요청
 axios({
   method: "post",
@@ -67,7 +76,7 @@ axios({
               </div>
               <div class="like_number"></div>
             </div>
-            <div class="share_post">공유</div>
+            <div class="share_post" onclick="kakaoShare('${postdata.title}','${postdata.comment}','${postdata.photo_address}')">공유</div>
             <div class="notify_post">신고</div>
           </div>      
     `;
@@ -459,4 +468,33 @@ function usermodal() {
 //이름 게시글 보기 클릭
 function userpost(userid) {
   window.location.href = `/detailmain?user=${userid}&category_id=0`;
+}
+
+//카카오톡 공유하기
+function kakaoShare(title, comment, photo) {
+  console.log("comment", title, comment, photo);
+  let currentURL = window.location.href;
+  Kakao.Link.sendDefault({
+    objectType: "feed",
+    content: {
+      title: title,
+      description: comment,
+      imageUrl: "http://localhost:3000/" + photo,
+      link: {
+        mobileWebUrl: currentURL,
+        webUrl: currentURL,
+      },
+    },
+    buttons: [
+      {
+        title: "웹으로 보기",
+        link: {
+          mobileWebUrl: currentURL,
+          webUrl: currentURL,
+        },
+      },
+    ],
+    // 카카오톡 미설치 시 카카오톡 설치 경로이동
+    installTalk: true,
+  });
 }
