@@ -366,7 +366,7 @@ const allpost = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    limit: 8,
+    limit: 5,
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
@@ -381,7 +381,7 @@ const categorypost = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    limit: 8,
+    limit: 5,
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
@@ -396,7 +396,7 @@ const categorypost_news = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    limit: 8,
+    limit: 5,
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
@@ -404,8 +404,26 @@ const categorypost_news = async (req, res) => {
 const search = async (req, res) => {
   const str = req.body.str;
   const select = req.body.select;
+  let pageNum = req.body.pageNum;
+  //console.log("pageNum", pageNum);
+  if (pageNum > 1) {
+    offset = 5 * (pageNum - 1);
+  } else if (pageNum <= 1) {
+    offset = 0;
+  }
+
+  //console.log("select : ", str);
   if (select === "title") {
+    let total = await Write.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${str}%`,
+        },
+      },
+    });
     let data_lst = await Write.findAll({
+      offset: offset,
+      limit: 5,
       include: [
         {
           model: User, // User 모델과 조인
@@ -414,12 +432,21 @@ const search = async (req, res) => {
       ],
       where: {
         title: {
-          [Op.like]: "%" + str + "%",
+          [Op.like]: `%${str}%`,
         },
       },
+      order: [["comment_id", "desc"]],
     }).catch((err) => console.log(err));
-    res.send(data_lst);
+    res.send({ data_lst, total });
   } else if (select === "comment") {
+    let total = await Write.findAll({
+      where: {
+        comment: {
+          [Op.like]: `%${str}%`,
+        },
+      },
+    });
+
     let data_lst = await Write.findAll({
       include: [
         {
@@ -432,8 +459,9 @@ const search = async (req, res) => {
           [Op.like]: "%" + str + "%",
         },
       },
+      order: [["comment_id", "desc"]],
     }).catch((err) => console.log(err));
-    res.send(data_lst);
+    res.send({ data_lst, total });
   } else if (select === "user") {
     /* 
     현재 str은 이름이 입력되어 있음. 이후 findall를 통해 해당 userid를
@@ -455,6 +483,11 @@ const search = async (req, res) => {
     });
 
     //console.log("data : ", data[0].id);
+    let total = await Write.findAll({
+      where: {
+        userId: data_result,
+      },
+    });
     let data_lst = await Write.findAll({
       include: [
         {
@@ -465,12 +498,24 @@ const search = async (req, res) => {
       where: {
         userId: data_result,
       },
+      order: [["comment_id", "desc"]],
     }).catch((err) => console.log(err));
-    res.send(data_lst);
+    res.send({ data_lst, total });
   }
 };
 
 const Userstr = async (req, res) => {
+  let pageNum = req.body.pageNum;
+  //console.log("pageNum", pageNum);
+  if (pageNum > 1) {
+    offset = 5 * (pageNum - 1);
+  } else if (pageNum <= 1) {
+    offset = 0;
+  }
+  let total = await Write.findAll({
+    where: { userId: req.body.user },
+  });
+
   let data_lst = await Write.findAll({
     include: [
       {
@@ -478,9 +523,11 @@ const Userstr = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
+    order: [["comment_id", "desc"]],
+    limit: 5,
     where: { userId: req.body.user },
   }).catch((err) => console.log(err));
-  res.send({ data_lst });
+  res.send({ data_lst, total });
 };
 
 module.exports = {

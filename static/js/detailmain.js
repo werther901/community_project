@@ -13,19 +13,13 @@ const user_url = urlParams.get("user");
 //console.log("urlSearch", urlParams.get("category_id"));
 
 //pagination
-function pagenation(category) {
-  axios({
-    method: "post",
-    url: "/detailmain/allPost_pagi",
-    data: { category: category },
-  }).then((res) => {
-    let len = res.data.allpost.length;
-    let total_group = Math.ceil(len / 5);
-
-    for (let i = 1; i <= total_group; i++) {
-      pagination.innerHTML += `<button class="pagi_btn" onclick="pageMove(${i},${category},this)">${i}</button>`;
-    }
-  });
+function pagenation(category, lst) {
+  let len = lst.length;
+  let total_group = Math.ceil(len / 5);
+  console.log("Res len", len);
+  for (let i = 1; i <= total_group; i++) {
+    pagination.innerHTML += `<button class="pagi_btn" onclick="pageMove(${i},${category},this)">${i}</button>`;
+  }
 }
 
 //페이지 이동 - 페이지네이션 버튼 클릭
@@ -33,7 +27,13 @@ function pageMove(num, category, btn) {
   axios({
     method: "post",
     url: "/detailmain/allPost",
-    data: { pageNum: num, category: category },
+    data: {
+      pageNum: num,
+      category: category,
+      search_url: search_url,
+      select_url: select_url,
+      user_url: user_url,
+    },
   }).then((res) => {
     makeTable(res.data.allpost);
     document.querySelectorAll(".pagi_btn").forEach((button) => {
@@ -45,6 +45,7 @@ function pageMove(num, category, btn) {
 
 //table 생성
 function makeTable(lst) {
+  console.log("mar", lst);
   table_content.innerHTML = lst
     .map((item) => {
       return `
@@ -67,6 +68,39 @@ function makeTable(lst) {
     })
     .join("");
 }
+
+//만약 search 쿼리 스트링이 있는 경우 -> 검색을 해서 들어온 경우
+if (search_url) {
+  //write table에 comment열을 비교 후 해당 쿼리 스트링이 있는 경우만 출력
+  //console.log(search_url);
+  axios({
+    method: "post",
+    url: "/detailmain/searchstr",
+    data: { str: search_url, select: select_url, pageNum: 0 },
+  }).then((res) => {
+    console.log("search res", res.data.total);
+    category_name.innerHTML = `<div>"${search_url}"의 검색 결과</div>`;
+    let search_data = res.data; //검색 포함 내용 리스트
+    pagenation(0, search_data.total);
+    makeTable(search_data.data_lst);
+  });
+}
+
+//만약 user url이 있는경우 -> post페이지에서 user 게시글 보기를 클릭해서 들어온 경우
+if (user_url) {
+  axios({
+    method: "post",
+    url: "/detailmain/userstr",
+    data: { user: user_url, pageNum: 0 },
+  }).then((res) => {
+    //console.log("res", res);
+    let data = res.data;
+    category_name.innerHTML = `<div>"${res.data.data_lst[0].User.name}"님의 게시글 목록</div>`;
+    pagenation(0, data.total);
+    makeTable(data.data_lst);
+  });
+}
+
 //main에서 전체 게시판 클릭 시
 if (
   Number(urlParams.get("category_id")) === 0 &&
@@ -85,7 +119,7 @@ if (
       console.log("res", res);
 
       let allpost_lst = res.data.allpost;
-      pagenation(0);
+      pagenation(0, res.data.total);
       makeTable(allpost_lst);
     })
     .catch((e) => {
@@ -123,12 +157,7 @@ if (
         console.log("res", res);
         let postlist = res.data.allpost;
 
-        // const category_post = postlist.filter((element) => {
-        //   //console.log("element", element.category, "id", id);
-        //   return Number(element.category) === Number(id);
-        // });
-        //console.log("category_post", category_post);
-        pagenation(Number(urlParams.get("category_id")));
+        pagenation(Number(urlParams.get("category_id")), postlist);
         makeTable(postlist);
       });
     })
@@ -147,22 +176,6 @@ function createPost() {
 function findpost(element, cate) {
   //console.log("findpost click");
   window.location.href = `/post?comment_id=${element}&category=${cate}`;
-}
-
-//만약 search 쿼리 스트링이 있는 경우 -> 검색을 해서 들어온 경우
-if (search_url) {
-  //write table에 comment열을 비교 후 해당 쿼리 스트링이 있는 경우만 출력
-  //console.log(search_url);
-  axios({
-    method: "post",
-    url: "/detailmain/searchstr",
-    data: { str: search_url, select: select_url },
-  }).then((res) => {
-    ///console.log("search res", res);
-    category_name.innerHTML = `<div>"${search_url}"의 검색 결과</div>`;
-    let search_data = res.data; //검색 포함 내용 리스트
-    makeTable(search_data);
-  });
 }
 
 // 사용자 검증
@@ -202,17 +215,3 @@ if (search_url) {
     console.error("Authentication error:", error);
   }
 })();
-
-//만약 user url이 있는경우 -> post페이지에서 user 게시글 보기를 클릭해서 들어온 경우
-if (user_url) {
-  axios({
-    method: "post",
-    url: "/detailmain/userstr",
-    data: { user: user_url },
-  }).then((res) => {
-    //console.log("res", res);
-    let data = res.data.data_lst;
-    category_name.innerHTML = `<div>"${res.data.data_lst[0].User.name}"님의 게시글 목록</div>`;
-    makeTable(data);
-  });
-}
