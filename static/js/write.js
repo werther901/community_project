@@ -7,10 +7,20 @@ const preview_image = document.getElementById("preview_image");
 
 let username = "";
 let comment_data_comment = ""; //db저장용 toast ui editor
+let comment_data_img = "";
 //url
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
 //console.log("urlSearch", urlParams.get("comment_id")); //10
+
+async function onUploadImage(blob, callback) {
+  const url = await uploadImage(blob);
+  console.log("Uploaded image URL:", url);
+  const imgTag = `<img src="${url}" />`;
+  console.log("imgtag", imgTag);
+  callback(url, "alt text");
+  return false;
+}
 
 // toast ui editor
 const editor = new window.toastui.Editor({
@@ -18,6 +28,12 @@ const editor = new window.toastui.Editor({
   previewStyle: "vertical",
   height: "400px",
   initialValue: "",
+  initialEditType: "wysiwyg",
+  previewStyle: "vertical",
+  language: "ko-KR",
+  hooks: {
+    addImageBlobHook: onUploadImage,
+  },
 });
 
 if (urlParams.get("comment_id")) {
@@ -35,6 +51,8 @@ if (urlParams.get("comment_id")) {
       // toast ui editor
       editor.setMarkdown(comment_data.comment);
       comment_data_comment = comment_data.comment;
+      comment_data_img = res.data.user.photo_address;
+      console.log("comment_data_img", comment_data_img);
     })
     .catch((e) => {
       console.log("error : ", e);
@@ -53,6 +71,7 @@ if (urlParams.get("comment_id")) {
 
     if (!tokenCookie) {
       alert("토큰이 없습니다");
+      window.location.href = "/login";
       return;
     }
 
@@ -111,19 +130,23 @@ const readURL = (input) => {
 //등록 버튼 클릭
 function form_submit() {
   //console.log("fom_submit click");
-  console.log("imgsrc", input_img.files[0]);
+  console.log("imgsrc", comment_data_img);
 
   /*
   1.파일 이미지 경로, select option값, 제목, 내용을 data에 담기
   2. axios요청을 보내 DB에 저장하기 
   - axios로 현재 로그인 되어 있는 id 값 가져오기
   */
+  if (!input_title.value) {
+    alert("제목을 입력해주세요");
+    return;
+  }
 
   const formData = new FormData();
   formData.append("userId", username);
   formData.append("title", input_title.value);
   formData.append("category", category.value);
-  formData.append("comment", editor.getMarkdown());
+  formData.append("comment", editor.getHTML());
   formData.append("imgsrc", input_img.files[0]);
 
   if (!urlParams.get("comment_id")) {
@@ -145,20 +168,21 @@ function form_submit() {
         console.log("error : ", e);
       });
   } else {
-    axios({
-      method: "post",
-      url: "/write",
-    });
-
+    // axios({
+    //   method: "post",
+    //   url: "/write",
+    // });
+    console.log("comment_data_img", comment_data_img);
     //쿼리 스트링이 있는 경우
     let formData = new FormData();
     formData.append("userId", username);
     formData.append("category", category.value);
     formData.append("title", input_title.value);
-    formData.append("comment", editor.getMarkdown() || comment_data_comment);
+    formData.append("comment", editor.getHTML() || comment_data_comment);
     formData.append("comment_id", urlParams.get("comment_id"));
-    formData.append("imgsrc", input_img.files[0]);
-    //console.log("input_img.files[0]", input_img.files[0]);
+    formData.append("imgsrc", input_img.files[0] || comment_data_img);
+    console.log("input_img.files[0]", comment_data_img);
+
     axios({
       method: "put",
       url: "/write/updateData",
@@ -175,5 +199,24 @@ function form_submit() {
       .catch((e) => {
         console.log("error : ", e);
       });
+  }
+}
+// 에디터 내용 변경 이벤트
+async function uploadImage(blob) {
+  console.log(" blob.files[0]", blob);
+  const formData = new FormData();
+  formData.append("image", blob);
+
+  try {
+    const response = await axios.post("/write/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    //console.log("response.data.imageUrl", response.data.imageUrl);
+    return response.data.imageUrl; // 서버에서 반환된 이미지 URL
+  } catch (error) {
+    console.error("이미지 업로드 오류:", error);
+    return "";
   }
 }

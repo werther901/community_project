@@ -11,8 +11,12 @@ const current_category_num = Number(urlParams.get("comment_id")); //현재 url c
 const modifybtn = document.querySelector(".modifybtn");
 const deletebtn = document.querySelector(".deletebtn");
 const sub_post = document.querySelector(".sub_post");
+const top_btn = document.querySelector(".top_btn");
 let check = 0; //유저이름 클릭 시 페이지 이동 용
 //let current_user_id = "";
+function removeHTMLTags(str) {
+  return str.replace(/<[^>]*>/g, ""); // 모든 HTML 태그 제거
+}
 
 axios({
   method: "get",
@@ -46,6 +50,11 @@ axios({
       timeZone: "Asia/Seoul",
     };
 
+    const sanitizedComment_befor = removeHTMLTags(postdata.comment);
+    const sanitizedComment = sanitizedComment_befor
+      .replace(/"/g, "&quot;") // " → &quot;
+      .replace(/'/g, "&#39;"); // ' → &#39;
+    console.log("sanitizedComment", sanitizedComment);
     const formatDate = date.toLocaleString("ko-KR", options);
     //console.log("Date", current_date);
     //화면 표시하기
@@ -76,7 +85,7 @@ axios({
               </div>
               <div class="like_number"></div>
             </div>
-            <div class="share_post" onclick="kakaoShare('${postdata.title}','${postdata.comment}','${postdata.photo_address}')">공유</div>
+            <div class="share_post" onclick="kakaoShare('${postdata.title}','${postdata.photo_address}')">공유</div>
             <div class="notify_post">신고</div>
           </div>      
     `;
@@ -471,14 +480,14 @@ function userpost(userid) {
 }
 
 //카카오톡 공유하기
-function kakaoShare(title, comment, photo) {
-  console.log("comment", title, comment, photo);
+function kakaoShare(title, photo) {
+  //console.log("comment", title, comment, photo);
   let currentURL = window.location.href;
   Kakao.Link.sendDefault({
     objectType: "feed",
     content: {
       title: title,
-      description: comment,
+      description: "",
       imageUrl: "http://localhost:3000/" + photo,
       link: {
         mobileWebUrl: currentURL,
@@ -498,3 +507,8 @@ function kakaoShare(title, comment, photo) {
     installTalk: true,
   });
 }
+
+//top_btn click
+top_btn.addEventListener("click", function () {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
