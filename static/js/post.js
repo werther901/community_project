@@ -50,11 +50,12 @@ axios({
       timeZone: "Asia/Seoul",
     };
 
-    const sanitizedComment_befor = removeHTMLTags(postdata.comment);
-    const sanitizedComment = sanitizedComment_befor
-      .replace(/"/g, "&quot;") // " → &quot;
-      .replace(/'/g, "&#39;"); // ' → &#39;
-    console.log("sanitizedComment", sanitizedComment);
+    // const sanitizedComment_befor = removeHTMLTags(postdata.comment);
+    // const sanitizedComment = sanitizedComment_befor
+    //   .replace(/"/g, "&quot;") // " → &quot;
+    //   .replace(/'/g, "&#39;"); // ' → &#39;
+    // console.log("sanitizedComment", sanitizedComment);
+
     const formatDate = date.toLocaleString("ko-KR", options);
     //console.log("Date", current_date);
     //화면 표시하기
@@ -229,6 +230,7 @@ function post_delete() {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "삭제하기",
+    cancelButtonText: "취소하기",
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire({

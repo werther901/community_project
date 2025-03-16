@@ -89,6 +89,7 @@ body {
 
 .content_detils {
   display: flex;
+  position: relative;
   justify-content: space-between;
   margin-bottom: 10px;
 }
@@ -100,6 +101,9 @@ body {
   font-size: 12px;
   color: #555;
   cursor: pointer;
+}
+.content_userid {
+  position: relative; /* 기준점이 되는 요소 */
 }
 .content_detils_right {
   display: flex;
@@ -241,8 +245,8 @@ body {
 .content_userid_modal {
   display: flex;
   border-radius: 10px;
-  position: relative;
-  left: -28%;
+  position: absolute;
+  left: 50px;
   top: 0px;
   display: none;
   font-size: 12px;
@@ -251,6 +255,7 @@ body {
   width: 80px;
   height: 15px;
 }
+
 /* 반응형 */
 
 @media (max-width: 768px) {
