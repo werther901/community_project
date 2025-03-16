@@ -30,4 +30,13 @@ router.post("/modify", writeController.postmodify);
 //수정 버튼 클릭 - 쿼리 스트링 있는 경우
 router.put("/updateData", upload.single("imgsrc"), writeController.updateData);
 
+// 파일 업로드 처리
+router.post("/upload", upload.single("image"), (req, res) => {
+  // 업로드된 파일의 경로
+  console.log("upldo", req.file);
+  const filePath = `/uploads/${req.file.filename}`;
+  // 업로드된 파일 URL 반환
+  res.json({ imageUrl: filePath });
+});
+
 module.exports = router;

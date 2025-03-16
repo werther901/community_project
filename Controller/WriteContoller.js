@@ -49,8 +49,8 @@ const postmodify = async (req, res) => {
 };
 
 const updateData = async (req, res) => {
-  //console.log("req", req.body, req.file);
-  const imgsrc = req.file ? req.file.path : null;
+  console.log("req", req.body, req.file);
+  const imgsrc = req.file ? req.file.path : req.body.imgsrc;
   //console.log("imgsrc", imgsrc);
   let info = {
     userId: req.body.userId,

@@ -11,8 +11,21 @@ const current_category_num = Number(urlParams.get("comment_id")); //현재 url c
 const modifybtn = document.querySelector(".modifybtn");
 const deletebtn = document.querySelector(".deletebtn");
 const sub_post = document.querySelector(".sub_post");
+const top_btn = document.querySelector(".top_btn");
 let check = 0; //유저이름 클릭 시 페이지 이동 용
 //let current_user_id = "";
+function removeHTMLTags(str) {
+  return str.replace(/<[^>]*>/g, ""); // 모든 HTML 태그 제거
+}
+
+axios({
+  method: "get",
+  url: "/post/kakao",
+}).then((res) => {
+  //console.log("kakao res", currentURL);
+  Kakao.init(res.data.kakao_key);
+  //console.log(Kakao.isInitialized());
+});
 
 // 페이지 로드 시 axios 요청
 axios({
@@ -23,9 +36,28 @@ axios({
   .then((res) => {
     //console.log("res", res);
     postdata = res.data.write;
-    let current_date = postdata.createdAt;
+    let dbTime = postdata.createdAt;
+    //const dbTime = x.write.createdAt;
+    const date = new Date(dbTime);
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Seoul",
+    };
 
-    console.log("Date", current_date);
+    // const sanitizedComment_befor = removeHTMLTags(postdata.comment);
+    // const sanitizedComment = sanitizedComment_befor
+    //   .replace(/"/g, "&quot;") // " → &quot;
+    //   .replace(/'/g, "&#39;"); // ' → &#39;
+    // console.log("sanitizedComment", sanitizedComment);
+
+    const formatDate = date.toLocaleString("ko-KR", options);
+    //console.log("Date", current_date);
     //화면 표시하기
     main_content.innerHTML = `
           <div class="content_top">
@@ -35,7 +67,7 @@ axios({
               <div class="content_userid" onclick="usermodal()">${postdata.User.name}</div>
               <div class="content_userid_modal" onclick="userpost(${postdata.userId})">- 게시글 보기</div>
               <div class="content_detils_right">
-                <div class="write_time">작성시간 ${postdata.createdAt}</div>
+                <div class="write_time">작성시간 : ${formatDate}</div>
                 <div class="show">조회수 ${postdata.view_cnt}</div>
                 <div class="copyurl" onclick="copyurl()">url복사</div>
                 <div class="moreview" onclick="printer()">Print</div>
@@ -54,7 +86,7 @@ axios({
               </div>
               <div class="like_number"></div>
             </div>
-            <div class="share_post">공유</div>
+            <div class="share_post" onclick="kakaoShare('${postdata.title}','${postdata.photo_address}')">공유</div>
             <div class="notify_post">신고</div>
           </div>      
     `;
@@ -198,6 +230,7 @@ function post_delete() {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "삭제하기",
+    cancelButtonText: "취소하기",
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire({
@@ -447,3 +480,37 @@ function usermodal() {
 function userpost(userid) {
   window.location.href = `/detailmain?user=${userid}&category_id=0`;
 }
+
+//카카오톡 공유하기
+function kakaoShare(title, photo) {
+  //console.log("comment", title, comment, photo);
+  let currentURL = window.location.href;
+  Kakao.Link.sendDefault({
+    objectType: "feed",
+    content: {
+      title: title,
+      description: "",
+      imageUrl: "http://localhost:3000/" + photo,
+      link: {
+        mobileWebUrl: currentURL,
+        webUrl: currentURL,
+      },
+    },
+    buttons: [
+      {
+        title: "웹으로 보기",
+        link: {
+          mobileWebUrl: currentURL,
+          webUrl: currentURL,
+        },
+      },
+    ],
+    // 카카오톡 미설치 시 카카오톡 설치 경로이동
+    installTalk: true,
+  });
+}
+
+//top_btn click
+top_btn.addEventListener("click", function () {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});

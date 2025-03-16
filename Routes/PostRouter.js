@@ -28,4 +28,7 @@ router.post("/like_adduser", PostController.addUser);
 //좋아요 버튼 취소
 router.delete("/like_deleteuser", PostController.deleteUser);
 
+//카카오
+router.get("/kakao", PostController.kakaoShare);
+
 module.exports = router;

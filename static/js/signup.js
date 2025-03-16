@@ -10,7 +10,9 @@ let birthValue = false;
 const saveData = document.querySelector(".saveData");
 
 const ifTrue = () => {
+
   if (emailVaule && pwValue && pwCheckValue && nameValue && phoneValue && birthValue) {
+
     saveData.disabled = false;
   } else {
     saveData.disabled = true;
@@ -28,36 +30,36 @@ const valueEmail = async (e) => {
   if (email.value == "") {
     content01.innerHTML = `<div>아이디 : 필수 정보입니다.</div>`;
     emailVaule = false;
-    return ;
+    return;
   } else if (pattern.test(email.value) == false) {
     content01.innerHTML = "<div>아이디 : 이메일 형식을 확인해주세요.</div>";
     emailVaule = false;
-    return ;
+    return;
   } else if (pattern.test(email.value) == true) {
     content01.innerHTML = "";
     // emailVaule = true;
   }
 
   await axios({
-    method: 'get',
-    url: '/idCheck',
-    params: { userId: email.value }
+    method: "get",
+    url: "/idCheck",
+    params: { userId: email.value },
   })
-  .then((res) => {
-    console.log(res.data);
+    .then((res) => {
+      console.log(res.data);
 
-    if (!res.data) {
-      content01.innerHTML = `<div>아이디 : 중복된 이메일입니다.</div>`;
-      emailVaule = false;
-    } else {
-      alert("사용 가능한 이메일 입니다.");
-      content01.innerHTML = "";
-      emailVaule = true;
-    }
-  })
-  .catch((e) => {
-    console.log("이메일 중복검사 실패 : ", e)
-  });
+      if (!res.data) {
+        content01.innerHTML = `<div>아이디 : 중복된 이메일입니다.</div>`;
+        emailVaule = false;
+      } else {
+        alert("사용 가능한 이메일 입니다.");
+        content01.innerHTML = "";
+        emailVaule = true;
+      }
+    })
+    .catch((e) => {
+      console.log("이메일 중복검사 실패 : ", e);
+    });
 
   ifTrue();
 };
@@ -70,7 +72,8 @@ const content02 = document.querySelector(".content02");
 
 const valuePW = (e) => {
   let inspectPassWord = "Abcd123!";
-  let regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/;
+  let regex =
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/;
 
   if (regex.test(e.target.value)) {
     content02.innerHTML = "";
@@ -120,27 +123,31 @@ const valueName = (e) => {
 names.addEventListener("blur", valueName);
 
 // 생년월일 작성여부 확인
-const birth = document.getElementById('birth');
-const content08 = document.querySelector('.content08');
+const birth = document.getElementById("birth");
+const content08 = document.querySelector(".content08");
 
 const valueBirth = () => {
-  const regBirth = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+  const regBirth =
+    /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 
   if (birth.value.trim() == "") {
-    content08.innerHTML = `<div>생년월일 : 필수정보 입니다.</div>`
+    content08.innerHTML = `<div>생년월일 : 필수정보 입니다.</div>`;
     birthValue = false;
   } else if (!regBirth.test(birth.value)) {
-    content08.innerHTML = `<div>생년월일 : 생년월일은 8자리 숫자로 입력해 주세요.</div>`
+    content08.innerHTML = `<div>생년월일 : 생년월일은 8자리 숫자로 입력해 주세요.</div>`;
     birthValue = false;
   } else {
-    let formatBirth = birth.value.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1.$2.$3');
+    let formatBirth = birth.value.replace(
+      /^(\d{4})(\d{2})(\d{2})$/,
+      "$1.$2.$3"
+    );
     birth.value = formatBirth;
     content08.innerHTML = "";
     birthValue = true;
   }
   ifTrue();
-}
-birth.addEventListener('blur', valueBirth);
+};
+birth.addEventListener("blur", valueBirth);
 
 // 주소 작성여부 확인
 // const address = document.getElementById('address');
@@ -168,12 +175,17 @@ const valuePhone = (e) => {
   const regex02 = /^01[0-9]-\d{3,4}-\d{4}$/;
 
   if (regex.test(e.target.value)) {
-
     if (e.target.value.length == 10) {
-      let formatPhone = e.target.value.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+      let formatPhone = e.target.value.replace(
+        /(\d{3})(\d{3})(\d{4})/,
+        "$1-$2-$3"
+      );
       e.target.value = formatPhone;
     } else if (e.target.value.length == 11) {
-      let formatPhone = e.target.value.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+      let formatPhone = e.target.value.replace(
+        /(\d{3})(\d{4})(\d{4})/,
+        "$1-$2-$3"
+      );
       e.target.value = formatPhone;
     }
 
@@ -193,32 +205,31 @@ const valuePhone = (e) => {
 };
 phone.addEventListener("blur", valuePhone);
 
-
 // 회원가입 요청 전송
 const content06 = document.querySelector(".content06");
 
 const signup = () => {
   // 성별 체크 여부
-  const genderChecked = document.querySelector('input[name=gender]:checked');
+  const genderChecked = document.querySelector("input[name=gender]:checked");
 
   if (!genderChecked) {
-    content06.innerHTML = `<div>성별 : 성별을 선택해주세요.</div>`
+    content06.innerHTML = `<div>성별 : 성별을 선택해주세요.</div>`;
     return;
   }
   console.log(genderChecked.value);
 
   // 생년월일 변환
-  let dateBirth = birth.value.replaceAll('.', '-');
+  let dateBirth = birth.value.replaceAll(".", "-");
 
   axios
-    .post("/signup", { 
-      userId : email.value,
+    .post("/signup", {
+      userId: email.value,
       password: password.value,
       name: names.value,
       phoneNumber: phone.value,
       gender: genderChecked.value,
       birth: dateBirth,
-      signup_method: 'local'
+      signup_method: "local",
     })
     .then((res) => {
       console.log(res);
@@ -237,4 +248,4 @@ const signup = () => {
       alert("회원가입 실패");
     });
 };
-saveData.addEventListener('click', signup);
+saveData.addEventListener("click", signup);
