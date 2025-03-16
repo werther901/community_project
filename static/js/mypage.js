@@ -22,11 +22,21 @@ const toolTopExit = () => {
 };
 exit_btn.addEventListener("click", toolTopExit);
 
-// --------------기능 관련 ----------------
+// 버튼 누르면 사이드바 표출
+const menuTrigger = document.querySelector('.menu-trigger');
+const side_bar_container = document.querySelector('.side_bar_container');
 
+menuTrigger.addEventListener('click', function() {
+  side_bar_container.classList.add('active');
+});
+
+const exit_sideBar = () => {
+  side_bar_container.classList.remove('active');
+}
+
+// --------------기능 관련 ----------------
 // 사용자 검증
 (async function () {
-  // const info = document.querySelector(".welcome");
   const name_text = document.querySelector(".name_text");
   const email_text = document.querySelector(".email_text");
 

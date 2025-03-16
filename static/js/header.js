@@ -6,6 +6,7 @@ let menu_chk = true; //버튼 클릭 확인용
 function createTable() {
   header_menu.innerHTML = `
             <div class="header_menu_container">
+              <div class="head_menu">
                 <div class="header_menu_header"></div>
                 <div class="header_menu_row">
                     <div class="header_menu_item"  onclick="categoryMove(0)">전체게시판</div>
@@ -51,8 +52,8 @@ function createTable() {
                         <div class="header_menu_footer_right" onclick="subcategory()">Gather 이용안내</div>
                     </div>
                 </div>
+              </div>
             </div>
-            
             `;
 }
 

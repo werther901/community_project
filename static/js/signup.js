@@ -3,21 +3,16 @@ let pwValue = false;
 let pwCheckValue = false;
 let nameValue = false;
 let phoneValue = false;
-let addressValue = false; // 임시
+// let addressValue = false;
 let birthValue = false;
 
 // 유효성 검증 통과 시 회원가입 버튼 disabled
 const saveData = document.querySelector(".saveData");
 
 const ifTrue = () => {
-  if (
-    emailVaule &&
-    pwValue &&
-    pwCheckValue &&
-    nameValue &&
-    phoneValue &&
-    birthValue
-  ) {
+
+  if (emailVaule && pwValue && pwCheckValue && nameValue && phoneValue && birthValue) {
+
     saveData.disabled = false;
   } else {
     saveData.disabled = true;
@@ -231,7 +226,6 @@ const signup = () => {
       userId: email.value,
       password: password.value,
       name: names.value,
-      address: "d",
       phoneNumber: phone.value,
       gender: genderChecked.value,
       birth: dateBirth,

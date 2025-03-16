@@ -71,11 +71,14 @@
             <div class="input-box">
               <span>성별</span>
               <div class="gender-group">
-                <label for="gender_m">남자</label>
-                <input type="radio" id="gender_m" name="gender" value="male">
-                <div style="width: 40px;"></div>
-                <label for="gender_f">여자</label>
-                <input type="radio" id="gender_f" name="gender" value="female">
+                <div class="radio_item">
+                  <input class="blind" type="radio" id="gender_m" name="gender" value="male">
+                  <label for="gender_m" class="gender_select mann">남자</label>
+                </div>
+                <div class="radio_item">
+                  <input class="blind" type="radio" id="gender_f" name="gender" value="female">
+                  <label for="gender_f" class="gender_select womann">여자</label>
+                </div>
               </div>
             </div>
             <div class="input-box">

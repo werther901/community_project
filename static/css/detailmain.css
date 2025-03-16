@@ -278,3 +278,10 @@ h1 {
     transition: all 0.3s ease;
   }
 }
+
+.text {
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -.5px;
+  color: #888;
+}

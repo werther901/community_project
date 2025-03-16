@@ -43,6 +43,126 @@
   border-radius: 1px;
 }
 
+.side_bar_container {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  z-index: 15;
+  background-color: #fff;
+  width: 300px;
+  height: 100%;
+  transition: 0.3s;
+}
+
+.side_bar_container.active {
+  right: 0;
+}
+
+.side_bar_subcontainer {
+  width: 100%;
+  height: 100%;
+  padding: 70px 40px;
+  position: relative;
+  box-shadow: 1px 1px 12px 0 rgba(0, 0, 0, .08);
+}
+
+.side_bar_subcontainer li {
+  margin-top: 30px;
+}
+
+.sidebar_x_btn {
+  position: absolute;
+  top: 21px;
+  right: 40px;
+  z-index: 16;
+  width: 27px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.sidebar_x_btn span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #4B89DC;
+  border-radius: 4px;
+}
+
+.sidebar_x_btn span:nth-of-type(1) {
+  transform: translateY(11px) rotate(-45deg);
+}
+
+.sidebar_x_btn span:nth-of-type(2) {
+  transform: translateY(-7px) rotate(45deg);
+  top: 17px;
+}
+
+.m_left_container {
+  display: none;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 70px;
+  background-color: #fff;
+  box-shadow: 1px 1px 12px 0 rgba(0, 0, 0, .08);
+  z-index: 10;
+}
+
+.m_left_header_logo {
+  width: 100%;
+  height: 100%;
+  padding: 17px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.m_left_header_logo_content {
+  font-size: 32px;
+  color: #4B89DC;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.menu-trigger,
+.menu-trigger span {
+  display: inline-block;
+  transition: all 0.4s;
+  box-sizing: border-box;
+}
+
+.menu-trigger {
+  position: relative;
+  width: 27px;
+  height: 22px;
+  z-index: 20;
+}
+
+.menu-trigger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #4B89DC;
+  border-radius: 4px;
+}
+
+.menu-trigger span:nth-of-type(1) {
+  top: 0;
+}
+
+.menu-trigger span:nth-of-type(2) {
+  top: 9px;
+}
+
+.menu-trigger span:nth-of-type(3) {
+  bottom: 0;
+}
+
 .right_container {
   display: table-cell;
   width: 100%;
@@ -275,6 +395,26 @@
   vertical-align: middle;
 }
 
+#toggle_btn:checked + .switch_btn {
+  background-color: #6499E1;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+#toggle_btn:checked + .switch_btn .switch_on {
+  display: inline-block;
+  padding-left: 6px;
+}
+
+#toggle_btn:checked + .switch_btn .switch_off {
+  display: none;
+}
+
+#toggle_btn:checked + .switch_btn::before {
+  transform: translate(25px, 0);
+  background-color: #fff;
+}
+
 .input_A {
   padding: 6px;
   border-radius: 5px;
@@ -440,12 +580,126 @@
 }
 
 
-/* @media (min-width: 1200px) {
-  .right_container {
-    width: 694px;
+@media (max-width: 1200px) {
+  .both_container {
+    width: 1024px;
   }
-} */
 
-@media (min-width: 1024px) {
+  .right_container {
+    padding: 56px 30px 0 30px;
+  }
 
+  .subRight_container {
+    width: 568px;
+  }
+
+  .edit_btn_parent {
+    margin-right: 0;
+  }
+
+  .input_title {
+    width: 119px;
+  }
+
+  #address {
+    width: 138px;
+  }
+
+  #address_detail {
+    width: 172px;
+  }
+
+  .input_phoneNumber {
+    width: 77px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .both_container {
+    width: 100%;
+  }
+
+  .left_container {
+    display: none;
+  }
+
+  .m_left_container {
+    display: block;
+  }
+
+  .right_container {
+    padding: 127px 60px 0 60px;
+  }
+
+  .subRight_container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 653px) {
+  .m_left_header_logo {
+    padding: 17px 20px;
+  }
+
+  .right_container {
+    padding: 94px 20px 0 20px;
+  }
+}
+
+@media (max-width: 574px) {
+  #address {
+    width: 91px;
+  } 
+
+  #address_detail {
+    width: 126px;
+  }
+
+  .input_phoneNumber {
+    width: 63px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input_title {
+    width: 111px;
+  }
+
+  .input_A {
+    width: 131px;
+  }
+
+  .input_phoneNumber  {
+    width: 38px;
+  }
+
+  .input_container {
+    padding: 12px 0;
+  }
+
+  .m_address {
+    display: flex;
+    flex-wrap: wrap;
+    height: 96px;
+  }
+
+  #address_detail {
+    margin-left: 110px;
+    width: 131px;
+  }
+
+  .now_pw::before,
+  .edit_pw::before,
+  .address_img::before,
+  .phone_img::before,
+  .block_img::before,
+  .loginRecord_img::before,
+  .infoEdit_img::before {
+    display: none;
+  }
+
+  .sidebar_x_btn {
+    top: 21px;
+    right: 20px;  
+  }
 }

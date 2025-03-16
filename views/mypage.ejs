@@ -19,7 +19,68 @@
   <body>
     <div class="container">
       <div class="both_container">
+
+        <div class="side_bar_container">
+          <div class="side_bar_subcontainer">
+            <div class="sidebar_x_btn" onclick="exit_sideBar()">
+              <span></span>
+              <span></span>
+            </div>
+            <ul>
+              <li>
+                <a href="/mypage">
+                  <div class="menu_text bold01">내 정보관리</div>
+                </a>
+              </li>
+              <li>
+                <a href="/mypage/likedpage">
+                  <div class="menu_text bold02">좋아요 한 글</div>
+                </a>
+              </li>
+              <li>
+                <a href="/mypage/view_mypost">
+                  <div class="menu_text bold03">내가 작성한 글</div>
+                </a>
+              </li>
+            </ul>
+            <footer>
+              <ul class="left_guide">
+                <li>
+                  <a href="#">
+                    <div class="footer_text" onclick="YesOrNo()">로그아웃</div>
+                  </a>
+                </li>
+                <li class="footer_b">
+                  <a href="#">
+                    <div class="footer_text" onclick="ready()">고객센터</div>
+                  </a>
+                </li>
+                <li class="footer_b">
+                  <a href="#" class="item_arrow" onclick="ready()">
+                    <div class="footer_text">한국어</div>
+                  </a>
+                </li>
+              </ul>
+            </footer>
+          </div>
+        </div>
+
         <% include mypage_common.ejs %>
+
+        <div class="m_left_container">
+          <div class="m_left_header_logo">
+            <a href="/">
+              <h1 class="m_left_header_logo_content">
+                <span>Gather</span>
+              </h1>
+            </a>
+            <a class="menu-trigger" href="#">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+        </div>
 
         <div class="right_container">
           <form style="position: relative">
@@ -75,7 +136,7 @@
                 </div>
               </div>
               <div class="input_position_container">
-                <div class="input_container address_img">
+                <div class="input_container address_img m_address">
                   <span class="input_title">주소</span>
                   <input class="input_A" id="address" type="text" placeholder="주소" readonly />
                   <input class="input_A" id="address_detail" type="text" placeholder="상세주소" />
@@ -126,7 +187,7 @@
               <div class="input_position_container">
                 <div class="input_container address_img sp_btwn">
                   <span class="input_title"> 타지역 로그인 차단 </span>
-                  <div class="btn_switch" onclick="ready()">
+                  <div class="btn_switch">
                     <input type="checkbox" id="toggle_btn" />
                     <label for="toggle_btn" class="switch_btn">
                       <span class="switch_on">ON</span>
