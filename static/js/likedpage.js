@@ -75,3 +75,15 @@
     window.location.replace("/login");
   }
 })();
+
+// 버튼 누르면 사이드바 표출
+const menuTrigger = document.querySelector('.menu-trigger');
+const side_bar_container = document.querySelector('.side_bar_container');
+
+menuTrigger.addEventListener('click', function() {
+  side_bar_container.classList.add('active');
+});
+
+const exit_sideBar = () => {
+  side_bar_container.classList.remove('active');
+}

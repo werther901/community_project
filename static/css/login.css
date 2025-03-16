@@ -337,8 +337,9 @@ header {
 }
 
 #kakaoLogin {
+  width: 100%;
   position: relative;
-  width: 410.222px;
+  /* width: 410.222px; */
   height: 48.222px;
   padding: 13px 20px;
   background-color: #FEE500;
@@ -408,54 +409,16 @@ header {
   color: #888;
 }
 
-/* footer {
-  padding: 48px 0 32px;
-  box-sizing: border-box;
-  margin: 100px 0 36px 0;
-}
+@media (max-width: 632px) {
+  .login-container {
+    padding: 0 20px;
+  }
 
-.footer_inner {
-  position: relative;
-  text-align: center;
-}
+  .login_wrap {
+    width: 100%;
+  }
 
-.footer_link li {
-  display: inline-block;
+  footer {
+    padding: 35px 0 38px;
+  }
 }
-
-.footer_link li + li {
-  position: relative;
-  padding-left: 13px;
-  font-size: 12px;
-}
-
-.footer_link li + li::before {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 1px;
-  height: 11px;
-  background-color: #dadada;
-}
-
-.corp {
-  padding: 0 2px;
-  font-weight: 500;
-  color: #000;
-}
-
-.footer_right {
-  display: flex;
-  justify-content: center;
-  margin-top: 9px;
-}
-
-.footer_logo {
-  color: #4B89DC;
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  margin-right: 3px;
-} */

@@ -163,3 +163,10 @@ h1 {
 .pagination > :first-child {
   background-color: #4b89dc; /* 첫 번째 요소의 배경색 변경 */
 }
+
+.text {
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -.5px;
+  color: #888;
+}

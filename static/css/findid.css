@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Pretendard-Regular", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* background-color: #f5f6f7; */
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #6499E1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.container button:hover {
+  background-color: #6498e1e4;
+}
+
+.container a {
+  display: block;
+  margin-top: 15px;
+  color: #6499E1;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.container a:hover {
+  text-decoration: underline;
+}
+
+.containerDiv {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.resultId {
+  margin-bottom: 20px;
+}
+
+.fail {
+  color: red;
+}

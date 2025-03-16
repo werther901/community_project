@@ -4,9 +4,17 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   font-family: "Pretendard-Regular", sans-serif;
+  color: #333;
   /* overflow: hidden; */
   /* background-color: #fafbfc; */
 }
@@ -24,6 +32,10 @@ button {
 
 input {
   font-family: "Pretendard-Regular", sans-serif;
+}
+
+input:focus {
+  outline: 1px solid #4B89DC;
 }
 
 h1, h2, h3,
@@ -47,14 +59,17 @@ a {
   display: inline-block;
 }
 
+label {
+  cursor: pointer;
+}
+
 .wrap {
   height: 100%;
 }
 
 .wrap_02 {
-  width: 400px;
-  margin: 0 auto;
-  padding: 16px 0;
+  padding: 20px 20px;
+  width: 100%;
 }
 
 .container_before {
@@ -67,20 +82,21 @@ a {
   font-weight: 700;
   font-style: normal;
   color: #4B89DC;
+  font-size: 28px;
 }
 
 .container {
-  width: 400px;
+  width: 100%;
   padding: 20px;
   background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
 .form-group {
   width: 100%;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 8px;
   margin-bottom: 15px;
   background: white;
@@ -126,6 +142,10 @@ input, select {
   margin-top: 5px;
 }
 
+.content03 {
+  margin-bottom: 10px;
+}
+
 .saveData {
   width: 100%;
   padding: 10px;
@@ -147,12 +167,11 @@ input, select {
   cursor: default;
 }
 
-/* 수정된 부분 */
 .gender-group {
   display: flex;
-  align-items: center;
+  /* align-items: center;
   gap: 10px;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .gender-group input {
@@ -160,14 +179,81 @@ input, select {
 }
 
 .gender-group input[type="radio"] {
-  width: 30px;
+  /* width: 30px; */
+  border-radius: 0;
+  border: none;
+  background: 0 0;
+  /* -webkit-appearance: none; */
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-text-size-adjust: none;
 }
 
 .gender-group label {
   font-weight: normal;
 }
 
+.radio_item {
+  width: 100%;
+}
+
+.gender_select {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 6px 0;
+  border-radius: inherit;
+  border: 1px solid #c6c6c6;
+  font-size: 13px;
+  line-height: 18px;
+  color: #929294;
+  text-align: center;
+}
+
+.mann {
+  border-radius: 4px 0 0 4px;
+}
+
+.womann {
+  border-radius: 0 4px 4px 0;
+  /* border-left: none; */
+}
+
+.blind {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.radio_item input:checked+label {
+  z-index: 1;
+  border-color: #6499E1;
+  font-weight: 500;
+  color: #6499E1;
+}
+
 .birth-group {
   display: flex;
   gap: 5px;
+}
+
+/* 768px 이상일 때 */
+@media (min-width: 768px) {
+  .wrap_02 {
+    width: 450px;
+    margin: 0 auto;
+  }
+
+  .container_before a .header_logo_content {
+    font-size: 32px;
+  }
+
 }

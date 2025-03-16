@@ -200,3 +200,8 @@ function loginWithKakao() {
     redirectUri: 'http://localhost:3000/kakao_login'
   });
 }
+
+// 준비중
+const ready = () => {
+  alert('준비중 입니다.');
+}

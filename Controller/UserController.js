@@ -37,11 +37,6 @@ const kakaoLogin = (req, res) => {
   res.render("kakao_login");
 };
 
-// 마이페이지
-// const mypage = (req, res) => {
-//   res.render("mypage");
-// };
-
 // 글 쓰기 페이지
 const write = (req, res) => {
   res.render("write");
@@ -64,13 +59,48 @@ const idCheck = async (req, res) => {
   }
 };
 
+// 아이디 찾기 페이지
+const find_id_page = (req, res) => {
+  res.render("findid");
+}
+
+// // 비번 찾기 페이지
+// const find_pw_page = (req, res) => {
+//   res.render("findpw");
+// }
+
+// 아이디 찾기(휴대폰번호)
+const find_id = async (req, res) => {
+  const userPhone = req.query.phoneNumber;
+  const findPhone = await User.findOne({ where: { phoneNumber: userPhone } });
+  console.log(findPhone);
+
+  if (!findPhone) {
+    res.json( { result: false, message: "휴대폰 번호를 찾을 수 없습니다." } );
+  } else {
+    res.json( { result: true, message: `고객님의 아이디는 ${findPhone.dataValues.userId} 입니다.`} );
+  }
+}
+
+// 비번 찾기(아이디) -> 단방향 암호화로 복호화 불가 -> 비번 재설정으로 유도 필요하나 시간 부족으로 구현은 다음으로..
+// const find_pw = async (req, res) => {
+//   const userId = req.query.userId;
+//   const findId = await User.findOne({ where: { userId: userId } });
+//   console.log(findId);
+
+//   if (!findId) {
+//     res.json( { result: false, message: "비밀번호를 찾을 수 없습니다." } );
+//   } else {
+//     res.json( { result: true, message: `고객님의 비밀번호는 ${findId.dataValues.password} 입니다.`} );
+//   }
+// }
+
 // 회원가입 처리
 const signupProcess = async (req, res) => {
   const {
     userId,
     password,
     name,
-    address,
     phoneNumber,
     gender,
     birth,
@@ -93,7 +123,6 @@ const signupProcess = async (req, res) => {
       userId,
       password: hashedPw,
       name,
-      address,
       phoneNumber,
       gender,
       birth: date,
@@ -490,6 +519,8 @@ module.exports = {
   naverLogin,
   kakaoLogin,
   idCheck,
+  find_id_page,
+  find_id,
   signupProcess,
   loginProcess,
   naverLoginProcess,

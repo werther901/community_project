@@ -12,9 +12,6 @@ router.get("/login", userController.login);
 // 카테고리 선택 페이지 이동
 router.get("/detailmain", userController.detailmain);
 
-// 마이페이지 이동
-// router.get("/mypage", userController.mypage);
-
 // 이메일 중복 검사
 router.get("/idCheck", userController.idCheck);
 
@@ -29,6 +26,18 @@ router.get("/naver_login", userController.naverLogin);
 
 // kakao 로그인
 router.get("/kakao_login", userController.kakaoLogin);
+
+// 아이디 찾기 페이지
+router.get("/findid", userController.find_id_page);
+
+// 비번 찾기 페이지
+// router.get("/findpw", userController.find_pw_page);
+
+// 아이디 찾기
+router.get("/find_id", userController.find_id);
+
+// 비번 찾기
+// router.get("/find_pw", userController.find_pw);
 
 // 로그인 검증
 router.post("/verify", userController.verifyProcess);

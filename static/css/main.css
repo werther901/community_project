@@ -7,9 +7,21 @@ body {
   overflow-x: hidden;
 }
 
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+select {
+  font-family: "Pretendard-Regular", sans-serif;
+}
+
 body {
   width: 100%;
   margin: 0;
+  font-family: "Pretendard-Regular", sans-serif;
 }
 h2 {
   margin: 15px 0;
@@ -18,13 +30,13 @@ h2 {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 .container {
   width: 100%;
   height: 100%;
   flex: 1;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 .today_menu {
   margin-top: 85px;
@@ -58,30 +70,36 @@ h2 {
   padding-top: 20px;
   font-size: 22px;
   font-weight: bold;
+  cursor: pointer;
 }
 .today_main_comment {
-  padding: 0px 15px;
+  padding: 0px 18px;
   flex-direction: column;
   width: 60%;
 }
 .today_main_content {
   padding-top: 10px;
-  font-size: 14px;
-  white-space: nowrap;
+  font-size: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+  cursor: pointer;
 }
 .today_main_img {
   width: 40%;
 }
 .today_main_img > img {
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .today_sub_1,
 .today_sub_2,
 .today_sub_3 {
-  width: 90%;
+  width: 97%;
   height: 100px;
   display: flex;
   margin: 0 15px;
@@ -97,6 +115,11 @@ h2 {
 }
 .today_sub_title {
   padding-left: 30px;
+  padding-right: 21px;
+  width: 378px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .today_sub_img {
   width: 90px;
@@ -154,6 +177,7 @@ h2 {
 .login,
 .signup {
   font-size: 14px;
+  font-weight: 700;
   color: white;
   text-decoration: none;
 }
@@ -182,7 +206,7 @@ h2 {
   width: 70%;
   padding: 10px 0px;
   gap: 5px;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   margin: 12px 0;
 }
 .card_title {
@@ -202,6 +226,13 @@ h2 {
 .card_comment {
   font-size: 17px;
   margin-top: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+  padding-right: 10px;
 }
 .card_img_style {
   width: 150px;
@@ -241,6 +272,11 @@ h2 {
   padding: 7px 0px;
   cursor: pointer;
   font-size: 14px;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 207px;
 }
 .search {
   display: flex;
@@ -282,4 +318,265 @@ h2 {
   line-height: 15px;
   letter-spacing: -.5px;
   color: #888;
+}
+
+@media (max-width: 869px) {
+  h2 {
+    font-size: 30px;
+  }
+
+  .today_content {
+    display: block;
+  }
+
+  .today_main {
+    width: 100%;
+    border: none;
+    margin-bottom: 22px;
+    justify-content: space-between;
+  }
+
+  .today_more {
+    font-size: 20px;
+  }
+
+  .today_main_title {
+    padding-top: 30px;
+    font-size: 28px;
+  }
+
+  .today_main_comment {
+    padding: 0;
+  }
+
+  .today_main_content {
+    font-size: 22px;
+  }
+
+  .today_main_img {
+    width: 244px;
+    height: 244px;
+  }
+
+  .today_sub {
+    width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .today_sub_title {
+    font-size: 20px;
+    width: 440px;
+    padding: 0;
+  }
+
+  .today_sub_1, .today_sub_2 {
+    border-bottom: 2px solid #b1ccf0;
+  }
+
+  .today_sub_1, .today_sub_2, .today_sub_3 {
+    width: 100%;
+    margin: 0;
+  }
+
+  .main_cards {
+    display: block;
+  }
+
+  .card {
+    border-bottom: none;
+  }
+
+  .card_comment {
+    -webkit-line-clamp: 2;
+  }
+
+  .container_submain {
+    display: block;
+    height: 100%;
+  }
+
+  .submain_title {
+    border-bottom: 2px solid #4b89dc;
+  }
+
+  .submain_section_1, .submain_section_2, .submain_section_3 {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 59px;
+  }
+
+  .submain_cont {
+    font-size: 21px;
+    margin-bottom: 4px;
+  }
+
+  .submain_content_row {
+    font-size: 18px;
+    width: 339px;
+  }
+
+  .submain_row_name {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 691px) {
+  h2 {
+    font-size: 28px;
+  }
+
+  .container_header {
+    padding: 0 20px;
+  }
+
+  .today_menu {
+    padding: 0 20px;
+  }
+
+  .today_main {
+    height: 252px;
+  }
+
+  .today_main_title {
+    font-size: 24px;
+  }
+
+  .today_main_content {
+    font-size: 19px;
+  }
+
+  .today_main_img {
+    width: 205px;
+    height: 205px;
+  }
+
+  .today_more {
+    font-size: 18px;
+  }
+
+  .today_sub {
+    margin-bottom: 52px;
+  }
+
+  .today_sub_1, .today_sub_2, .today_sub_3 {
+    justify-content: space-around;
+  }
+
+  .container_main {
+    padding: 0 20px;
+  }
+
+  .container_submain {
+    padding: 0 20px;
+  }
+
+  .search_input {
+    width: 237px;
+  }
+}
+
+@media (max-width: 552px) {
+  
+
+  .today_main {
+    height: 182px;
+    margin-bottom: 0;
+  }
+
+  .today_main_img {
+    width: 156px;
+    height: 156px;
+  }
+
+  .today_main_title {
+    font-size: 20px;
+    padding-top: 10px;
+  }
+
+  .today_main_content {
+    font-size: 17px;
+  }
+
+  .today_more {
+    font-size: 16px;
+  }
+
+  .today_sub {
+    gap: 0;
+    height: 168px;
+  }
+
+  .today_sub_title {
+    width: 356px;
+    font-size: 18px;
+  }
+
+  .today_sub_img {
+    display: none;
+  }
+
+  .today_sub_1 {
+    border-top: 2px solid #b1ccf0;
+  }
+
+  .today_sub_1, .today_sub_2, .today_sub_3 {
+    height: 67px;
+  }
+
+  footer {
+    margin: 0 auto;
+    margin-top: 58px;
+  }
+
+  .footer_link {
+    padding: 0;
+  }
+}
+
+@media (max-width: 448px) {
+  .login {
+    padding-right: 0;
+  }
+
+  .today_main {
+    height: 161px;
+  }
+
+  .today_main_img {
+    display: none;
+  }
+
+  .today_main_comment {
+    width: 100%;
+  }
+
+  .today_sub_1, .today_sub_2, .today_sub_3 {
+    justify-content: flex-start;
+  }
+
+  .card {
+    height: 146px;
+  }
+
+  .card_img_style {
+    width: 108px;
+    height: 108px;
+  }
+
+  .card_comment {
+    -webkit-line-clamp: 1;
+  }
+
+  .submain_content_row {
+    width: 232px;
+  }
+
+  .search_input {
+    width: 160px;
+  }
+
+  .footer_inner {
+    width: 259px;
+  }
+
 }
