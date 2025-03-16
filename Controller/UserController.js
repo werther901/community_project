@@ -62,7 +62,7 @@ const idCheck = async (req, res) => {
 // 아이디 찾기 페이지
 const find_id_page = (req, res) => {
   res.render("findid");
-}
+};
 
 // // 비번 찾기 페이지
 // const find_pw_page = (req, res) => {
@@ -76,11 +76,14 @@ const find_id = async (req, res) => {
   console.log(findPhone);
 
   if (!findPhone) {
-    res.json( { result: false, message: "휴대폰 번호를 찾을 수 없습니다." } );
+    res.json({ result: false, message: "휴대폰 번호를 찾을 수 없습니다." });
   } else {
-    res.json( { result: true, message: `고객님의 아이디는 ${findPhone.dataValues.userId} 입니다.`} );
+    res.json({
+      result: true,
+      message: `고객님의 아이디는 ${findPhone.dataValues.userId} 입니다.`,
+    });
   }
-}
+};
 
 // 비번 찾기(아이디) -> 단방향 암호화로 복호화 불가 -> 비번 재설정으로 유도 필요하나 시간 부족으로 구현은 다음으로..
 // const find_pw = async (req, res) => {
@@ -97,15 +100,8 @@ const find_id = async (req, res) => {
 
 // 회원가입 처리
 const signupProcess = async (req, res) => {
-  const {
-    userId,
-    password,
-    name,
-    phoneNumber,
-    gender,
-    birth,
-    signup_method,
-  } = req.body;
+  const { userId, password, name, phoneNumber, gender, birth, signup_method } =
+    req.body;
 
   console.log(req.body);
   const date = moment(birth, "YYYY-MM-DD").format("YYYY-MM-DD");
@@ -395,7 +391,8 @@ const allpost = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    limit: 5,
+    order: [["comment_id", "desc"]],
+    limit: 8,
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
@@ -410,7 +407,8 @@ const categorypost = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    limit: 5,
+    order: [["comment_id", "desc"]],
+    limit: 8,
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
@@ -425,7 +423,8 @@ const categorypost_news = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    limit: 5,
+    order: [["comment_id", "desc"]],
+    limit: 8,
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
@@ -518,6 +517,8 @@ const search = async (req, res) => {
       },
     });
     let data_lst = await Write.findAll({
+      offset: offset,
+      limit: 5,
       include: [
         {
           model: User, // User 모델과 조인
@@ -529,6 +530,7 @@ const search = async (req, res) => {
       },
       order: [["comment_id", "desc"]],
     }).catch((err) => console.log(err));
+    console.log("offedfsfsdfsfd", offset);
     res.send({ data_lst, total });
   }
 };

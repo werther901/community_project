@@ -25,7 +25,7 @@ footer {
 }
 
 .footer_link li + li::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 4px;
   left: 4px;
@@ -47,10 +47,26 @@ footer {
 }
 
 .footer_logo {
-  color: #4B89DC;
+  color: #4b89dc;
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
   margin-right: 3px;
+}
+@media (max-width: 552px) {
+  footer {
+    margin: 0 auto;
+    margin-top: 58px;
+  }
+
+  .footer_link {
+    padding: 0;
+  }
+}
+
+@media (max-width: 448px) {
+  .footer_inner {
+    width: 259px;
+  }
 }
