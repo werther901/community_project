@@ -45,6 +45,7 @@
 
 
 ### 메인 페이지
+![검색기능-Clipchamp로-제작](https://github.com/user-attachments/assets/aece8bf4-3218-4313-8711-3a8e0c34c64b)
 
 - 글 포스트 최신순 4개 업로드
 - 맛집 카테고리 좋아요 높은 순으로 2개 업로드
@@ -52,12 +53,17 @@
 - 검색 기능
 
 ### 글 목록 페이지
+![헤더-카테고리-_-페이지-네이션-Clipchamp로-제작](https://github.com/user-attachments/assets/83d9724b-05c9-4638-b3d8-0ab825003aee)
 
 - 각 카테고리에 따른 포스트 업로드
 - 글쓰기 버튼
 - 각 카테고리에 따른 페이지네이션 기능
 
 ### 글 페이지
+![글-상세-페이지-Clipchamp로-제작](https://github.com/user-attachments/assets/6c715300-4444-440e-b365-4770ca37c01c)
+![글-상세-페이지2-Clipchamp로-제작](https://github.com/user-attachments/assets/19e5dfe4-6ec9-4507-b7ee-596fb507afa6)
+![좋아요](https://github.com/user-attachments/assets/11078e14-f26c-432d-b0ad-46131e4487b2)
+![카카오-api-Clipchamp로-제작](https://github.com/user-attachments/assets/92d3d800-1864-464d-8ff1-2b217d8e923f)
 
 - 회원만 접근 가능
 - 회원 게시물 클릭 시 해당 회원이 쓴 게시물 바로보기
@@ -70,6 +76,7 @@
 
 
 ### 수정 & 글 쓰기 페이지
+![글-등록-Clipchamp로-제작](https://github.com/user-attachments/assets/9b519d06-54b8-44e9-a4fc-a4739c91fa93)
 
 - 회원만 접근 가능
 - 대표 이미지 선정
@@ -77,6 +84,7 @@
 
 
 ### 검색 페이지
+![검색기능-Clipchamp로-제작](https://github.com/user-attachments/assets/f8b09dce-bc27-4fb4-9f50-9c4e819353e0)
 
 - 제목 / 내용 / 사용자 별 내용 검색 기능
 
