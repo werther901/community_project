@@ -14,6 +14,8 @@
 - 카카오 공유 API
 - TOAST EIDTOR UI
 - Clipboard API
+- 네이버 로그인 API
+- 카카오 로그인 API
 
 ## 주요기능
 
@@ -22,7 +24,7 @@
 <img src="./static/images/signup.png" width=200 />
 
 - 이메일 중복 확인
-- 비밀번호 특수문자 1자, 영어 대소문자 각 1자 포함 8자 이상
+- 비밀번호 특수문자 1자, 영어 대소문자 각 1자 포함 8자 이상(유효성검사)
 - 이름, 생년월일, 성별, 전화번호 저장
 
 ### 로그인
@@ -45,6 +47,8 @@
 
 
 ### 메인 페이지
+![메인화면-Clipchamp로-제작](https://github.com/user-attachments/assets/d5e45524-a532-47a5-89bb-8b8072b82cf1)
+
 ![검색기능-Clipchamp로-제작](https://github.com/user-attachments/assets/aece8bf4-3218-4313-8711-3a8e0c34c64b)
 
 - 글 포스트 최신순 4개 업로드
