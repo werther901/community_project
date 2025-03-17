@@ -476,8 +476,6 @@ h2 {
 }
 
 @media (max-width: 552px) {
-  
-
   .today_main {
     height: 182px;
     margin-bottom: 0;
@@ -523,14 +521,14 @@ h2 {
     height: 67px;
   }
 
-  footer {
+  /* footer {
     margin: 0 auto;
     margin-top: 58px;
   }
 
   .footer_link {
     padding: 0;
-  }
+  } */
 }
 
 @media (max-width: 448px) {
@@ -575,8 +573,8 @@ h2 {
     width: 160px;
   }
 
-  .footer_inner {
+  /* .footer_inner {
     width: 259px;
-  }
+  } */
 
 }

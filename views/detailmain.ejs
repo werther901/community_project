@@ -10,29 +10,33 @@
     <title>Document</title>
   </head>
   <body>
-    <%- include("./header") %>
-    <div class="container_wrap">
-      <h1 class="category_name"></h1>
-      <div class="container_modify">
-        <button class="postbtn" onclick="createPost()">글쓰기</button>
-      </div>
-      <div class="container_main">
-        <div class="table">
-          <div class="talbe_column">
-            <div class="th_img">이미지</div>
-            <div class="th_title">제목</div>
-            <div class="th_user">작성자</div>
-            <div class="th_like">좋아요</div>
-            <div class="th_show">조회수</div>
-          </div>
-          <!-- tabel row -->
-          <div class="table_content"></div>
+
+      <%- include("./header") %>
+      <div class="container_wrap">
+        <h1 class="category_name"></h1>
+        <div class="container_modify">
+          <button class="postbtn" onclick="createPost()">글쓰기</button>
         </div>
-        <!-- pagination -->
-        <div class="pagination"></div>
+        <div class="container_main">
+          <div class="table">
+            <div class="talbe_column">
+              <div class="th_img">이미지</div>
+              <div class="th_title">제목</div>
+              <div class="th_user">작성자</div>
+              <div class="th_like">좋아요</div>
+              <div class="th_show">조회수</div>
+            </div>
+            <!-- tabel row -->
+            <div class="table_content"></div>
+          </div>
+          <!-- pagination -->
+          <div class="pagination"></div>
+        </div>
       </div>
-      <%- include("./footer") %>
-    </div>
+      <div class="footer-wrap">
+        <%- include("./footer") %>
+      </div>
+
   </body>
   <script src="/js/detailmain.js"></script>
 </html>

@@ -168,6 +168,8 @@ const allPost = async (req, res) => {
 
       //전체 데이터 반환용
       let allpost = await Write.findAll({
+        offset: offset,
+        limit: 5,
         include: [
           {
             model: User, // User 모델과 조인

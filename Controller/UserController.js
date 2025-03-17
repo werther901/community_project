@@ -395,10 +395,12 @@ const allpost = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    limit: 5,
+    order: [["comment_id", "desc"]],
+    limit: 8,
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
+
 
 //나머지 게시물 탐색
 const categorypost = async (req, res) => {
@@ -410,10 +412,12 @@ const categorypost = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    limit: 5,
+    order: [["comment_id", "desc"]],
+    limit: 8,
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
+
 
 //나머지 게시물 탐색
 const categorypost_news = async (req, res) => {
@@ -425,10 +429,12 @@ const categorypost_news = async (req, res) => {
         attributes: ["name"], // User 테이블에서 name 값만 가져옴
       },
     ],
-    limit: 5,
+    order: [["comment_id", "desc"]],
+    limit: 8,
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
+
 
 const search = async (req, res) => {
   const str = req.body.str;

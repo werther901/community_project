@@ -5,6 +5,10 @@
   font-style: normal;
 }
 
+body {
+  font-family: "Pretendard-Regular", sans-serif;
+}
+
 button {
   font-family: "Pretendard-Regular", sans-serif;
 }

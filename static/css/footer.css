@@ -54,3 +54,22 @@ footer {
   font-style: normal;
   margin-right: 3px;
 }
+
+@media (max-width: 552px) {
+  footer {
+    margin: 0 auto;
+    margin-top: 58px;
+  }
+
+  .footer_link {
+    padding: 0;
+  }
+
+}
+
+@media (max-width: 448px) {
+  .footer_inner {
+    width: 259px;
+  }
+
+}
