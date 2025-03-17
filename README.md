@@ -43,10 +43,9 @@
 - 내가 작성한글 확인
 - 로그아웃
 
-능
 
 ## ERD
-![community다이어그램 drawio (1)](https://github.com/user-attachments/assets/dca73b97-4fd7-425e-9971-ad221f56c3b1)
+![community다이어그램 drawio (2)](https://github.com/user-attachments/assets/53090fca-e31d-4125-8d6f-05329e733a4f)
 
 ## 프로젝트 구조
 
