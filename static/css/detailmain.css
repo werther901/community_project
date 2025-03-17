@@ -100,15 +100,6 @@ h1 {
   overflow: hidden;
 }
 
-.td_title {
-  display: block;
-  justify-content: left;
-  align-items: center;
-
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
 .td_like,
 .td_user,
 .td_show {
@@ -120,6 +111,15 @@ h1 {
 .imgstyle {
   width: 100%;
   height: 100%;
+}
+
+.td_title {
+  display: block;
+  justify-content: left;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .table_img {
@@ -291,6 +291,6 @@ h1 {
 .text {
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -.5px;
+  letter-spacing: -0.5px;
   color: #888;
 }

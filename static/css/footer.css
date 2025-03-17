@@ -25,7 +25,7 @@ footer {
 }
 
 .footer_link li + li::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 4px;
   left: 4px;
@@ -47,7 +47,7 @@ footer {
 }
 
 .footer_logo {
-  color: #4B89DC;
+  color: #4b89dc;
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
@@ -71,5 +71,6 @@ footer {
   .footer_inner {
     width: 259px;
   }
+
 
 }

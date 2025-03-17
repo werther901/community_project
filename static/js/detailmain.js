@@ -35,6 +35,7 @@ function pageMove(num, category, btn) {
       user_url: user_url,
     },
   }).then((res) => {
+    console.log("res.data.allpost", res.data.allpost);
     makeTable(res.data.allpost);
     document.querySelectorAll(".pagi_btn").forEach((button) => {
       button.style.backgroundColor = "#cbddf5";
@@ -78,7 +79,7 @@ if (search_url) {
     url: "/detailmain/searchstr",
     data: { str: search_url, select: select_url, pageNum: 0 },
   }).then((res) => {
-    console.log("search res", res.data.total);
+    console.log("search res", res.data);
     category_name.innerHTML = `<div>"${search_url}"의 검색 결과</div>`;
     let search_data = res.data; //검색 포함 내용 리스트
     pagenation(0, search_data.total);

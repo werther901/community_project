@@ -81,7 +81,7 @@ window.onload = function () {
     method: "post",
     url: "/allpost",
   }).then((res) => {
-    console.log("allpost - res : ", res);
+    //console.log("allpost - res : ", res);
     let all_data = res.data;
     submain_content_all.innerHTML = all_data
       .map((item) => {
