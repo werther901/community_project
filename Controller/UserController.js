@@ -397,6 +397,7 @@ const allpost = async (req, res) => {
   res.send(postdata);
 };
 
+
 //나머지 게시물 탐색
 const categorypost = async (req, res) => {
   let postdata = await Write.findAll({
@@ -413,6 +414,7 @@ const categorypost = async (req, res) => {
   res.send(postdata);
 };
 
+
 //나머지 게시물 탐색
 const categorypost_news = async (req, res) => {
   let postdata = await Write.findAll({
@@ -428,6 +430,7 @@ const categorypost_news = async (req, res) => {
   }).catch((err) => console.log(err));
   res.send(postdata);
 };
+
 
 const search = async (req, res) => {
   const str = req.body.str;
