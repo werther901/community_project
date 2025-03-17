@@ -49,7 +49,6 @@
 ### 메인 페이지
 ![메인화면-Clipchamp로-제작](https://github.com/user-attachments/assets/d5e45524-a532-47a5-89bb-8b8072b82cf1)
 
-![검색기능-Clipchamp로-제작](https://github.com/user-attachments/assets/aece8bf4-3218-4313-8711-3a8e0c34c64b)
 
 - 글 포스트 최신순 4개 업로드
 - 맛집 카테고리 좋아요 높은 순으로 2개 업로드
